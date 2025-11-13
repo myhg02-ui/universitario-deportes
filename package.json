@@ -1,0 +1,42 @@
+{
+  "name": "universitario-deportes-web",
+  "version": "1.0.0",
+  "description": "Sitio web oficial del Club Universitario de Deportes con información sobre tecnologías web",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx serve .",
+    "build": "echo 'Proyecto listo para producción'",
+    "dev": "python -m http.server 3000"
+  },
+  "keywords": [
+    "universitario",
+    "deportes",
+    "futbol",
+    "peru",
+    "web",
+    "tecnologias",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "Desarrollador Web",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.2.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/usuario/universitario-deportes-web"
+  },
+  "bugs": {
+    "url": "https://github.com/usuario/universitario-deportes-web/issues"
+  },
+  "homepage": "https://universitario-deportes.com"
+}

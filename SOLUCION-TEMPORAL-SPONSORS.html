@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solución Temporal - Sponsors con Placeholders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #1a1a1a;
+        }
+        
+        h1 {
+            color: #d4af37;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        
+        .warning h2 {
+            color: #856404;
+            margin-top: 0;
+        }
+        
+        .warning p {
+            color: #856404;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        
+        .warning code {
+            background: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .instructions {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .instructions h2 {
+            color: #c41e3a;
+            margin-top: 0;
+        }
+        
+        .instructions ol {
+            line-height: 1.8;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .instructions a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .instructions a:hover {
+            text-decoration: underline;
+        }
+        
+        .sponsors-preview {
+            background: #2a2a2a;
+            padding: 40px;
+            border-radius: 8px;
+        }
+        
+        .section-title {
+            color: white;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        
+        .sponsor-category {
+            color: #d4af37;
+            text-align: center;
+            font-size: 1.4rem;
+            margin: 30px 0 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .sponsor-placeholder {
+            background: white;
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            color: #c41e3a;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .sponsor-placeholder:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(196, 30, 58, 0.4);
+            border-color: #c41e3a;
+        }
+        
+        .sponsor-main {
+            height: 200px;
+            font-size: 2rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .sponsors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .sponsors-grid-large {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            max-width: 1000px;
+            margin: 20px auto 0;
+            gap: 30px;
+        }
+        
+        .sponsors-grid-large .sponsor-placeholder {
+            height: 160px;
+        }
+        
+        .sponsors-grid .sponsor-placeholder {
+            height: 140px;
+        }
+        
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent 0%, #c41e3a 15%, #d4af37 50%, #c41e3a 85%, transparent 100%);
+            margin: 40px 0;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-back {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back:hover {
+            background: #8b0000;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <h1>⚠️ Problema Detectado: Imágenes Vacías</h1>
+    
+    <div class="warning">
+        <h2>🔍 Diagnóstico</h2>
+        <p><strong>Todas las imágenes PNG en la carpeta <code>images/sponsors/</code> están vacías (0.1 KB).</strong></p>
+        <p>Los archivos existen físicamente, pero no contienen datos gráficos reales. Por eso se ven como cuadros blancos.</p>
+        <p><strong>El código HTML/CSS está 100% correcto.</strong> El problema son los archivos de imagen.</p>
+    </div>
+    
+    <div class="instructions">
+        <h2>📥 Cómo Descargar los Logos Reales</h2>
+        <ol>
+            <li><strong>WorldVectorLogo</strong> (Recomendado): <a href="https://worldvectorlogo.com/" target="_blank">https://worldvectorlogo.com/</a>
+                <br>→ Busca cada marca y descarga en PNG/SVG de alta calidad</li>
+            
+            <li><strong>Seeklogo</strong>: <a href="https://seeklogo.com/" target="_blank">https://seeklogo.com/</a>
+                <br>→ Base de datos masiva de logos en formato PNG transparente</li>
+            
+            <li><strong>Google Imágenes</strong>: Busca "<em>nombre marca logo png transparent</em>"
+                <br>→ Filtro: Herramientas → Color → Transparente
+                <br>→ Busca imágenes de al menos 800x400px</li>
+            
+            <li><strong>Sitios Oficiales</strong>: Muchas marcas tienen sección de prensa con logos descargables</li>
+        </ol>
+        
+        <h3>📋 Especificaciones Requeridas:</h3>
+        <ul>
+            <li>Formato: <strong>PNG con fondo transparente</strong></li>
+            <li>Tamaño recomendado: <strong>800x400 píxeles</strong></li>
+            <li>Peso del archivo: <strong>20-150 KB</strong> (NO 0.1 KB)</li>
+            <li>Calidad: <strong>Alta resolución sin pixelación</strong></li>
+        </ul>
+        
+        <h3>💾 Logos Necesarios (14 totales):</h3>
+        <ol>
+            <li>yape.png</li>
+            <li>sponsor_marathon_eW57qcJ_KB2nAiq.png</li>
+            <li>sponsor_apuestatotal_uLa9RqJ_OeuQ8cx.png</li>
+            <li>sponsor_cristal_apLIlY3.png</li>
+            <li>sponsor_marcadores247_Hqxk6Iv_FIqc5HE.png</li>
+            <li>sponsor_movistar_wOp8woX.png</li>
+            <li>sponsor_jetour_UJpjEoj.png</li>
+            <li>sponsor_esan_sQ1OchX.png</li>
+            <li>sponsor_anypsa_XTQVyLI.png</li>
+            <li>sponsor_opalux_CWjiZy4.png</li>
+            <li>sponsor_altos.png</li>
+            <li>sponsor_foshepan.png</li>
+            <li>sponsor_movilbus.png</li>
+            <li>sponsor_sancarlos.png</li>
+        </ol>
+        
+        <p><strong>⚡ Después de descargar:</strong> Guarda cada imagen en <code>images/sponsors/</code> con el nombre exacto listado arriba.</p>
+    </div>
+    
+    <div class="sponsors-preview">
+        <h2 class="section-title">Vista Previa con Placeholders Temporales</h2>
+        <p style="color: #ccc; text-align: center; margin-bottom: 30px;">
+            (Así se vería con placeholders de texto mientras consigues los logos)
+        </p>
+        
+        <h3 class="sponsor-category">Patrocinador Principal</h3>
+        <div class="sponsor-placeholder sponsor-main">YAPE</div>
+        
+        <div class="divider"></div>
+        
+        <h3 class="sponsor-category">Main Sports</h3>
+        <div class="sponsors-grid-large">
+            <div class="sponsor-placeholder">MARATHON</div>
+            <div class="sponsor-placeholder">APUESTA TOTAL</div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <h3 class="sponsor-category">Sponsors Digitales</h3>
+        <div class="sponsors-grid">
+            <div class="sponsor-placeholder">CRISTAL</div>
+            <div class="sponsor-placeholder">MARCADORES 247</div>
+            <div class="sponsor-placeholder">MOVISTAR</div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <h3 class="sponsor-category">Sponsors Oficiales</h3>
+        <div class="sponsors-grid">
+            <div class="sponsor-placeholder">JETOUR</div>
+            <div class="sponsor-placeholder">ESAN</div>
+            <div class="sponsor-placeholder">ANYPSA</div>
+            <div class="sponsor-placeholder">OPALUX</div>
+            <div class="sponsor-placeholder">ALTOS</div>
+            <div class="sponsor-placeholder">FOSHEPAN</div>
+            <div class="sponsor-placeholder">MOVILBUS</div>
+            <div class="sponsor-placeholder">SAN CARLOS</div>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="../index.html" class="btn-back">← Volver a la página principal</a>
+    </div>
+</body>
+</html>

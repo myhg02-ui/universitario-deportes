@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Club | Universitario de Deportes</title>
+    <meta name="description" content="Conoce la historia y grandeza del Club Universitario de Deportes. 27 títulos nacionales, 100 años de historia.">
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">
+                    <img src="images/logo.png" alt="Escudo Universitario" class="logo-img" width="50" height="50">
+                    <span>Universitario de Deportes</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="club.html" class="nav-link">El Club</a></li>
+                    <li><a href="beneficios.html" class="nav-link">Beneficios</a></li>
+                    <li><a href="noticias.html" class="nav-link">Noticias</a></li>
+                    <li><a href="index.html#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+                <div class="nav-auth">
+                    <button class="btn-login" onclick="openModal('loginModal')">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+                    <button class="btn-register" onclick="openModal('registerModal')">
+                        <i class="fas fa-user-plus"></i> Registrarse
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Club Info Hero -->
+    <section class="hero" style="min-height: 50vh; padding: 120px 20px 60px;">
+        <div class="hero-content" style="grid-template-columns: 1fr; text-align: center; gap: 2rem;">
+            <div class="hero-text">
+                <h1 style="font-size: 3rem;">El Club Más Grande del Perú</h1>
+                <p class="hero-subtitle" style="font-size: 1.3rem;">🏆 27 Títulos Nacionales 🏆</p>
+                <p class="hero-description">Una institución con historia, tradición y gloria futbolística</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Club Info -->
+    <section class="club-info">
+        <div class="container">
+            <div class="club-grid">
+                <article class="club-card">
+                    <i class="fas fa-trophy" aria-hidden="true"></i>
+                    <h3>27 Títulos Nacionales</h3>
+                    <p>El club más exitoso del fútbol peruano con la mayor cantidad de campeonatos nacionales. Nuestra vitrina está llena de trofeos que representan décadas de excelencia deportiva.</p>
+                </article>
+                <article class="club-card">
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    <h3>Fundado en 1924</h3>
+                    <p>Casi un siglo de historia, tradición y gloria en el deporte peruano. Somos una institución que ha marcado generaciones de futbolistas y aficionados.</p>
+                </article>
+                <article class="club-card">
+                    <i class="fas fa-users" aria-hidden="true"></i>
+                    <h3>La Hinchada Más Grande</h3>
+                    <p>Millones de hinchas apasionados en todo el Perú y el mundo nos respaldan. La familia crema es la más numerosa y leal del país.</p>
+                </article>
+                <article class="club-card">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                    <h3>Estadio Monumental</h3>
+                    <p>Nuestra casa, el estadio más grande e imponente del país con capacidad para 80,000 personas. Un coloso que intimida a todos nuestros rivales.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Historia -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Nuestra Historia</h2>
+            <p class="section-subtitle">Un legado de triunfos y pasión</p>
+            
+            <div style="max-width: 900px; margin: 0 auto; text-align: left; line-height: 1.8;">
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                    Fundado el 7 de agosto de 1924, el Club Universitario de Deportes nació en el seno de la Universidad Nacional Mayor de San Marcos, la universidad más antigua de América. Desde sus inicios, el club se caracterizó por su espíritu competitivo y su compromiso con la excelencia.
+                </p>
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                    A lo largo de su centenaria historia, Universitario se ha consolidado como el club más ganador del fútbol peruano, con 27 títulos nacionales que lo posicionan como el máximo referente del deporte rey en el país.
+                </p>
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                    La camiseta crema es símbolo de tradición, garra y pasión. Grandes figuras del fútbol peruano han defendido estos colores, llevando el nombre del club a lo más alto del podio nacional e internacional.
+                </p>
+            </div>
+
+            <div style="margin-top: 4rem;">
+                <h3 style="text-align: center; color: var(--primary-color); font-size: 2rem; margin-bottom: 2rem;">Estadísticas del Club</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+                    <div style="text-align: center; padding: 2rem; background: white; border-radius: 12px; box-shadow: var(--shadow);">
+                        <div style="font-size: 3rem; color: #d4af37; font-weight: 800;">27</div>
+                        <div style="font-size: 1.1rem; margin-top: 0.5rem;">Títulos Nacionales</div>
+                    </div>
+                    <div style="text-align: center; padding: 2rem; background: white; border-radius: 12px; box-shadow: var(--shadow);">
+                        <div style="font-size: 3rem; color: #d4af37; font-weight: 800;">100+</div>
+                        <div style="font-size: 1.1rem; margin-top: 0.5rem;">Años de Historia</div>
+                    </div>
+                    <div style="text-align: center; padding: 2rem; background: white; border-radius: 12px; box-shadow: var(--shadow);">
+                        <div style="font-size: 3rem; color: #d4af37; font-weight: 800;">80K</div>
+                        <div style="font-size: 1.1rem; margin-top: 0.5rem;">Capacidad Estadio</div>
+                    </div>
+                    <div style="text-align: center; padding: 2rem; background: white; border-radius: 12px; box-shadow: var(--shadow);">
+                        <div style="font-size: 3rem; color: #d4af37; font-weight: 800;">#1</div>
+                        <div style="font-size: 1.1rem; margin-top: 0.5rem;">Del Perú</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Imagen de Trofeos -->
+    <section style="padding: 80px 0; background: linear-gradient(135deg, rgba(196, 30, 58, 0.95) 0%, rgba(139, 0, 0, 0.90) 100%); position: relative; overflow: hidden;">
+        <div class="container" style="text-align: center;">
+            <h2 style="color: #d4af37; font-size: 2.8rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">🏆 Nuestra Vitrina 🏆</h2>
+            <p style="color: white; font-size: 1.3rem; margin-bottom: 3rem; opacity: 0.95;">El orgullo de ser el más grande del Perú</p>
+            <div style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
+                <img src="images/trofeos.png" alt="Trofeos Universitario" class="trofeos-image" style="width: 100%; max-width: 900px; height: auto; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 80px rgba(212, 175, 55, 0.3); border: 5px solid rgba(212, 175, 55, 0.5);">
+            </div>
+            <p style="color: #d4af37; font-size: 1.4rem; margin-top: 2.5rem; font-weight: 600; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">27 Títulos Nacionales que nos hacen el equipo más ganador</p>
+        </div>
+    </section>
+
+    <!-- Palmarés -->
+    <section class="club-info">
+        <div class="container">
+            <h2 class="section-title">Palmarés</h2>
+            <p class="section-subtitle">Nuestros títulos y logros más importantes</p>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="background: white; padding: 2.5rem; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 2rem;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.5rem;">
+                        <i class="fas fa-trophy"></i> Torneos Nacionales
+                    </h3>
+                    <ul style="list-style: none; padding: 0; line-height: 2;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>27 Campeonatos Nacionales</strong> - Récord absoluto</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>Tricampeón 2023-2024-2025</strong></li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>Bicampeón 2013-2014</strong></li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>Múltiples Subcampeonatos</strong></li>
+                    </ul>
+                </div>
+
+                <div style="background: white; padding: 2.5rem; border-radius: 12px; box-shadow: var(--shadow);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.5rem;">
+                        <i class="fas fa-globe-americas"></i> Torneos Internacionales
+                    </h3>
+                    <ul style="list-style: none; padding: 0; line-height: 2;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>Copa Libertadores</strong> - Múltiples participaciones</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;"><strong>Copa Sudamericana</strong> - Representando al Perú</li>
+                        <li style="padding: 0.5rem 0;"><strong>Torneos Amistosos Internacionales</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Club Universitario de Deportes</h3>
+                    <p>El equipo más grande y exitoso del Perú. Tricampeón 2023-2024-2025.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="club.html">El Club</a></li>
+                        <li><a href="beneficios.html">Beneficios</a></li>
+                        <li><a href="noticias.html">Noticias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Síguenos</h3>
+                    <p>Únete a nuestra comunidad crema</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/universitario" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com/universitario" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/universitario" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/universitario" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com/@universitario" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-club-logo">
+                <img src="images/logo.png" alt="Escudo" width="140" height="140">
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Club Universitario de Deportes. Todos los derechos reservados.</p>
+                <p class="footer-links">
+                    <a href="privacidad.html">Política de Privacidad</a> | 
+                    <a href="terminos.html">Términos y Condiciones</a> | 
+                    <a href="libro-reclamaciones.html">Libro de Reclamaciones</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals (Login/Register) -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Iniciar Sesión</h2>
+            <form class="auth-form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Registrarse</h2>
+            <form class="auth-form">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Crear Cuenta</button>
+            </form>
+        </div>
+    </div>
+
+    <button id="backToTop" class="back-to-top" style="display: none;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

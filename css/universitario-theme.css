@@ -1,0 +1,354 @@
+/* Tema Oficial de Universitario de Deportes */
+
+/* Estrellas decorativas (como en el sitio oficial) */
+.estrellas-decorativas {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.estrellas-decorativas i {
+    color: #d4af37;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.estrellas-decorativas i:hover {
+    color: #ffd700;
+    transform: scale(1.2) rotate(72deg);
+}
+
+/* Barra superior con estrellas */
+.header-stars {
+    background: #000000;
+    padding: 0.5rem 0;
+    text-align: center;
+}
+
+.header-stars::before {
+    content: "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★";
+    color: #d4af37;
+    font-size: 0.8rem;
+    letter-spacing: 10px;
+}
+
+/* Títulos con estilo oficial */
+.titulo-oficial {
+    text-align: center;
+    color: #c41e3a;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.titulo-oficial::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+}
+
+/* Tarjetas con borde dorado */
+.card-crema {
+    background: white;
+    border: 2px solid transparent;
+    border-image: linear-gradient(135deg, #d4af37, #c41e3a) 1;
+    padding: 2rem;
+    margin: 1rem 0;
+    box-shadow: 0 4px 15px rgba(196, 30, 58, 0.1);
+}
+
+.card-crema:hover {
+    box-shadow: 0 8px 25px rgba(196, 30, 58, 0.2);
+    transform: translateY(-3px);
+}
+
+/* Botones estilo oficial */
+.btn-crema {
+    background: linear-gradient(135deg, #c41e3a, #8B0000);
+    color: #fcf9ea;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+}
+
+.btn-crema:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(196, 30, 58, 0.4);
+}
+
+.btn-dorado {
+    background: linear-gradient(135deg, #d4af37, #ffd700);
+    color: #000000;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-dorado:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
+/* Separador con estrellas */
+.separador-estrellas {
+    text-align: center;
+    margin: 3rem 0;
+    position: relative;
+}
+
+.separador-estrellas::before,
+.separador-estrellas::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #d4af37, transparent);
+}
+
+.separador-estrellas::before {
+    left: 0;
+}
+
+.separador-estrellas::after {
+    right: 0;
+}
+
+.separador-estrellas span {
+    color: #d4af37;
+    font-size: 2rem;
+    position: relative;
+    z-index: 1;
+    background: white;
+    padding: 0 1rem;
+}
+
+/* Badge/Insignia oficial */
+.badge-campeon {
+    background: #d4af37;
+    color: #000000;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    display: inline-block;
+    box-shadow: 0 3px 10px rgba(212, 175, 55, 0.4);
+}
+
+/* Header con gradiente oficial */
+.header-oficial {
+    background: linear-gradient(to bottom, #000000 0%, #1a1a1a 100%);
+    color: #fcf9ea;
+    padding: 1rem 0;
+}
+
+/* Texto con color crema */
+.text-crema {
+    color: #fcf9ea;
+}
+
+.text-dorado {
+    color: #d4af37;
+}
+
+.text-rojo {
+    color: #c41e3a;
+}
+
+/* Fondo crema */
+.bg-crema {
+    background-color: #fcf9ea;
+}
+
+.bg-negro {
+    background-color: #000000;
+}
+
+.bg-rojo {
+    background: linear-gradient(135deg, #c41e3a, #8B0000);
+}
+
+/* Hover effects oficiales */
+.hover-dorado:hover {
+    color: #d4af37;
+    transition: color 0.3s ease;
+}
+
+.hover-rojo:hover {
+    color: #c41e3a;
+    transition: color 0.3s ease;
+}
+
+/* Pattern de fondo con estrellas */
+.bg-pattern-estrellas {
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(196, 30, 58, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+}
+
+/* Línea decorativa dorada */
+.linea-dorada {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    margin: 2rem auto;
+    width: 80%;
+    max-width: 600px;
+}
+
+/* Badge tricampeón */
+.badge-tricampeon {
+    background: linear-gradient(135deg, #d4af37, #ffd700);
+    color: #000000;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.5);
+    border: 2px solid #c41e3a;
+}
+
+/* Texto con sombra crema */
+.text-shadow-crema {
+    text-shadow: 2px 2px 8px rgba(212, 175, 55, 0.6);
+}
+
+/* Animación de entrada para elementos */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Pulse animation para estrellas */
+@keyframes pulse-star {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.star-pulse {
+    animation: pulse-star 2s ease-in-out infinite;
+}
+
+/* Sección destacada */
+.seccion-destacada {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+    color: #fcf9ea;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.seccion-destacada::before {
+    content: "★";
+    position: absolute;
+    font-size: 20rem;
+    color: rgba(212, 175, 55, 0.05);
+    top: -5rem;
+    right: -5rem;
+    z-index: 0;
+}
+
+/* Box shadow oficial */
+.shadow-oficial {
+    box-shadow: 0 5px 20px rgba(196, 30, 58, 0.15);
+}
+
+.shadow-dorado {
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+}
+
+/* Border gradient */
+.border-gradient {
+    border: 3px solid;
+    border-image: linear-gradient(135deg, #c41e3a, #d4af37) 1;
+}
+
+/* Typography oficial */
+.font-title-u {
+    font-family: 'Arial Black', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* Overlay oscuro */
+.overlay-oscuro {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.overlay-rojo {
+    background: rgba(196, 30, 58, 0.9);
+}
+
+/* Ribbon campeón */
+.ribbon-campeon {
+    background: #d4af37;
+    color: #000000;
+    padding: 0.5rem 2rem;
+    position: relative;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.ribbon-campeon::before,
+.ribbon-campeon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.ribbon-campeon::before {
+    left: -20px;
+    border-width: 0 0 40px 20px;
+    border-color: transparent transparent #c41e3a transparent;
+}
+
+.ribbon-campeon::after {
+    right: -20px;
+    border-width: 40px 0 0 20px;
+    border-color: #c41e3a transparent transparent transparent;
+}

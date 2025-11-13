@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Universitario de Deportes | Club Oficial - Tricampeón Peruano</title>
+    <meta name="description" content="Sitio web oficial del Club Universitario de Deportes. El club más grande del Perú, Tricampeón 2023-2024-2025. Únete a la familia crema y disfruta beneficios exclusivos.">
+    <meta name="keywords" content="Universitario de Deportes, La U, fútbol peruano, club crema, tricampeón, estadio monumental, socio crema">
+    <meta name="author" content="Universitario de Deportes">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Universitario de Deportes | Club Oficial">
+    <meta property="og:description" content="El club más grande del Perú. Tricampeón 2023-2024-2025. Únete a la familia crema.">
+    <meta property="og:image" content="images/logo.png">
+    <meta property="og:url" content="https://www.universitario.pe">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Universitario de Deportes | Club Oficial">
+    <meta name="twitter:description" content="El club más grande del Perú. Tricampeón 2023-2024-2025.">
+    <meta name="twitter:image" content="images/logo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    
+    <!-- Stylesheets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/universitario-theme.css">
+    <link rel="stylesheet" href="css/placeholders.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="images/estadio.png" as="image">
+    <link rel="preload" href="images/logo.png" as="image">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <!-- Estrellas decorativas -->
+        <div class="header-stars"></div>
+        
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="#inicio" class="nav-logo" aria-label="Inicio - Universitario de Deportes">
+                    <img src="images/logo.png" alt="Escudo Universitario de Deportes" class="logo-img" width="50" height="50">
+                    <span>Universitario de Deportes</span>
+                </a>
+                <ul class="nav-menu" role="navigation" aria-label="Navegación principal">
+                    <li><a href="index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="club.html" class="nav-link">El Club</a></li>
+                    <li><a href="beneficios.html" class="nav-link">Beneficios</a></li>
+                    <li><a href="noticias.html" class="nav-link">Noticias</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+                <div class="nav-auth">
+                    <button class="btn-login" onclick="openModal('loginModal')">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+                    <button class="btn-register" onclick="window.location.href='registro.html'">
+                        <i class="fas fa-user-plus"></i> Registrarse
+                    </button>
+                </div>
+                <button class="hamburger" aria-label="Menú de navegación" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Club Universitario de Deportes</h1>
+                <p class="hero-subtitle">🏆 Tricampeón Peruano 2023 - 2024 - 2025 🏆</p>
+                <p class="hero-description">El equipo más grande y exitoso del fútbol peruano. Más de 27 títulos nacionales nos respaldan. Únete a la familia crema y vive la pasión del verdadero campeón.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="window.location.href='registro.html'" aria-label="Registrarse como socio">
+                        <i class="fas fa-star"></i> Hacerse Socio Ahora
+                    </button>
+                    <a href="beneficios.html" class="btn btn-secondary" aria-label="Ver beneficios de socio">
+                        <i class="fas fa-gift"></i> Ver Beneficios
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">27</span>
+                        <span class="stat-label">Títulos Nacionales</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100</span>
+                        <span class="stat-label">Años de Historia</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">#1</span>
+                        <span class="stat-label">Del Perú</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/tricampeon .png" alt="Tricampeón Nacional 2023-2024-2025 - Club Universitario de Deportes" loading="eager">
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Contact Section -->
+    <section id="contacto" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contáctanos</h2>
+            <p class="section-subtitle">Estamos aquí para atenderte y resolver tus consultas</p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        <div>
+                            <strong>Sede Central</strong>
+                            <p>Estadio Monumental, Av. Universitaria s/n<br>Ate, Lima - Perú</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone" aria-hidden="true"></i>
+                        <div>
+                            <strong>Teléfono</strong>
+                            <p><a href="tel:+5113265000">+51 1 326-5000</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <p><a href="mailto:contacto@universitario.pe">contacto@universitario.pe</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock" aria-hidden="true"></i>
+                        <div>
+                            <strong>Horario de Atención</strong>
+                            <p>Lunes a Viernes: 9:00 AM - 6:00 PM<br>Sábados: 9:00 AM - 1:00 PM</p>
+                        </div>
+                    </div>
+                    <h4 style="margin: 2rem 0 1rem; color: var(--primary-color);">Síguenos en Redes Sociales</h4>
+                    <div class="social-links">
+                        <a href="https://facebook.com/universitario" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Universitario"><i class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com/universitario" target="_blank" rel="noopener noreferrer" aria-label="Twitter de Universitario"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/universitario" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Universitario"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/universitario" target="_blank" rel="noopener noreferrer" aria-label="YouTube de Universitario"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com/@universitario" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Universitario"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <h3>Envíanos un Mensaje</h3>
+                    <div class="form-group">
+                        <label for="contactName">Nombre Completo *</label>
+                        <input type="text" id="contactName" name="name" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Correo Electrónico *</label>
+                        <input type="email" id="contactEmail" name="email" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPhone">Teléfono</label>
+                        <input type="tel" id="contactPhone" name="phone" placeholder="+51 999 999 999">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactSubject">Asunto *</label>
+                        <input type="text" id="contactSubject" name="subject" placeholder="¿En qué podemos ayudarte?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Mensaje *</label>
+                        <textarea id="contactMessage" name="message" placeholder="Escribe tu mensaje aquí..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsors Section -->
+    <section class="sponsors">
+        <div class="container">
+            <!-- Main Sponsor -->
+            <div class="sponsor-section">
+                <h3 class="sponsor-category">Main Sponsor</h3>
+                <div class="sponsors-grid sponsors-grid-large">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="marathon">
+                            <img src="images/sponsors/sponsor_marathon_eW57qcJ_KB2nAiq.png" alt="Marathon" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="apuestatotal">
+                            <img src="images/sponsors/sponsor_apuestatotal_uLa9RqJ_OeuQ8cx.png" alt="Apuesta Total" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="sponsor-divider">
+
+            <!-- Sponsors Digitales -->
+            <div class="sponsor-section">
+                <h3 class="sponsor-category">Sponsors Digitales</h3>
+                <div class="sponsors-grid">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="cristal">
+                            <img src="images/sponsors/sponsor_cristal_apLIlY3.png" alt="Cristal" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="marcadores247">
+                            <img src="images/sponsors/sponsor_marcadores247_Hqxk6Iv_FIqc5HE.png" alt="Marcadores 247" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="movistar">
+                            <img src="images/sponsors/sponsor_movistar_wOp8woX.png" alt="Movistar" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="sponsor-divider">
+
+            <!-- Sponsors Oficiales -->
+            <div class="sponsor-section">
+                <h3 class="sponsor-category">Sponsors Oficiales</h3>
+                <div class="sponsors-grid">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="jetour">
+                            <img src="images/sponsors/sponsor_jetour_UJpjEoj.png" alt="JETOUR" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="esan">
+                            <img src="images/sponsors/sponsor_esan_sQ1OchX.png" alt="ESAN" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="anypsa">
+                            <img src="images/sponsors/sponsor_anypsa_XTQVyLI.png" alt="ANYPSA" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="opalux">
+                            <img src="images/sponsors/sponsor_opalux_CWjiZy4.png" alt="OPALUX" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="altos">
+                            <img src="images/sponsors/sponsor_altos.png" alt="ALTOS" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="foshepan">
+                            <img src="images/sponsors/sponsor_foshepan.png" alt="Fos-hepan Forte" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="movilbus">
+                            <img src="images/sponsors/sponsor_movilbus.png" alt="Movilbus" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo" data-sponsor="sancarlos">
+                            <img src="images/sponsors/sponsor_sancarlos.png" alt="SAN CARLOS" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Club Universitario de Deportes</h3>
+                    <p>El equipo más grande y exitoso del Perú. Tricampeón 2023-2024-2025. Una institución con historia, tradición y gloria futbolística.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="club.html">El Club</a></li>
+                        <li><a href="beneficios.html">Beneficios</a></li>
+                        <li><a href="noticias.html">Noticias</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Para Socios</h3>
+                    <ul>
+                        <li><a href="registro.html">Hacerse Socio</a></li>
+                        <li><a href="#" onclick="openModal('loginModal')">Iniciar Sesión</a></li>
+                        <li><a href="#">Comprar Entradas</a></li>
+                        <li><a href="#">Tienda Oficial</a></li>
+                        <li><a href="#">Consultas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Síguenos</h3>
+                    <p>Mantente conectado con la familia crema en todas nuestras redes sociales</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/universitario" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com/universitario" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/universitario" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/universitario" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com/@universitario" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Logo Grande Centrado -->
+            <div class="footer-club-logo">
+                <img src="images/logo.png" alt="Escudo Club Universitario de Deportes" width="140" height="140">
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Club Universitario de Deportes. Todos los derechos reservados.</p>
+                <p class="footer-links">
+                    <a href="privacidad.html">Política de Privacidad</a> | 
+                    <a href="terminos.html">Términos y Condiciones</a> | 
+                    <a href="libro-reclamaciones.html">Libro de Reclamaciones</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal" role="dialog" aria-labelledby="loginTitle" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('loginModal')" aria-label="Cerrar modal">&times;</button>
+            <h2 id="loginTitle">Iniciar Sesión</h2>
+            <p class="modal-subtitle">Accede a tu cuenta de socio crema</p>
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Correo Electrónico *</label>
+                    <input type="email" id="loginEmail" placeholder="tu@email.com" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña *</label>
+                    <input type="password" id="loginPassword" placeholder="Tu contraseña" required autocomplete="current-password">
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Recordarme</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                </button>
+                <p class="auth-switch">¿No tienes cuenta? <a href="#" onclick="switchModal('loginModal', 'registerModal')">Regístrate aquí</a></p>
+                <p class="auth-switch"><a href="#">¿Olvidaste tu contraseña?</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal" role="dialog" aria-labelledby="registerTitle" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('registerModal')" aria-label="Cerrar modal">&times;</button>
+            <h2 id="registerTitle">Únete a la Familia Crema</h2>
+            <p class="modal-subtitle">Crea tu cuenta y disfruta de todos los beneficios de ser socio</p>
+            <form class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Nombre Completo *</label>
+                    <input type="text" id="registerName" placeholder="Juan Pérez García" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Correo Electrónico *</label>
+                    <input type="email" id="registerEmail" placeholder="tu@email.com" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="registerPhone">Teléfono *</label>
+                    <input type="tel" id="registerPhone" placeholder="+51 999 999 999" required autocomplete="tel">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Contraseña *</label>
+                    <input type="password" id="registerPassword" placeholder="Mínimo 6 caracteres" required autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar Contraseña *</label>
+                    <input type="password" id="confirmPassword" placeholder="Repite tu contraseña" required autocomplete="new-password">
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="acceptTerms" required>
+                    <label for="acceptTerms">Acepto los <a href="#" target="_blank">términos y condiciones</a> y la <a href="#" target="_blank">política de privacidad</a></label>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="newsletter">
+                    <label for="newsletter">Deseo recibir noticias y promociones del club</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-user-plus"></i> Crear Cuenta
+                </button>
+                <p class="auth-switch">¿Ya tienes cuenta? <a href="#" onclick="switchModal('registerModal', 'loginModal')">Inicia sesión aquí</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Volver arriba" style="display: none;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Cookie Notice -->
+    <div id="cookieNotice" class="cookie-notice" style="display: none;">
+        <div class="cookie-content">
+            <p><i class="fas fa-cookie-bite"></i> Utilizamos cookies para mejorar tu experiencia en nuestro sitio web. Al continuar navegando, aceptas nuestra <a href="#">política de cookies</a>.</p>
+            <button onclick="acceptCookies()" class="btn-cookie">Aceptar</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

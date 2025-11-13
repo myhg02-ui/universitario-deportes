@@ -1,0 +1,89 @@
+/* Archivo CSS para imágenes placeholder */
+/* Estas clases crean imágenes de muestra con CSS */
+
+.hero-image img {
+    position: relative;
+}
+
+.news-card img {
+    background: linear-gradient(135deg, #c41e3a, #8B0000);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    position: relative;
+}
+
+.news-card:nth-child(1) img::before {
+    content: "⚽ NUEVA TEMPORADA 2025";
+    position: absolute;
+    font-size: 1.2rem;
+    text-align: center;
+    background: rgba(0,0,0,0.8);
+    padding: 1rem;
+    border-radius: 5px;
+    width: 80%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.news-card:nth-child(2) img::before {
+    content: "�️ RENOVACIÓN DEL MONUMENTAL";
+    position: absolute;
+    font-size: 1.2rem;
+    text-align: center;
+    background: rgba(0,0,0,0.8);
+    padding: 1rem;
+    border-radius: 5px;
+    width: 80%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.news-card:nth-child(3) img::before {
+    content: "🆕 NUEVOS REFUERZOS";
+    position: absolute;
+    font-size: 1.2rem;
+    text-align: center;
+    background: rgba(0,0,0,0.8);
+    padding: 1rem;
+    border-radius: 5px;
+    width: 80%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Mejoras visuales adicionales */
+.hero-image {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(212,175,55,0.05), rgba(196,30,58,0.05));
+    pointer-events: none;
+}
+
+/* Badge tricampeón en hero */
+.hero-subtitle {
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.6);
+    }
+}
