@@ -147,34 +147,40 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
         
-        // Enviar datos al servidor
-        fetch('php/register.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
+        // Simulación: Guardar en localStorage (en producción iría al servidor)
+        const userData = {
+            tipo_documento: formData.get('tipo_documento'),
+            numero_documento: formData.get('numero_documento'),
+            nombres: formData.get('nombres'),
+            apellidos: formData.get('apellidos'),
+            fecha_nacimiento: formData.get('fecha_nacimiento'),
+            genero: formData.get('genero'),
+            email: formData.get('email'),
+            telefono: formData.get('telefono'),
+            direccion: formData.get('direccion'),
+            departamento: formData.get('departamento'),
+            distrito: formData.get('distrito'),
+            tipo_membresia: formData.get('tipo_membresia'),
+            password_hash: 'hashed_' + formData.get('password'), // Simulación de hash
+            numero_socio: 'U2025' + Math.floor(Math.random() * 100000).toString().padStart(5, '0'),
+            fecha_registro: new Date().toISOString(),
+            fecha_vencimiento: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString()
+        };
+        
+        // Guardar usuario en localStorage
+        localStorage.setItem(`user_${userData.email}`, JSON.stringify(userData));
+        
+        // Guardar sesión actual
+        localStorage.setItem('currentUser', JSON.stringify(userData));
+        
+        // Simular delay de servidor
+        setTimeout(() => {
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
             
-            if (data.success) {
-                mostrarMensaje('success', data.message || '¡Registro exitoso! Te hemos enviado un correo de confirmación.');
-                form.reset();
-                
-                // Redirigir después de 3 segundos
-                setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 3000);
-            } else {
-                mostrarMensaje('error', data.message || 'Hubo un error al procesar tu registro. Por favor, intenta nuevamente.');
-            }
-        })
-        .catch(error => {
-            submitBtn.classList.remove('loading');
-            submitBtn.disabled = false;
-            console.error('Error:', error);
-            mostrarMensaje('error', 'Error de conexión. Por favor, verifica tu conexión a internet e intenta nuevamente.');
-        });
+            mostrarMensaje('success', `¡Registro exitoso! Tu número de socio es: ${userData.numero_socio}. Redirigiendo a tu dashboard...`);
+            form.reset();
+        }, 1500);
     }
 
     function validarPassword(password) {
@@ -244,8 +250,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Scroll al mensaje
         mensajeContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
         
-        // Auto-ocultar después de 5 segundos si es error
-        if (tipo === 'error') {
+        // Si es éxito, redirigir al dashboard después de 2 segundos
+        if (tipo === 'success') {
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 2000);
+        } else {
+            // Auto-ocultar después de 5 segundos si es error
             setTimeout(() => {
                 mensajeContainer.style.display = 'none';
             }, 5000);

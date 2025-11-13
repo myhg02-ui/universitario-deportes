@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - Club Universitario de Deportes</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">
+                    <img src="images/logo.png" alt="Logo Universitario" class="logo">
+                    <span>Universitario</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="club.html" class="nav-link">El Club</a></li>
+                    <li><a href="beneficios.html" class="nav-link">Beneficios</a></li>
+                    <li><a href="noticias.html" class="nav-link">Noticias</a></li>
+                </ul>
+                <div class="nav-auth">
+                    <button class="btn-logout" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard-main">
+        <div class="dashboard-container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-card">
+                    <div class="welcome-content">
+                        <h1>¡Bienvenido, <span id="userName">Socio</span>! 🏆</h1>
+                        <p>Número de Socio: <strong id="memberNumber">U2025XXXXX</strong></p>
+                        <p>Miembro desde: <strong id="memberSince">2025</strong></p>
+                    </div>
+                    <div class="welcome-badge">
+                        <div class="badge-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Membership Status -->
+            <section class="membership-section">
+                <h2 class="section-title">Estado de tu Membresía</h2>
+                
+                <div class="current-membership">
+                    <div class="membership-card active" id="currentMembershipCard">
+                        <div class="membership-badge">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 id="currentPlanName">Membresía Básica</h3>
+                        <p class="membership-price" id="currentPlanPrice">S/ 120.00 / año</p>
+                        <p class="membership-status">Estado: <span class="status-active">Activa</span></p>
+                        <p class="membership-expiry">Vence: <span id="expiryDate">--/--/----</span></p>
+                        
+                        <div class="membership-benefits">
+                            <h4>Tus beneficios actuales:</h4>
+                            <ul id="currentBenefitsList">
+                                <li><i class="fas fa-check"></i> 10% descuento en merchandising oficial</li>
+                                <li><i class="fas fa-check"></i> Prioridad en compra de entradas</li>
+                                <li><i class="fas fa-check"></i> Boletín mensual exclusivo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upgrade Options -->
+            <section class="upgrade-section" id="upgradeSection">
+                <h2 class="section-title">Mejora tu Membresía</h2>
+                <p class="section-subtitle">Desbloquea más beneficios exclusivos</p>
+
+                <div class="upgrade-grid">
+                    <!-- Premium Plan -->
+                    <div class="upgrade-card" data-plan="premium">
+                        <div class="upgrade-header">
+                            <div class="upgrade-icon premium">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <h3>Membresía Premium</h3>
+                            <p class="upgrade-price">S/ 300.00 <span>/ año</span></p>
+                        </div>
+                        
+                        <ul class="upgrade-benefits">
+                            <li><i class="fas fa-check"></i> Todo lo de Básica +</li>
+                            <li><i class="fas fa-check"></i> 20% descuento en merchandising</li>
+                            <li><i class="fas fa-check"></i> 2 entradas gratis al año</li>
+                            <li><i class="fas fa-check"></i> Acceso a eventos exclusivos</li>
+                            <li><i class="fas fa-check"></i> Meet & Greet con jugadores</li>
+                            <li><i class="fas fa-check"></i> Bufanda oficial de regalo</li>
+                        </ul>
+                        
+                        <button class="btn-upgrade" onclick="openUpgradeModal('premium', 300)">
+                            <i class="fas fa-arrow-up"></i> Actualizar a Premium
+                        </button>
+                    </div>
+
+                    <!-- VIP Plan -->
+                    <div class="upgrade-card vip-card" data-plan="vip">
+                        <div class="vip-badge">MÁS POPULAR</div>
+                        <div class="upgrade-header">
+                            <div class="upgrade-icon vip">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <h3>Membresía VIP</h3>
+                            <p class="upgrade-price">S/ 800.00 <span>/ año</span></p>
+                        </div>
+                        
+                        <ul class="upgrade-benefits">
+                            <li><i class="fas fa-check"></i> Todo lo de Premium +</li>
+                            <li><i class="fas fa-check"></i> 30% descuento en merchandising</li>
+                            <li><i class="fas fa-check"></i> 4 entradas VIP al año</li>
+                            <li><i class="fas fa-check"></i> Acceso al Palco VIP</li>
+                            <li><i class="fas fa-check"></i> Camiseta oficial firmada</li>
+                            <li><i class="fas fa-check"></i> Invitación a entrenamientos</li>
+                            <li><i class="fas fa-check"></i> Pack de bienvenida premium</li>
+                            <li><i class="fas fa-check"></i> Atención prioritaria 24/7</li>
+                        </ul>
+                        
+                        <button class="btn-upgrade vip-btn" onclick="openUpgradeModal('vip', 800)">
+                            <i class="fas fa-crown"></i> Actualizar a VIP
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Membership History -->
+            <section class="history-section">
+                <h2 class="section-title">Historial de Membresías</h2>
+                
+                <div class="history-table-container">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <!-- Se llenará dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Upgrade Modal -->
+    <div id="upgradeModal" class="modal">
+        <div class="modal-content upgrade-modal-content">
+            <span class="close" onclick="closeUpgradeModal()">&times;</span>
+            
+            <div class="upgrade-modal-header">
+                <div class="upgrade-modal-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h2>Actualizar Membresía</h2>
+                <p class="modal-subtitle">Completa el pago para actualizar tu membresía</p>
+            </div>
+
+            <div class="upgrade-modal-body">
+                <div class="upgrade-summary">
+                    <div class="summary-item">
+                        <span>Membresía actual:</span>
+                        <strong id="modalCurrentPlan">Básica</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Nueva membresía:</span>
+                        <strong id="modalNewPlan" class="text-primary">Premium</strong>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-item total">
+                        <span>Total a pagar:</span>
+                        <strong id="modalAmount" class="text-amount">S/ 300.00</strong>
+                    </div>
+                </div>
+
+                <form id="paymentForm" class="payment-form">
+                    <h3><i class="fas fa-lock"></i> Información de Pago (Simulación)</h3>
+                    <p class="payment-note">
+                        <i class="fas fa-info-circle"></i> 
+                        Esta es una simulación. No se procesará ningún pago real.
+                    </p>
+
+                    <div class="form-group">
+                        <label for="cardNumber">Número de Tarjeta</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" 
+                               maxlength="19" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cardExpiry">Vencimiento</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/AA" 
+                                   maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardCVV">CVV</label>
+                            <input type="text" id="cardCVV" placeholder="123" 
+                                   maxlength="3" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardName">Nombre en la tarjeta</label>
+                        <input type="text" id="cardName" placeholder="NOMBRE APELLIDO" required>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="termsPayment" required>
+                        <label for="termsPayment">
+                            Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-submit-payment">
+                        <i class="fas fa-check-circle"></i> Confirmar Pago (Simulación)
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>¡Actualización Exitosa! 🎉</h2>
+            <p>Tu membresía ha sido actualizada correctamente</p>
+            <p class="success-detail">Ahora eres un socio <strong id="successPlanName">Premium</strong></p>
+            <button class="btn-success" onclick="closeSuccessModal()">
+                <i class="fas fa-home"></i> Volver al Dashboard
+            </button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Club Universitario de Deportes. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
