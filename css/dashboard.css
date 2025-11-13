@@ -103,6 +103,19 @@
     color: white;
 }
 
+/* Free Plan Styles */
+.membership-card.free .membership-badge {
+    background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+.membership-card.free .membership-card::before {
+    background: linear-gradient(90deg, #28a745, #20c997);
+}
+
+.membership-card.free h3 {
+    color: #28a745;
+}
+
 .membership-card h3 {
     font-size: 2rem;
     color: #c41e3a;
@@ -217,6 +230,10 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
+}
+
+.upgrade-icon.basica {
+    background: linear-gradient(135deg, #007bff, #0056b3);
 }
 
 .upgrade-icon.premium {

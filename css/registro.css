@@ -428,6 +428,104 @@
     }
 }
 
+/* Free Plan Info Styles */
+.free-plan-info {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.free-plan-info::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.free-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.free-icon i {
+    font-size: 3rem;
+    color: white;
+}
+
+.free-plan-info h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 1;
+}
+
+.free-plan-info > p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    position: relative;
+    z-index: 1;
+}
+
+.free-benefits {
+    display: grid;
+    gap: 1rem;
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateX(10px);
+}
+
+.benefit-item i {
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.benefit-item span {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .registro-section {

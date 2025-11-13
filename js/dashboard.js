@@ -20,6 +20,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Membership plans data
 const membershipPlans = {
+    free: {
+        name: 'Free',
+        price: 0,
+        icon: 'user',
+        benefits: [
+            'Acceso al portal de socios',
+            'Noticias y novedades del club',
+            'Opción de actualizar a planes premium'
+        ]
+    },
     basica: {
         name: 'Básica',
         price: 120,
@@ -71,14 +81,20 @@ function loadUserData(user) {
     document.getElementById('memberSince').textContent = memberSince;
     
     // Display current membership
-    const currentPlan = user.tipo_membresia || 'basica';
+    const currentPlan = user.tipo_membresia || 'free';
     const planData = membershipPlans[currentPlan];
     
     document.getElementById('currentPlanName').textContent = `Membresía ${planData.name}`;
-    document.getElementById('currentPlanPrice').textContent = `S/ ${planData.price.toFixed(2)} / año`;
     
-    // Display expiry date
-    const expiryDate = user.fecha_vencimiento ? new Date(user.fecha_vencimiento).toLocaleDateString('es-PE') : '--/--/----';
+    // Show "Gratis" for free plan, or price for paid plans
+    if (currentPlan === 'free') {
+        document.getElementById('currentPlanPrice').textContent = 'Gratis';
+    } else {
+        document.getElementById('currentPlanPrice').textContent = `S/ ${planData.price.toFixed(2)} / año`;
+    }
+    
+    // Display expiry date (only for paid plans)
+    const expiryDate = user.fecha_vencimiento ? new Date(user.fecha_vencimiento).toLocaleDateString('es-PE') : 'Sin vencimiento';
     document.getElementById('expiryDate').textContent = expiryDate;
     
     // Update membership badge icon
@@ -117,12 +133,12 @@ function loadUserData(user) {
             </div>
         `;
     } else {
-        // Hide lower tier options
+        // Hide lower tier options (show only higher tiers)
         const upgradeCards = document.querySelectorAll('.upgrade-card');
         upgradeCards.forEach(card => {
             const cardPlan = card.getAttribute('data-plan');
-            const planHierarchy = { basica: 0, premium: 1, vip: 2 };
-            const currentTier = planHierarchy[currentPlan];
+            const planHierarchy = { free: -1, basica: 0, premium: 1, vip: 2 };
+            const currentTier = planHierarchy[currentPlan] || -1;
             const cardTier = planHierarchy[cardPlan];
             
             if (cardTier <= currentTier) {

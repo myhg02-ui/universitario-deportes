@@ -160,11 +160,11 @@ document.addEventListener('DOMContentLoaded', function() {
             direccion: formData.get('direccion'),
             departamento: formData.get('departamento'),
             distrito: formData.get('distrito'),
-            tipo_membresia: formData.get('tipo_membresia'),
+            tipo_membresia: 'free', // Todos los nuevos usuarios comienzan con plan gratuito
             password_hash: 'hashed_' + formData.get('password'), // Simulación de hash
             numero_socio: 'U2025' + Math.floor(Math.random() * 100000).toString().padStart(5, '0'),
             fecha_registro: new Date().toISOString(),
-            fecha_vencimiento: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString()
+            fecha_vencimiento: null // Los usuarios free no tienen vencimiento
         };
         
         // Guardar usuario en localStorage
