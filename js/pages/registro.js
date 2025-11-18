@@ -189,9 +189,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     mostrarMensaje('success', `¡Registro exitoso! Tu número de socio es: ${userData.numero_socio}. Redirigiendo a tu dashboard...`);
                     form.reset();
                     
-                    // Redirigir al dashboard después de 2 segundos
+                    // 🎯 Redirigir al INDEX después de registro exitoso
                     setTimeout(() => {
-                        window.location.href = 'dashboard.html';
+                        window.location.href = '../../index.html';
                     }, 2000);
                 }
             } else {
@@ -203,11 +203,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
                 
-                mostrarMensaje('success', `¡Registro exitoso! Tu número de socio es: ${userData.numero_socio}. Redirigiendo a tu dashboard...`);
+                mostrarMensaje('success', `¡Registro exitoso! Tu número de socio es: ${userData.numero_socio}. Redirigiendo...`);
                 form.reset();
                 
+                // 🎯 Redirigir al INDEX después de registro exitoso
                 setTimeout(() => {
-                    window.location.href = 'dashboard.html';
+                    window.location.href = '../../index.html';
                 }, 2000);
             }
         } catch (error) {
@@ -287,8 +288,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Si es éxito, redirigir al dashboard después de 2 segundos
         if (tipo === 'success') {
+            // Desde src/pages/auth/registro.html hacia src/pages/user/dashboard.html
             setTimeout(() => {
-                window.location.href = 'dashboard.html';
+                window.location.href = '../user/dashboard.html';
             }, 2000);
         } else {
             // Auto-ocultar después de 5 segundos si es error

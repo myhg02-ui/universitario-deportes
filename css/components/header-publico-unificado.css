@@ -1,0 +1,395 @@
+/**
+ * HEADER PÚBLICO UNIFICADO (Header 1)
+ * Para páginas: INICIO, EL CLUB, BENEFICIOS, NOTICIAS, CONTACTO
+ * Evita parpadeos y mantiene consistencia visual
+ */
+
+/* ============================================
+   PRELOAD Y OPTIMIZACIÓN
+   ============================================ */
+
+html {
+    background: #ffffff;
+}
+
+/* Marcar página cargada */
+html.page-loaded,
+body.page-loaded {
+    opacity: 1 !important;
+}
+
+/* ============================================
+   HEADER FIJO Y ESTABLE
+   ============================================ */
+
+header, 
+.header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
+    background: linear-gradient(135deg, #003278 0%, #005bb5 100%) !important;
+    box-shadow: 0 4px 20px rgba(0, 50, 120, 0.3) !important;
+    
+    /* Evitar parpadeo */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+    -webkit-font-smoothing: antialiased;
+    
+    /* Sin transiciones para evitar parpadeo */
+    transition: none !important;
+}
+
+/* Mantener header visible SIEMPRE */
+header {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* ============================================
+   NAV CONTAINER
+   ============================================ */
+
+.nav-container,
+.navbar,
+nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: nowrap !important;
+}
+
+/* ============================================
+   LOGO
+   ============================================ */
+
+.logo,
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    
+    /* Optimización */
+    transform: translateZ(0);
+    will-change: auto;
+}
+
+.logo img,
+.nav-logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    
+    /* Optimización de imagen */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.logo span,
+.nav-logo span {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   MENÚ DE NAVEGACIÓN
+   ============================================ */
+
+.nav-menu,
+.menu {
+    display: flex !important; /* Forzar visibilidad */
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.nav-menu li,
+.menu li {
+    display: inline-block !important;
+}
+
+.nav-link,
+.nav-menu a,
+.menu a {
+    text-decoration: none;
+    color: white !important;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    
+    /* Transiciones suaves SOLO en hover */
+    transition: background-color 0.2s ease, 
+                transform 0.15s ease !important;
+    
+    /* Optimización */
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Hover suave */
+.nav-link:hover,
+.nav-menu a:hover,
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-2px);
+}
+
+/* Active state */
+.nav-link.active,
+.nav-menu a.active,
+.menu a.active {
+    background: rgba(255, 255, 255, 0.25) !important;
+    font-weight: 700;
+}
+
+/* ============================================
+   BOTONES DE ACCIÓN
+   ============================================ */
+
+.nav-buttons,
+.nav-auth,
+.auth-buttons {
+    display: flex !important;
+    gap: 1rem;
+    align-items: center;
+    visibility: visible !important;
+}
+
+.btn-login,
+.btn-register,
+.btn-primary,
+.btn-secondary {
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    
+    /* Transiciones suaves */
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease !important;
+    
+    /* Optimización */
+    will-change: transform;
+}
+
+/* Botón Login (ROJO para que se lea bien) */
+.btn-login {
+    background: linear-gradient(135deg, #c41e3a, #e63950) !important;
+    border: 2px solid transparent !important;
+    color: white !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, #8B0000, #c41e3a) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(196, 30, 58, 0.6) !important;
+}
+
+/* Botón Register (ROJO igual que Login) */
+.btn-register,
+.btn-primary {
+    background: linear-gradient(135deg, #c41e3a, #e63950) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(196, 30, 58, 0.4);
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+}
+
+.btn-register:hover,
+.btn-primary:hover {
+    background: linear-gradient(135deg, #8B0000, #c41e3a) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(196, 30, 58, 0.6) !important;
+}
+
+/* ============================================
+   USER MENU (cuando está autenticado)
+   ============================================ */
+
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    
+    /* Transición suave */
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.user-info:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    min-width: 220px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    
+    /* Transición suave del dropdown */
+    transition: opacity 0.2s ease,
+                visibility 0.2s ease,
+                transform 0.2s ease !important;
+    
+    /* Optimización */
+    will-change: opacity, visibility, transform;
+}
+
+.user-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1.2rem;
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: 600;
+    
+    /* Transición suave */
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background: #f5f5f5;
+    color: #003278;
+}
+
+.dropdown-item:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+.dropdown-item:last-child {
+    border-radius: 0 0 12px 12px;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: #e0e0e0;
+    margin: 0.5rem 0;
+}
+
+.logout-item {
+    color: #c41e3a;
+}
+
+.logout-item:hover {
+    background: #fff0f0;
+}
+
+/* ============================================
+   CONTENIDO PRINCIPAL
+   ============================================ */
+
+body {
+    padding-top: 80px; /* Espacio para header fijo */
+    
+    /* Fade in suave del contenido */
+    animation: fadeInContent 0.2s ease-in-out;
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0.9;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    header,
+    .header {
+        position: fixed !important;
+    }
+    
+    .nav-container,
+    nav {
+        padding: 0.8rem 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .nav-menu,
+    .menu {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .nav-link,
+    .nav-menu a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    body {
+        padding-top: 70px;
+    }
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATION
+   ============================================ */
+
+/* GPU Acceleration para todo el header */
+header * {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Optimizar fuentes */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

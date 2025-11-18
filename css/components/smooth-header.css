@@ -1,0 +1,228 @@
+/**
+ * SMOOTH HEADER TRANSITIONS
+ * Evita el parpadeo del header al cambiar de página
+ * Similar al comportamiento de Word
+ */
+
+/* ============================================
+   1. HEADER PERSISTENTE Y SUAVE
+   ============================================ */
+
+/* Header siempre visible, incluso durante carga */
+header,
+.header-unified {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
+    background: white !important;
+    box-shadow: 0 4px 16px rgba(0, 50, 120, 0.12) !important;
+    transition: none !important; /* Sin transición para evitar parpadeo */
+    will-change: transform; /* Optimización GPU */
+    backface-visibility: hidden; /* Evita parpadeo */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================
+   2. EVITAR PARPADEO EN CARGA
+   ============================================ */
+
+/* El header se muestra INMEDIATAMENTE */
+header,
+.header-unified {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateZ(0); /* Force GPU acceleration */
+}
+
+/* Skeleton del header mientras carga la página */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    z-index: -1;
+}
+
+/* ============================================
+   3. CONTENIDO SUAVE (solo el body parpadea)
+   ============================================ */
+
+/* El contenido principal tiene transición suave */
+body {
+    padding-top: 80px; /* Espacio para header fijo */
+    animation: fadeInContent 0.2s ease-in-out;
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   4. NAVEGACIÓN SIN PARPADEO
+   ============================================ */
+
+/* Links del header sin efectos de carga */
+.nav-menu a,
+.nav-link-unified,
+.dropdown-item {
+    transition: background-color 0.2s ease, 
+                color 0.2s ease,
+                transform 0.15s ease !important;
+}
+
+/* Hover suave */
+.nav-menu a:hover,
+.nav-link-unified:hover {
+    transform: translateY(-2px);
+}
+
+/* Active state instantáneo */
+.nav-menu a.active,
+.nav-link-unified.active {
+    background: #003278 !important;
+    color: white !important;
+}
+
+/* ============================================
+   5. OPTIMIZACIÓN DE CARGA
+   ============================================ */
+
+/* Prevenir FOUC (Flash of Unstyled Content) */
+html {
+    background: white;
+}
+
+/* Logo y elementos críticos del header */
+.nav-logo,
+.nav-logo img {
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+/* ============================================
+   6. DROPDOWN SIN PARPADEO
+   ============================================ */
+
+.user-dropdown {
+    transition: opacity 0.2s ease, 
+                visibility 0.2s ease,
+                transform 0.2s ease !important;
+    will-change: opacity, visibility, transform;
+}
+
+.user-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ============================================
+   7. BOTONES SUAVES
+   ============================================ */
+
+.btn-logout,
+.btn-unified,
+.btn-rojo {
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease !important;
+    will-change: transform;
+}
+
+.btn-logout:hover,
+.btn-unified:hover {
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   8. LOADING STATE (opcional)
+   ============================================ */
+
+/* Mostrar skeleton mientras carga */
+.header-skeleton {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: white;
+    z-index: 10000;
+    box-shadow: 0 4px 16px rgba(0, 50, 120, 0.12);
+}
+
+/* Ocultar skeleton cuando el DOM está listo */
+.page-loaded .header-skeleton {
+    display: none;
+}
+
+/* ============================================
+   9. PERFORMANCE BOOST
+   ============================================ */
+
+/* Forzar rendering por GPU */
+header * {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Optimizar imágenes del logo */
+.nav-logo img {
+    will-change: auto;
+    image-rendering: crisp-edges;
+}
+
+/* ============================================
+   10. RESPONSIVE SIN PARPADEO
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Mantener header fijo en móviles */
+    header,
+    .header-unified {
+        position: fixed !important;
+    }
+    
+    body {
+        padding-top: 70px;
+    }
+}
+
+/* ============================================
+   11. PRELOAD HINT
+   ============================================ */
+
+/* Sugerir al navegador que precargue recursos críticos */
+link[rel="preload"][as="style"] {
+    /* Estilos críticos del header se cargan primero */
+}
+
+/* ============================================
+   12. CONSISTENCIA CROSS-BROWSER
+   ============================================ */
+
+/* Chrome, Safari, Edge */
+@supports (-webkit-appearance: none) {
+    header {
+        -webkit-backface-visibility: hidden;
+        -webkit-transform: translateZ(0);
+    }
+}
+
+/* Firefox */
+@-moz-document url-prefix() {
+    header {
+        transform: translateZ(0);
+    }
+}

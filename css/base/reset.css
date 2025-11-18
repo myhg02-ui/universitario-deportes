@@ -49,11 +49,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1400px;
-    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    gap: 2rem;
 }
 
 .nav-logo {
@@ -108,137 +106,6 @@ body {
 .nav-auth {
     display: flex;
     gap: 1rem;
-    align-items: center;
-    flex-shrink: 0;
-    opacity: 0;
-    transition: opacity 0.2s ease-in;
-}
-
-.nav-auth.loaded {
-    opacity: 1;
-}
-
-/* User Menu (cuando está logueado) */
-.user-menu {
-    position: relative;
-    display: inline-block;
-    flex-shrink: 0;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    background: var(--primary-color);
-    border: 2px solid var(--primary-color);
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: white;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-.user-info:hover {
-    background: #a01629;
-    border-color: #a01629;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(196, 30, 58, 0.3);
-}
-
-.user-info i.fa-user-circle {
-    font-size: 1.5rem;
-}
-
-.user-info i.fa-chevron-down {
-    font-size: 0.8rem;
-    transition: transform 0.3s ease;
-}
-
-.user-menu:hover .user-info i.fa-chevron-down {
-    transform: rotate(180deg);
-}
-
-.user-name {
-    font-weight: 600;
-    color: white;
-}
-
-.user-dropdown {
-    display: none;
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    min-width: 220px;
-    overflow: hidden;
-    z-index: 1000;
-    animation: slideDown 0.3s ease-out;
-}
-
-.user-dropdown.show {
-    display: block;
-}
-
-.user-dropdown a {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 1rem 1.2rem;
-    color: #333;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-    border-bottom: 1px solid #eee;
-    font-size: 0.95rem;
-}
-
-.user-dropdown a:last-child {
-    border-bottom: none;
-}
-
-.user-dropdown a:hover {
-    background-color: #f8f9fa;
-}
-
-.user-dropdown a i {
-    font-size: 1.1rem;
-    width: 20px;
-    text-align: center;
-    color: #c41e3a;
-}
-
-.user-dropdown .logout-item {
-    color: #dc3545;
-    font-weight: 600;
-}
-
-.user-dropdown .logout-item:hover {
-    background-color: #fff5f5;
-}
-
-.user-dropdown .logout-item i {
-    color: #dc3545;
-}
-
-.dropdown-divider {
-    height: 1px;
-    background: #eee;
-    margin: 0;
-    border: none;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .btn-login, .btn-register {
@@ -251,8 +118,6 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    white-space: nowrap;
-    flex-shrink: 0;
 }
 
 .btn-login {
@@ -294,7 +159,7 @@ body {
 .hero {
     background: 
         linear-gradient(135deg, rgba(196, 30, 58, 0.90) 0%, rgba(139, 0, 0, 0.88) 50%, rgba(0, 0, 0, 0.92) 100%),
-        url('../assets/images/hero/estadio.png');
+        url('../../../public/assets/images/estadio.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1240,7 +1105,7 @@ body {
     padding: 80px 0;
     background: 
         linear-gradient(rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.94)),
-        url('../assets/images/hero/estadio2.png');
+        url('../../../public/assets/images/estadio2.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1574,42 +1439,15 @@ body {
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
-        order: 3;
     }
     
     .nav-menu {
         display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: white;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        flex-direction: column;
-        padding: 1rem;
-        z-index: 999;
-    }
-    
-    .nav-menu.active {
-        display: flex;
     }
     
     .nav-auth {
-        display: flex;
-        flex-direction: row;
+        flex-direction: column;
         gap: 0.5rem;
-        order: 2;
-        flex-shrink: 0;
-    }
-    
-    .btn-login, .btn-register {
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
-    }
-    
-    .user-info {
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
     }
     
     .hero {

@@ -1,8 +1,8 @@
-// Login functionality
+// Login functionality with Firebase
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('loginForm');
     
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const email = document.getElementById('email').value.trim();
@@ -14,31 +14,67 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Get all registered users from localStorage
-        const allUsers = getAllUsers();
-        
-        // Find user by email
-        const user = allUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
-        
-        if (!user) {
-            showMessage('error', 'Usuario no encontrado. Por favor regístrate primero.');
-            return;
-        }
-        
-        // In real app, you'd verify password with bcrypt
-        // For simulation, we check if password exists (simplified)
-        if (user.password_hash) {
-            // User exists, simulate successful login
-            // Save current user session
-            localStorage.setItem('currentUser', JSON.stringify(user));
+        try {
+            // Try Firebase login first
+            if (typeof firebaseAPI !== 'undefined') {
+                showMessage('info', 'Iniciando sesión...');
+                
+                const result = await firebaseAPI.login(email, password);
+                
+                if (result.success) {
+                    // Save user in sessionStorage
+                    sessionStorage.setItem('currentUser', JSON.stringify({
+                        uid: result.uid,
+                        email: result.email,
+                        nombres: result.nombres,
+                        apellidos: result.apellidos,
+                        numero_socio: result.numero_socio,
+                        tipo_membresia: result.tipo_membresia,
+                        is_admin: result.is_admin || false
+                    }));
+                    
+                    showMessage('success', `¡Bienvenido ${result.nombres}! Redirigiendo...`);
+                    
+                    setTimeout(() => {
+                        window.location.href = '../index.html';
+                    }, 1500);
+                }
+            } else {
+                // Fallback to localStorage if Firebase not available
+                console.warn('⚠️ Firebase no disponible, usando localStorage');
+                const allUsers = getAllUsers();
+                const user = allUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
+                
+                if (!user) {
+                    showMessage('error', 'Usuario no encontrado. Por favor regístrate primero.');
+                    return;
+                }
+                
+                if (user.password_hash) {
+                    sessionStorage.setItem('currentUser', JSON.stringify(user));
+                    showMessage('success', '¡Bienvenido! Redirigiendo...');
+                    setTimeout(() => {
+                        window.location.href = '../index.html';
+                    }, 1500);
+                } else {
+                    showMessage('error', 'Contraseña incorrecta');
+                }
+            }
+        } catch (error) {
+            console.error('❌ Error en login:', error);
             
-            showMessage('success', '¡Bienvenido! Redirigiendo...');
-            
-            setTimeout(() => {
-                window.location.href = 'dashboard.html';
-            }, 1500);
-        } else {
-            showMessage('error', 'Contraseña incorrecta');
+            // More specific error messages
+            if (error.code === 'auth/user-not-found') {
+                showMessage('error', 'Usuario no encontrado. Por favor regístrate primero.');
+            } else if (error.code === 'auth/wrong-password') {
+                showMessage('error', 'Contraseña incorrecta. Intenta nuevamente.');
+            } else if (error.code === 'auth/invalid-email') {
+                showMessage('error', 'Email inválido. Verifica tu correo.');
+            } else if (error.code === 'auth/too-many-requests') {
+                showMessage('error', 'Demasiados intentos. Intenta más tarde.');
+            } else {
+                showMessage('error', error.message || 'Error al iniciar sesión. Intenta nuevamente.');
+            }
         }
     });
 });
@@ -79,7 +115,12 @@ function showMessage(type, message) {
     
     messageDiv.className = `mensaje ${type}`;
     
-    const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+    const icons = {
+        'success': 'fa-check-circle',
+        'error': 'fa-exclamation-circle',
+        'info': 'fa-info-circle'
+    };
+    const icon = icons[type] || 'fa-info-circle';
     messageDiv.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
     
     messageContainer.style.display = 'block';

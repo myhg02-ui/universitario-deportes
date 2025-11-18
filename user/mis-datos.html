@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Mis Datos - Club Universitario de Deportes</title>
+    <link rel="icon" type="image/png" href="../assets/images/logos/logo.png">
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/logo.png">
+    
+    <!-- CSS Profesional -->
+    <link rel="stylesheet" href="../css/pages/mis-datos-pro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Ajuste del contenedor para header fijo */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 100px !important;
+            padding-top: 2rem;
+        }
+        
+        /* Mejoras visuales para el formulario */
+        .datos-personales {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 0;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #003278;
+            font-size: 0.95rem;
+        }
+        
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e8ecef;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            background: white;
+        }
+        
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #003278;
+            box-shadow: 0 0 0 3px rgba(0, 50, 120, 0.1);
+        }
+        
+        .form-input:disabled,
+        .form-select:disabled {
+            background: #f8f9fa;
+            cursor: not-allowed;
+            color: #6c757d;
+            border-color: #dee2e6;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            color: #003278;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .info-box {
+            padding: 1.25rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            border-left: 4px solid #003278;
+        }
+        
+        .info-label {
+            font-size: 0.85rem;
+            color: #6c757d;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .info-value {
+            font-size: 1.1rem;
+            color: #003278;
+            font-weight: 700;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #003278, #0052cc);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 50, 120, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 50, 120, 0.4);
+        }
+        
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #ffc107, #ffca28);
+            color: #000;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+        }
+        
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+        }
+        
+        .page-banner {
+            background: linear-gradient(135deg, #003278 0%, #0052cc 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 50, 120, 0.2);
+        }
+        
+        .page-banner h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .page-banner p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .message {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+            display: flex;
+        }
+        
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+            display: flex;
+        }
+        
+        .edit-mode-banner {
+            background: linear-gradient(135deg, #ffc107, #ffca28);
+            color: #000;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+        }
+        
+        .edit-mode-banner.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ✅ HEADER USUARIO ESTANDARIZADO -->
+    <header style="position: fixed; top: 0; left: 0; right: 0; background: white; box-shadow: 0 4px 16px rgba(0,50,120,0.12); z-index: 1000; border-bottom: none;">
+        <nav style="max-width: 1400px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem;">
+            <!-- Logo y nombre -->
+            <a href="../index.html" style="display: flex; align-items: center; gap: 1rem; text-decoration: none;">
+                <img src="../assets/images/logos/logo.png" alt="Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23003278%22/%3E%3Crect x=%220%22 y=%2248%22 width=%22100%22 height=%224%22 fill=%22%23c41e3a%22/%3E%3Ctext x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2250%22 font-weight=%22bold%22 font-family=%22Arial%22%3EU%3C/text%3E%3C/svg%3E'" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                <span style="font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, #003278 0%, #0052cc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Universitario</span>
+            </a>
+            
+            <!-- Menú de navegación -->
+            <ul style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0;">
+                <li>
+                    <a href="../index.html" style="text-decoration: none; color: #5a6c7d; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 10px; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                        <i class="fas fa-home" style="font-size: 1.1rem;"></i> Inicio
+                    </a>
+                </li>
+                <li>
+                    <a href="dashboard.html" style="text-decoration: none; color: #5a6c7d; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 10px; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                        <i class="fas fa-th-large" style="font-size: 1.1rem;"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="mis-datos.html?v=20251116" style="text-decoration: none; color: #003278; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 10px; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                        <i class="fas fa-id-card" style="font-size: 1.1rem;"></i> Mis Datos
+                    </a>
+                </li>
+                <li>
+                    <a href="test.html?v=20251116" style="text-decoration: none; color: #5a6c7d; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 10px; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                        <i class="fas fa-flask" style="font-size: 1.1rem;"></i> TEST
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Botón Salir -->
+            <button onclick="logout()" style="padding: 0.875rem 2rem; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; background: linear-gradient(135deg, #c41e3a, #e63950); color: white; box-shadow: 0 4px 12px rgba(196,30,58,0.3); display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; font-family: 'Montserrat', sans-serif;">
+                <i class="fas fa-sign-out-alt" style="font-size: 1.1rem;"></i> Salir
+            </button>
+        </nav>
+    </header>
+
+    <!-- Contenido Principal -->
+    <div class="container">
+        <!-- Banner -->
+        <div class="page-banner">
+            <h1><i class="fas fa-id-card"></i> MIS DATOS PERSONALES</h1>
+            <p>Consulta y actualiza tu información personal</p>
+        </div>
+
+        <!-- Mensaje -->
+        <div id="mensaje" class="message"></div>
+        
+        <!-- Banner de Modo Edición -->
+        <div id="editModeBanner" class="edit-mode-banner">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>MODO EDICIÓN ACTIVADO - Los campos están desbloqueados para editar</span>
+        </div>
+
+        <!-- Información No Editable -->
+        <div class="card">
+            <h2 class="card-title">
+                <i class="fas fa-info-circle"></i>
+                Información de Cuenta
+            </h2>
+            
+            <div class="info-grid">
+                <div class="info-box">
+                    <div class="info-label">Número de Socio</div>
+                    <div class="info-value" id="numeroSocio">-</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-label">Tipo de Documento</div>
+                    <div class="info-value">DNI</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-label">Número de Documento</div>
+                    <div class="info-value" id="documento">-</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-label">Correo Electrónico</div>
+                    <div class="info-value" id="email">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Datos Personales Editables -->
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 class="card-title" style="margin-bottom: 0;">
+                    <i class="fas fa-user-edit"></i>
+                    Datos Personales
+                </h2>
+                <button type="button" id="btnHabilitarEdicion" class="btn btn-warning" onclick="habilitarEdicion()">
+                    <i class="fas fa-lock"></i> Habilitar Edición
+                </button>
+            </div>
+            
+            <form id="formDatos">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-user"></i> Nombres *
+                        </label>
+                        <input type="text" class="form-input" id="nombres" placeholder="Tus nombres" required disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-user"></i> Apellidos *
+                        </label>
+                        <input type="text" class="form-input" id="apellidos" placeholder="Tus apellidos" required disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-calendar"></i> Fecha de Nacimiento
+                        </label>
+                        <input type="date" class="form-input" id="fechaNacimiento" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-venus-mars"></i> Género
+                        </label>
+                        <select class="form-select" id="genero" disabled>
+                            <option value="">Seleccionar</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-phone"></i> Teléfono
+                        </label>
+                        <input type="tel" class="form-input" id="telefono" placeholder="+51 999 999 999" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-map-marker-alt"></i> Departamento
+                        </label>
+                        <select class="form-select" id="departamento" disabled>
+                            <option value="">Seleccionar departamento</option>
+                            <option value="Amazonas">Amazonas</option>
+                            <option value="Áncash">Áncash</option>
+                            <option value="Apurímac">Apurímac</option>
+                            <option value="Arequipa">Arequipa</option>
+                            <option value="Ayacucho">Ayacucho</option>
+                            <option value="Cajamarca">Cajamarca</option>
+                            <option value="Callao">Callao</option>
+                            <option value="Cusco">Cusco</option>
+                            <option value="Huancavelica">Huancavelica</option>
+                            <option value="Huánuco">Huánuco</option>
+                            <option value="Ica">Ica</option>
+                            <option value="Junín">Junín</option>
+                            <option value="La Libertad">La Libertad</option>
+                            <option value="Lambayeque">Lambayeque</option>
+                            <option value="Lima">Lima</option>
+                            <option value="Loreto">Loreto</option>
+                            <option value="Madre de Dios">Madre de Dios</option>
+                            <option value="Moquegua">Moquegua</option>
+                            <option value="Pasco">Pasco</option>
+                            <option value="Piura">Piura</option>
+                            <option value="Puno">Puno</option>
+                            <option value="San Martín">San Martín</option>
+                            <option value="Tacna">Tacna</option>
+                            <option value="Tumbes">Tumbes</option>
+                            <option value="Ucayali">Ucayali</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-building"></i> Distrito
+                        </label>
+                        <input type="text" class="form-input" id="distrito" placeholder="Tu distrito" disabled>
+                    </div>
+
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label class="form-label">
+                            <i class="fas fa-home"></i> Dirección
+                        </label>
+                        <input type="text" class="form-input" id="direccion" placeholder="Tu dirección completa" disabled>
+                    </div>
+                </div>
+
+                <div class="btn-group" id="botonesAccion" style="display: none;">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Guardar Cambios
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="cancelarEdicion()">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <script>
+        // Inicializar Firebase PRIMERO
+        const firebaseConfig = {
+            apiKey: "AIzaSyC3W8ZzBxKPlPwVmhhIg9OU3tKqR-7mr9Y",
+            authDomain: "universitario-deportes.firebaseapp.com",
+            databaseURL: "https://universitario-deportes-default-rtdb.firebaseio.com",
+            projectId: "universitario-deportes",
+            storageBucket: "universitario-deportes.firebasestorage.app",
+            messagingSenderId: "891772064216",
+            appId: "1:891772064216:web:efb768cec8725af31862ad",
+            measurementId: "G-J5181E6DGB"
+        };
+
+        // Inicializar Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+            console.log('✅ Firebase inicializado correctamente');
+        }
+        
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+    </script>
+    
+    <!-- Sistema de Presencia Global (después de Firebase) -->
+    <script src="../js/presence-system.js"></script>
+
+    <script>
+        // Variables globales para caché
+        let userDataCache = null;
+        let currentUser = null;
+        
+        // Cargar datos del usuario automáticamente con CACHÉ
+        auth.onAuthStateChanged(async (user) => {
+            if (!user) {
+                console.log('❌ Usuario no autenticado');
+                window.location.href = '../auth/login.html';
+                return;
+            }
+
+            currentUser = user;
+            console.log('✅ Usuario autenticado:', user.email);
+
+            // Mostrar loading
+            mostrarLoading(true);
+
+            try {
+                // Usar caché si existe
+                if (userDataCache) {
+                    console.log('⚡ Cargando desde caché...');
+                    cargarDatosEnFormulario(userDataCache);
+                    mostrarLoading(false);
+                    return;
+                }
+                
+                const userDoc = await db.collection('users').doc(user.uid).get();
+                
+                if (userDoc.exists) {
+                    userDataCache = userDoc.data();
+                    console.log('📊 Datos cargados:', userDataCache);
+                    cargarDatosEnFormulario(userDataCache);
+                } else {
+                    console.error('❌ No se encontraron datos del usuario');
+                }
+            } catch (error) {
+                console.error('❌ Error cargando datos:', error);
+                mostrarMensaje('Error al cargar los datos', 'error');
+            } finally {
+                mostrarLoading(false);
+            }
+        });
+        
+        // Función optimizada para cargar datos en el formulario
+        function cargarDatosEnFormulario(userData) {
+            const user = currentUser;
+            
+            // Info no editable (batch DOM update)
+            const updates = [
+                ['numeroSocio', userData.numero_socio || 'U2025-' + user.uid.substring(0, 6).toUpperCase(), 'textContent'],
+                ['documento', userData.dni || '-', 'textContent'],
+                ['email', user.email || '-', 'textContent'],
+                // Datos editables
+                ['nombres', userData.nombres || '', 'value'],
+                ['apellidos', userData.apellidos || '', 'value'],
+                ['fechaNacimiento', userData.fecha_nacimiento || '', 'value'],
+                ['genero', userData.genero || '', 'value'],
+                ['telefono', userData.telefono || '', 'value'],
+                ['departamento', userData.departamento || '', 'value'],
+                ['distrito', userData.distrito || '', 'value'],
+                ['direccion', userData.direccion || '', 'value']
+            ];
+            
+            // Aplicar todos los cambios de una vez
+            requestAnimationFrame(() => {
+                updates.forEach(([id, value, prop]) => {
+                    const element = document.getElementById(id);
+                    if (element) element[prop] = value;
+                });
+            });
+        }
+
+        // Guardar cambios OPTIMIZADO
+        document.getElementById('formDatos').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                mostrarMensaje('❌ Debes iniciar sesión', 'error');
+                return;
+            }
+            
+            // Mostrar loading
+            mostrarLoading(true);
+            
+            try {
+                const datosActualizados = {
+                    nombres: document.getElementById('nombres').value.trim(),
+                    apellidos: document.getElementById('apellidos').value.trim(),
+                    fecha_nacimiento: document.getElementById('fechaNacimiento').value,
+                    genero: document.getElementById('genero').value,
+                    telefono: document.getElementById('telefono').value.trim(),
+                    departamento: document.getElementById('departamento').value,
+                    distrito: document.getElementById('distrito').value.trim(),
+                    direccion: document.getElementById('direccion').value.trim(),
+                    actualizado: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                console.log('💾 Guardando datos...');
+                
+                // Guardar en Firebase y actualizar caché simultáneamente
+                await db.collection('users').doc(currentUser.uid).update(datosActualizados);
+                
+                // Actualizar caché local INMEDIATAMENTE
+                userDataCache = { ...userDataCache, ...datosActualizados };
+                
+                mostrarMensaje('✅ Datos guardados correctamente', 'success');
+                
+                // Deshabilitar edición después de guardar
+                deshabilitarEdicion();
+            } catch (error) {
+                console.error('❌ Error guardando:', error);
+                mostrarMensaje('❌ Error al guardar: ' + error.message, 'error');
+            } finally {
+                mostrarLoading(false);
+            }
+        });
+        
+        // Mostrar/ocultar loading
+        function mostrarLoading(mostrar) {
+            let loader = document.getElementById('loadingOverlay');
+            if (!loader && mostrar) {
+                loader = document.createElement('div');
+                loader.id = 'loadingOverlay';
+                loader.innerHTML = `
+                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+                        <div style="background: white; padding: 2rem 3rem; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); text-align: center;">
+                            <div style="width: 50px; height: 50px; border: 4px solid #e0e0e0; border-top: 4px solid #003278; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
+                            <p style="margin: 0; font-weight: 700; color: #003278; font-size: 1.1rem;">Procesando...</p>
+                        </div>
+                    </div>
+                    <style>
+                        @keyframes spin {
+                            0% { transform: rotate(0deg); }
+                            100% { transform: rotate(360deg); }
+                        }
+                    </style>
+                `;
+                document.body.appendChild(loader);
+            } else if (loader && !mostrar) {
+                loader.remove();
+            }
+        }
+
+        // Habilitar edición SIN confirmación molesta
+        function habilitarEdicion() {
+            // Habilitar todos los campos directamente
+            document.getElementById('nombres').disabled = false;
+            document.getElementById('apellidos').disabled = false;
+            document.getElementById('fechaNacimiento').disabled = false;
+            document.getElementById('genero').disabled = false;
+            document.getElementById('telefono').disabled = false;
+            document.getElementById('departamento').disabled = false;
+            document.getElementById('distrito').disabled = false;
+            document.getElementById('direccion').disabled = false;
+            
+            // Cambiar botón
+            const btnEditar = document.getElementById('btnHabilitarEdicion');
+            btnEditar.innerHTML = '<i class="fas fa-lock-open"></i> Edición Habilitada';
+            btnEditar.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+            btnEditar.disabled = true;
+            
+            // Mostrar banner y botones
+            document.getElementById('editModeBanner').classList.add('active');
+            document.getElementById('botonesAccion').style.display = 'flex';
+            
+            mostrarMensaje('🔓 Edición habilitada. Modifica tus datos y guarda los cambios.', 'success');
+        }
+        
+        // Deshabilitar edición
+        function deshabilitarEdicion() {
+            // Deshabilitar todos los campos
+            document.getElementById('nombres').disabled = true;
+            document.getElementById('apellidos').disabled = true;
+            document.getElementById('fechaNacimiento').disabled = true;
+            document.getElementById('genero').disabled = true;
+            document.getElementById('telefono').disabled = true;
+            document.getElementById('departamento').disabled = true;
+            document.getElementById('distrito').disabled = true;
+            document.getElementById('direccion').disabled = true;
+            
+            // Restaurar botón
+            const btnEditar = document.getElementById('btnHabilitarEdicion');
+            btnEditar.innerHTML = '<i class="fas fa-lock"></i> Habilitar Edición';
+            btnEditar.style.background = 'linear-gradient(135deg, #ffc107, #ffca28)';
+            btnEditar.disabled = false;
+            
+            // Ocultar banner y botones
+            document.getElementById('editModeBanner').classList.remove('active');
+            document.getElementById('botonesAccion').style.display = 'none';
+        }
+
+        // Cancelar cambios
+        function cancelarEdicion() {
+            if (confirm('¿Descartar los cambios realizados?')) {
+                window.location.reload();
+            }
+        }
+
+        // Mostrar mensaje
+        function mostrarMensaje(texto, tipo) {
+            const mensaje = document.getElementById('mensaje');
+            mensaje.textContent = texto;
+            mensaje.className = `message ${tipo}`;
+            mensaje.style.display = 'block';
+            
+            setTimeout(() => {
+                mensaje.style.display = 'none';
+            }, 5000);
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                firebase.auth().signOut().then(() => {
+                    sessionStorage.clear();
+                    localStorage.clear();
+                    window.location.href = '../index.html';
+                }).catch((error) => {
+                    console.error('Error al cerrar sesión:', error);
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>

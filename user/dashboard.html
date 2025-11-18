@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - Club Universitario de Deportes</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/logos/logo.png">
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/logo.png">
+    
+    <!-- CSS UNIFICADO -->
+    <link rel="stylesheet" href="../css/pages/dashboard-pro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Forzar estilos del header para consistencia */
+        .header-unified {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: white !important;
+            box-shadow: 0 4px 16px rgba(0, 50, 120, 0.12) !important;
+            z-index: 1000 !important;
+        }
+        
+        .navbar-unified {
+            max-width: 1400px !important;
+            margin: 0 auto !important;
+            padding: 1rem 2rem !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            gap: 2rem !important;
+        }
+        
+        .nav-logo-unified {
+            display: flex !important;
+            align-items: center !important;
+            gap: 1rem !important;
+            text-decoration: none !important;
+        }
+        
+        .nav-menu-unified {
+            display: flex !important;
+            gap: 2rem !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .nav-menu-unified li {
+            list-style: none !important;
+        }
+        
+        .nav-link-unified {
+            text-decoration: none !important;
+            color: #1a1a1a !important;
+            font-weight: 600 !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px !important;
+            transition: all 0.3s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+        }
+        
+        .nav-link-unified:hover,
+        .nav-link-unified.active {
+            background: #003278 !important;
+            color: white !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        .btn-unified {
+            padding: 0.8rem 1.8rem !important;
+            border: none !important;
+            border-radius: 12px !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+        }
+        
+        .btn-rojo {
+            background: linear-gradient(135deg, #c41e3a, #e63950) !important;
+            color: white !important;
+            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3) !important;
+        }
+        
+        .btn-rojo:hover {
+            background: linear-gradient(135deg, #8B0000, #c41e3a) !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 6px 16px rgba(196, 30, 58, 0.4) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- ✅ HEADER USUARIO (Inicio, Dashboard, Mi Perfil) -->
+    <header style="position: fixed; top: 0; left: 0; right: 0; background: white; box-shadow: 0 4px 16px rgba(0,50,120,0.12); z-index: 1000;">
+        <nav style="max-width: 1400px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem;">
+            <!-- Logo y nombre -->
+            <a href="../index.html" style="display: flex; align-items: center; gap: 1rem; text-decoration: none;">
+                <img src="../assets/images/logos/logo.png" alt="Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23003278%22/%3E%3Crect x=%220%22 y=%2248%22 width=%22100%22 height=%224%22 fill=%22%23c41e3a%22/%3E%3Ctext x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2250%22 font-weight=%22bold%22 font-family=%22Arial%22%3EU%3C/text%3E%3C/svg%3E'" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                <span style="font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, #003278 0%, #0052cc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Universitario</span>
+            </a>
+            
+            <!-- Menú de navegación -->
+            <ul style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0;">
+                <li>
+                    <a href="../index.html" style="text-decoration: none; color: #5a6c7d; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 10px; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                        <i class="fas fa-home" style="font-size: 1.1rem;"></i> Inicio
+                    </a>
+                </li>
+                <li>
+                    <a href="dashboard.html" style="text-decoration: none; color: #003278; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 10px; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                        <i class="fas fa-th-large" style="font-size: 1.1rem;"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="mis-datos.html?v=20251116" style="text-decoration: none; color: #5a6c7d; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 10px; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                        <i class="fas fa-id-card" style="font-size: 1.1rem;"></i> Mis Datos
+                    </a>
+                </li>
+                <li>
+                    <a href="test.html?v=20251116" style="text-decoration: none; color: #5a6c7d; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 10px; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                        <i class="fas fa-flask" style="font-size: 1.1rem;"></i> TEST
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Botón Salir -->
+            <button onclick="logout()" style="padding: 0.875rem 2rem; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; background: linear-gradient(135deg, #c41e3a, #e63950); color: white; box-shadow: 0 4px 12px rgba(196,30,58,0.3); display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; font-family: 'Montserrat', sans-serif;">
+                <i class="fas fa-sign-out-alt" style="font-size: 1.1rem;"></i> Salir
+            </button>
+        </nav>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard-main" style="padding-top: 100px; max-width: 1400px; margin: 0 auto; padding: 100px 2rem 2rem;">
+        <div class="dashboard-container">
+            
+            <!-- Hero Banner Unificado -->
+            <div class="hero-banner animate-fade-in">
+                <div class="hero-content">
+                    <h1 class="hero-title">¡Bienvenido, <span id="userName">Socio</span>! 🏆</h1>
+                    <p class="hero-subtitle">Número de Socio: <strong id="memberNumber">U2025XXXXX</strong></p>
+                    <p class="hero-subtitle">Miembro desde: <strong id="memberSince">2025</strong></p>
+                    <span class="badge-unified badge-success mt-sm">
+                        <span class="status-dot active"></span>
+                        <span id="userStatusText">Conectado</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Separador con estrellas -->
+            <div class="stars-decoration"></div>
+
+            <!-- Estado de Membresía -->
+            <section class="membership-section">
+                <h2 class="section-title text-center">
+                    <span class="text-azul">Estado de tu Membresía</span>
+                </h2>
+                <hr class="separator-unified mb-lg">
+                
+                <div class="current-membership">
+                    <div class="membership-card-unified animate-fade-in-up" id="currentMembershipCard">
+                        <div class="membership-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="membership-name" id="currentPlanName">Membresía Básica</h3>
+                        <p class="membership-price" id="currentPlanPrice">S/ 120.00 <span>/ año</span></p>
+                        
+                        <div class="text-center mb-md">
+                            <span class="badge-unified badge-success">
+                                <i class="fas fa-check-circle"></i> Activa
+                            </span>
+                        </div>
+                        
+                        <p class="text-center text-gris">
+                            Vence: <strong id="expiryDate">--/--/----</strong>
+                        </p>
+                        
+                        <hr class="separator-unified separator-blue mt-md mb-md">
+                        
+                        <div class="membership-benefits">
+                            <h4 class="text-azul fw-bold mb-sm">Tus beneficios actuales:</h4>
+                            <ul id="currentBenefitsList">
+                                <li><i class="fas fa-check"></i> 10% descuento en merchandising oficial</li>
+                                <li><i class="fas fa-check"></i> Prioridad en compra de entradas</li>
+                                <li><i class="fas fa-check"></i> Boletín mensual exclusivo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Separador -->
+            <div class="stars-decoration"></div>
+
+            <!-- Mejora tu Membresía -->
+            <section class="upgrade-section" id="upgradeSection">
+                <h2 class="section-title text-center">
+                    <span class="text-rojo">Mejora tu Membresía</span>
+                </h2>
+                <p class="section-subtitle text-center text-gris">Desbloquea más beneficios exclusivos</p>
+                <hr class="separator-unified separator-red mb-lg">
+
+                <div class="grid-unified grid-3">
+                    <!-- Básica Plan -->
+                    <div class="membership-card-unified animate-slide-in-left" data-plan="basica">
+                        <div class="membership-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="membership-name">Membresía Básica</h3>
+                        <p class="membership-price">S/ 120.00 <span>/ año</span></p>
+                        
+                        <hr class="separator-unified separator-blue mt-md mb-md">
+                        
+                        <ul class="membership-benefits">
+                            <li><i class="fas fa-check"></i> 10% descuento en merchandising oficial</li>
+                            <li><i class="fas fa-check"></i> Prioridad en compra de entradas</li>
+                            <li><i class="fas fa-check"></i> Boletín mensual exclusivo</li>
+                        </ul>
+                        
+                        <button class="btn-unified btn-azul mt-md" style="width: 100%;" onclick="openUpgradeModal('basica', 120)">
+                            <i class="fas fa-arrow-up"></i> Actualizar
+                        </button>
+                    </div>
+
+                    <!-- Premium Plan -->
+                    <div class="membership-card-unified animate-fade-in-up" data-plan="premium">
+                        <div class="membership-icon gold">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3 class="membership-name">Membresía Premium</h3>
+                        <p class="membership-price">S/ 300.00 <span>/ año</span></p>
+                        
+                        <hr class="separator-unified mt-md mb-md">
+                        
+                        <ul class="membership-benefits">
+                            <li><i class="fas fa-check"></i> Todo lo de Básica +</li>
+                            <li><i class="fas fa-check"></i> 20% descuento en merchandising</li>
+                            <li><i class="fas fa-check"></i> 2 entradas gratis al año</li>
+                            <li><i class="fas fa-check"></i> Acceso a eventos exclusivos</li>
+                            <li><i class="fas fa-check"></i> Meet & Greet con jugadores</li>
+                            <li><i class="fas fa-check"></i> Bufanda oficial de regalo</li>
+                        </ul>
+                        
+                        <button class="btn-unified btn-dorado mt-md" style="width: 100%;" onclick="openUpgradeModal('premium', 300)">
+                            <i class="fas fa-arrow-up"></i> Actualizar
+                        </button>
+                    </div>
+
+                    <!-- VIP Plan -->
+                    <div class="membership-card-unified animate-slide-in-right" data-plan="vip" style="position: relative;">
+                        <span class="badge-unified badge-rojo" style="position: absolute; top: -15px; right: 20px;">
+                            <i class="fas fa-fire"></i> MÁS POPULAR
+                        </span>
+                        <div class="membership-icon red">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3 class="membership-name">Membresía VIP</h3>
+                        <p class="membership-price">S/ 800.00 <span>/ año</span></p>
+                        
+                        <hr class="separator-unified separator-red mt-md mb-md">
+                        
+                        <ul class="membership-benefits">
+                            <li><i class="fas fa-check"></i> Todo lo de Premium +</li>
+                            <li><i class="fas fa-check"></i> 30% descuento en merchandising</li>
+                            <li><i class="fas fa-check"></i> 4 entradas VIP al año</li>
+                            <li><i class="fas fa-check"></i> Acceso al Palco VIP</li>
+                            <li><i class="fas fa-check"></i> Camiseta oficial firmada</li>
+                            <li><i class="fas fa-check"></i> Invitación a entrenamientos</li>
+                            <li><i class="fas fa-check"></i> Pack de bienvenida premium</li>
+                            <li><i class="fas fa-check"></i> Atención prioritaria 24/7</li>
+                        </ul>
+                        
+                        <button class="btn-unified btn-rojo mt-md" style="width: 100%;" onclick="openUpgradeModal('vip', 800)">
+                            <i class="fas fa-crown"></i> Actualizar a VIP
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Separador -->
+            <div class="stars-decoration"></div>
+
+            <!-- Historial de Membresías -->
+            <section class="history-section" style="margin-bottom: 3rem;">
+                <h2 class="section-title text-center" style="font-size: 2rem; margin-bottom: 0.5rem;">
+                    <i class="fas fa-history" style="color: #003278;"></i>
+                    <span class="text-azul">Historial de Membresías</span>
+                </h2>
+                <p class="section-subtitle text-center text-gris" style="margin-bottom: 2rem;">
+                    Revisa todas tus actualizaciones de membresía
+                </p>
+                <hr class="separator-unified mb-lg">
+                
+                <div class="history-table-container card-unified" style="box-shadow: 0 4px 20px rgba(0,50,120,0.1); border-radius: 16px; overflow: hidden;">
+                    <div style="padding: 1.5rem; background: linear-gradient(135deg, #003278 0%, #0052cc 100%); color: white;">
+                        <h3 style="margin: 0; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-list-alt"></i>
+                            Registro de Transacciones
+                        </h3>
+                    </div>
+                    <table class="table-unified" style="margin: 0; width: 100%;">
+                        <thead style="background: #f8f9fa;">
+                            <tr>
+                                <th style="padding: 1.25rem;"><i class="fas fa-calendar"></i> Fecha</th>
+                                <th style="padding: 1.25rem;"><i class="fas fa-tag"></i> Tipo</th>
+                                <th style="padding: 1.25rem;"><i class="fas fa-money-bill-wave"></i> Monto</th>
+                                <th style="padding: 1.25rem;"><i class="fas fa-check-circle"></i> Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody" style="background: white;">
+                            <!-- Se llenará dinámicamente desde JavaScript -->
+                            <tr>
+                                <td colspan="4" style="text-align: center; padding: 3rem; color: #999;">
+                                    <i class="fas fa-inbox" style="font-size: 3rem; display: block; margin-bottom: 1rem; opacity: 0.3;"></i>
+                                    <p style="margin: 0; font-size: 1.1rem;">No hay historial de transacciones aún</p>
+                                    <p style="margin: 0.5rem 0 0; font-size: 0.9rem; color: #bbb;">
+                                        Tus actualizaciones de membresía aparecerán aquí
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Nota informativa -->
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #e3f2fd 0%, #f3f4f6 100%); 
+                            border-left: 4px solid #003278; border-radius: 12px;">
+                    <p style="margin: 0; color: #555; display: flex; align-items: start; gap: 0.75rem;">
+                        <i class="fas fa-info-circle" style="color: #003278; font-size: 1.25rem; margin-top: 2px;"></i>
+                        <span style="line-height: 1.6;">
+                            <strong style="color: #003278;">Nota:</strong> Todas las transacciones están protegidas y respaldadas. 
+                            Si tienes alguna consulta sobre tu historial, contacta a 
+                            <a href="mailto:socios@universitario.pe" style="color: #c41e3a; text-decoration: none; font-weight: 600;">
+                                socios@universitario.pe
+                            </a>
+                        </span>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Upgrade Modal -->
+    <div id="upgradeModal" class="modal">
+        <div class="modal-content upgrade-modal-content">
+            <span class="close" onclick="closeUpgradeModal()">&times;</span>
+            
+            <div class="upgrade-modal-header">
+                <div class="upgrade-modal-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h2>Actualizar Membresía</h2>
+                <p class="modal-subtitle">Completa el pago para actualizar tu membresía</p>
+            </div>
+
+            <div class="upgrade-modal-body">
+                <div class="upgrade-summary">
+                    <div class="summary-item">
+                        <span>Membresía actual:</span>
+                        <strong id="modalCurrentPlan">Básica</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Nueva membresía:</span>
+                        <strong id="modalNewPlan" class="text-primary">Premium</strong>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-item total">
+                        <span>Total a pagar:</span>
+                        <strong id="modalAmount" class="text-amount">S/ 300.00</strong>
+                    </div>
+                </div>
+
+                <form id="paymentForm" class="payment-form">
+                    <h3><i class="fas fa-lock"></i> Información de Pago (Simulación)</h3>
+                    <p class="payment-note">
+                        <i class="fas fa-info-circle"></i> 
+                        Esta es una simulación. No se procesará ningún pago real.
+                    </p>
+
+                    <div class="form-group">
+                        <label for="cardNumber">Número de Tarjeta</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" 
+                               maxlength="19" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cardExpiry">Vencimiento</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/AA" 
+                                   maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardCVV">CVV</label>
+                            <input type="text" id="cardCVV" placeholder="123" 
+                                   maxlength="3" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardName">Nombre en la tarjeta</label>
+                        <input type="text" id="cardName" placeholder="NOMBRE APELLIDO" required>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="termsPayment" required>
+                        <label for="termsPayment">
+                            Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-submit-payment">
+                        <i class="fas fa-check-circle"></i> Confirmar Pago (Simulación)
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>¡Actualización Exitosa! 🎉</h2>
+            <p>Tu membresía ha sido actualizada correctamente</p>
+            <p class="success-detail">Ahora eres un socio <strong id="successPlanName">Premium</strong></p>
+            <button class="btn-success" onclick="closeSuccessModal()">
+                <i class="fas fa-home"></i> Volver al Dashboard
+            </button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; padding: 3rem 0 2rem;">
+                <!-- Logo y Descripción -->
+                <div class="footer-section">
+                    <img src="../img/logo_universitario.png" alt="Universitario" style="width: 120px; margin-bottom: 1rem;" onerror="this.style.display='none'">
+                    <p style="color: #666; line-height: 1.6; margin: 0;">
+                        El club más grande del Perú. Unidos por la crema, unidos por la historia.
+                    </p>
+                </div>
+                
+                <!-- Enlaces Rápidos -->
+                <div class="footer-section">
+                    <h4 style="color: #003278; margin-bottom: 1rem; font-weight: 700;">Enlaces Rápidos</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 0.5rem;">
+                            <a href="../index.html" style="color: #666; text-decoration: none; transition: color 0.3s;">
+                                <i class="fas fa-home"></i> Inicio
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 0.5rem;">
+                            <a href="./mis-datos.html" style="color: #666; text-decoration: none; transition: color 0.3s;">
+                                <i class="fas fa-user"></i> Mi Perfil
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 0.5rem;">
+                            <a href="../info/noticias.html" style="color: #666; text-decoration: none; transition: color 0.3s;">
+                                <i class="fas fa-newspaper"></i> Noticias
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 0.5rem;">
+                            <a href="../info/club.html" style="color: #666; text-decoration: none; transition: color 0.3s;">
+                                <i class="fas fa-info-circle"></i> Sobre el Club
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Contacto -->
+                <div class="footer-section">
+                    <h4 style="color: #c41e3a; margin-bottom: 1rem; font-weight: 700;">Contacto</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; color: #666;">
+                            <i class="fas fa-phone" style="color: #003278;"></i>
+                            <span>(01) 614-0000</span>
+                        </li>
+                        <li style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; color: #666;">
+                            <i class="fas fa-envelope" style="color: #c41e3a;"></i>
+                            <span>socios@universitario.pe</span>
+                        </li>
+                        <li style="margin-bottom: 0.75rem; display: flex; align-items: start; gap: 0.5rem; color: #666;">
+                            <i class="fas fa-map-marker-alt" style="color: #003278; margin-top: 3px;"></i>
+                            <span>Av. Universitaria 755, Lima, Perú</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Redes Sociales -->
+                <div class="footer-section">
+                    <h4 style="color: #003278; margin-bottom: 1rem; font-weight: 700;">Síguenos</h4>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="https://facebook.com/universitario" target="_blank" 
+                           style="width: 45px; height: 45px; background: linear-gradient(135deg, #003278, #0052cc); 
+                                  color: white; border-radius: 50%; display: flex; align-items: center; 
+                                  justify-content: center; text-decoration: none; transition: all 0.3s; 
+                                  box-shadow: 0 2px 8px rgba(0,50,120,0.3);">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/universitario" target="_blank" 
+                           style="width: 45px; height: 45px; background: linear-gradient(135deg, #1da1f2, #0c85d0); 
+                                  color: white; border-radius: 50%; display: flex; align-items: center; 
+                                  justify-content: center; text-decoration: none; transition: all 0.3s; 
+                                  box-shadow: 0 2px 8px rgba(29,161,242,0.3);">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com/universitario" target="_blank" 
+                           style="width: 45px; height: 45px; background: linear-gradient(135deg, #c41e3a, #e63950); 
+                                  color: white; border-radius: 50%; display: flex; align-items: center; 
+                                  justify-content: center; text-decoration: none; transition: all 0.3s; 
+                                  box-shadow: 0 2px 8px rgba(196,30,58,0.3);">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/universitario" target="_blank" 
+                           style="width: 45px; height: 45px; background: linear-gradient(135deg, #ff0000, #cc0000); 
+                                  color: white; border-radius: 50%; display: flex; align-items: center; 
+                                  justify-content: center; text-decoration: none; transition: all 0.3s; 
+                                  box-shadow: 0 2px 8px rgba(255,0,0,0.3);">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <p style="margin-top: 1.5rem; color: #666; font-size: 0.875rem;">
+                        <i class="fas fa-users"></i> <strong style="color: #003278;">+500,000</strong> socios cremas
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" style="border-top: 2px solid #e5e5e5; padding-top: 2rem; text-align: center;">
+                <p style="color: #666; margin: 0; font-size: 0.95rem;">
+                    &copy; 2025 <strong style="color: #003278;">Club Universitario de Deportes</strong>. 
+                    Todos los derechos reservados.
+                </p>
+                <p style="color: #999; margin: 0.5rem 0 0; font-size: 0.875rem;">
+                    <i class="fas fa-shield-alt"></i> Sistema de Gestión de Socios v2.0
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .footer {
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+            margin-top: 4rem;
+            border-top: 3px solid #003278;
+        }
+        
+        .footer a:hover {
+            color: #c41e3a !important;
+        }
+        
+        .footer-section a[href*="facebook"]:hover,
+        .footer-section a[href*="twitter"]:hover,
+        .footer-section a[href*="instagram"]:hover,
+        .footer-section a[href*="youtube"]:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 6px 16px rgba(0,50,120,0.4) !important;
+        }
+    </style>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="../js/firebase-config.js"></script>
+    <script>
+        if (typeof initFirebase === 'function') {
+            initFirebase();
+        }
+    </script>
+    
+    <!-- 🔐 PROTECCIÓN: Verificar que el usuario esté autenticado -->
+    <script src="../js/services/auth-protection.js"></script>
+    
+    <!-- Sistema de Presencia Global (detecta usuario online en cualquier página) -->
+    <script src="../js/presence-system.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
+
+

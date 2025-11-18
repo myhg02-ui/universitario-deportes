@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procesando Pago | Universitario de Deportes</title>
+    <meta name="description" content="Completa tu pago y conviértete en socio del Club Universitario de Deportes.">
+    
+    <link rel="icon" type="image/png" href="../../../public/assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../src/css/base/reset.css">
+    <link rel="stylesheet" href="../../../src/css/pages/registro.css">
+    <link rel="stylesheet" href="../../../src/css/base/universitario.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        .pago-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 3rem;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .pago-form-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .pago-form-section h2 {
+            color: #c41e3a;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .pago-form-section p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .payment-method {
+            padding: 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .payment-method:hover {
+            border-color: #c41e3a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.1);
+        }
+        
+        .payment-method.active {
+            border-color: #c41e3a;
+            background: #fff5f6;
+        }
+        
+        .payment-method i {
+            font-size: 2rem;
+            color: #c41e3a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .payment-method span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .card-form {
+            display: none;
+        }
+        
+        .card-form.active {
+            display: block;
+        }
+        
+        .card-preview {
+            background: linear-gradient(135deg, #c41e3a 0%, #8B0000 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-preview::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+        
+        .card-chip {
+            width: 50px;
+            height: 40px;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .card-number {
+            font-size: 1.5rem;
+            letter-spacing: 0.2rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .card-holder, .card-expiry {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .card-label {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .security-badge i {
+            color: #28a745;
+            font-size: 1.5rem;
+        }
+        
+        .security-badge span {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .resumen-pedido {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .resumen-pedido h3 {
+            color: #333;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .plan-selected {
+            background: linear-gradient(135deg, #c41e3a 0%, #8B0000 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-selected::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+        
+        .plan-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #d4af37;
+        }
+        
+        .plan-price small {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        .resumen-linea {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            color: #666;
+        }
+        
+        .resumen-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 1.5rem 0;
+            margin-top: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            border-top: 2px solid #c41e3a;
+        }
+        
+        .btn-pagar {
+            width: 100%;
+            background: linear-gradient(135deg, #c41e3a 0%, #8B0000 100%);
+            color: white;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-pagar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.3);
+        }
+        
+        .garantia {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .garantia i {
+            color: #28a745;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .garantia p {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .pago-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .resumen-pedido {
+                order: -1;
+                position: relative;
+                top: 0;
+            }
+            
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Loading animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        
+        .loading-overlay.active {
+            display: flex;
+        }
+        
+        .loading-content {
+            text-align: center;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #c41e3a;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <!-- Estrellas decorativas -->
+        <div class="header-stars"></div>
+        
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="../../../public/index.html" class="nav-logo">
+                    <img src="../../../public/assets/images/logo.png" alt="Escudo Universitario" class="logo-img" width="50" height="50">
+                    <span>Universitario de Deportes</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="../info/club.html" class="nav-link">El Club</a></li>
+                    <li><a href="beneficios.html" class="nav-link">Beneficios</a></li>
+                    <li><a href="../info/noticias.html" class="nav-link">Noticias</a></li>
+                    <li><a href="../index.html#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+                <div class="nav-auth">
+                    <!-- Dinámico por auth.service.js -->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Payment Section -->
+    <section style="padding: 120px 20px 60px; background: #f8f9fa;">
+        <div class="pago-container">
+            <!-- Formulario de Pago -->
+            <div class="pago-form-section">
+                <h2>
+                    <i class="fas fa-credit-card"></i>
+                    Información de Pago
+                </h2>
+                <p>Completa los datos de tu tarjeta de forma segura</p>
+                
+                <!-- Métodos de Pago -->
+                <div class="payment-methods">
+                    <div class="payment-method active" data-method="card">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Tarjeta</span>
+                    </div>
+                    <div class="payment-method" data-method="yape">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Yape</span>
+                    </div>
+                    <div class="payment-method" data-method="plin">
+                        <i class="fas fa-qrcode"></i>
+                        <span>Plin</span>
+                    </div>
+                </div>
+                
+                <!-- Formulario de Tarjeta -->
+                <form id="paymentForm" class="card-form active">
+                    <!-- Vista Previa de Tarjeta -->
+                    <div class="card-preview">
+                        <div class="card-chip"></div>
+                        <div class="card-number" id="cardPreview">•••• •••• •••• ••••</div>
+                        <div class="card-details">
+                            <div class="card-holder">
+                                <div class="card-label">Titular</div>
+                                <div id="holderPreview">NOMBRE COMPLETO</div>
+                            </div>
+                            <div class="card-expiry">
+                                <div class="card-label">Vence</div>
+                                <div id="expiryPreview">MM/AA</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Campos del Formulario -->
+                    <div class="form-group">
+                        <label for="cardNumber">Número de Tarjeta *</label>
+                        <input type="text" id="cardNumber" maxlength="19" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cardHolder">Nombre del Titular *</label>
+                        <input type="text" id="cardHolder" placeholder="Como aparece en la tarjeta" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiryDate">Fecha de Vencimiento *</label>
+                            <input type="text" id="expiryDate" placeholder="MM/AA" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV *</label>
+                            <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email de Confirmación *</label>
+                        <input type="email" id="email" placeholder="tu@email.com" required>
+                    </div>
+                    
+                    <div class="security-badge">
+                        <i class="fas fa-lock"></i>
+                        <span>Tu información está protegida con encriptación SSL de 256 bits</span>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Resumen del Pedido -->
+            <div class="resumen-pedido">
+                <h3>Resumen del Pedido</h3>
+                
+                <div class="plan-selected">
+                    <div class="plan-name" id="planNameDisplay">Socio Premium</div>
+                    <div class="plan-price">
+                        S/ <span id="planPriceDisplay">100</span>
+                        <small>/mes</small>
+                    </div>
+                </div>
+                
+                <div class="resumen-linea">
+                    <span>Subtotal</span>
+                    <span>S/ <span id="subtotal">100.00</span></span>
+                </div>
+                <div class="resumen-linea">
+                    <span>Descuento</span>
+                    <span style="color: #28a745;">- S/ 0.00</span>
+                </div>
+                <div class="resumen-linea">
+                    <span>IGV (18%)</span>
+                    <span>S/ <span id="igv">18.00</span></span>
+                </div>
+                
+                <div class="resumen-total">
+                    <span>Total a Pagar</span>
+                    <span>S/ <span id="total">118.00</span></span>
+                </div>
+                
+                <button type="submit" form="paymentForm" class="btn-pagar">
+                    <i class="fas fa-lock"></i>
+                    Procesar Pago Seguro
+                </button>
+                
+                <div class="garantia">
+                    <i class="fas fa-shield-alt"></i>
+                    <p><strong>Garantía de 30 días</strong><br>
+                    Cancela cuando quieras, sin compromiso</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h3>Procesando Pago...</h3>
+            <p>Por favor espera, no cierres esta ventana</p>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="../../../src/js/core/firebase-config.js"></script>
+    <script>initFirebase();</script>
+    
+    <!-- Sistema de Presencia Global -->
+    <script src="../js/presence-system.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="../../../src/js/pages/index.js"></script>
+    <script src="../../../src/js/services/auth.service.js"></script>
+    
+    <!-- Payment Script -->
+    <script>
+        // Verificar que el usuario esté logueado
+        const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        if (!currentUser) {
+            alert('Debes iniciar sesión primero');
+            window.location.href = 'beneficios.html';
+        }
+        
+        // Cargar plan seleccionado
+        const selectedPlan = JSON.parse(sessionStorage.getItem('selectedPlan'));
+        if (!selectedPlan) {
+            alert('Por favor selecciona un plan primero');
+            window.location.href = 'beneficios.html';
+        }
+        
+        // Actualizar UI con datos del plan
+        document.getElementById('planNameDisplay').textContent = selectedPlan.name;
+        document.getElementById('planPriceDisplay').textContent = selectedPlan.price;
+        
+        // El precio ya incluye IGV
+        const totalConIGV = selectedPlan.price;
+        const subtotalSinIGV = totalConIGV / 1.18; // Calcular base sin IGV
+        const igv = totalConIGV - subtotalSinIGV;
+        
+        document.getElementById('subtotal').textContent = subtotalSinIGV.toFixed(2);
+        document.getElementById('igv').textContent = igv.toFixed(2);
+        document.getElementById('total').textContent = totalConIGV.toFixed(2);
+        
+        // Formateo de tarjeta en tiempo real
+        const cardNumberInput = document.getElementById('cardNumber');
+        const cardPreview = document.getElementById('cardPreview');
+        
+        cardNumberInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+            
+            if (value) {
+                cardPreview.textContent = formattedValue.padEnd(19, '•');
+            } else {
+                cardPreview.textContent = '•••• •••• •••• ••••';
+            }
+        });
+        
+        // Nombre del titular
+        const cardHolderInput = document.getElementById('cardHolder');
+        const holderPreview = document.getElementById('holderPreview');
+        
+        cardHolderInput.addEventListener('input', function(e) {
+            holderPreview.textContent = e.target.value.toUpperCase() || 'NOMBRE COMPLETO';
+        });
+        
+        // Fecha de vencimiento
+        const expiryInput = document.getElementById('expiryDate');
+        const expiryPreview = document.getElementById('expiryPreview');
+        
+        expiryInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+            expiryPreview.textContent = value || 'MM/AA';
+        });
+        
+        // Solo números en CVV
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+        
+        // Cambio de método de pago
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                this.classList.add('active');
+                
+                const methodType = this.dataset.method;
+                if (methodType === 'card') {
+                    document.querySelector('.card-form').classList.add('active');
+                } else {
+                    document.querySelector('.card-form').classList.remove('active');
+                    alert(`La integración con ${methodType === 'yape' ? 'Yape' : 'Plin'} estará disponible próximamente`);
+                }
+            });
+        });
+        
+        // Procesar pago
+        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Obtener datos del formulario (sin validaciones estrictas)
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            const cardHolder = document.getElementById('cardHolder').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
+            const email = document.getElementById('email').value;
+            
+            // Validaciones mínimas
+            if (!cardNumber || !cardHolder || !expiryDate || !cvv || !email) {
+                alert('Por favor completa todos los campos');
+                return;
+            }
+            
+            // Mostrar loading
+            document.getElementById('loadingOverlay').classList.add('active');
+            
+            // Simular procesamiento de pago (3 segundos)
+            setTimeout(async () => {
+                try {
+                    // Calcular fecha de vencimiento (1 año desde hoy)
+                    const fechaVencimiento = new Date();
+                    fechaVencimiento.setFullYear(fechaVencimiento.getFullYear() + 1);
+                    
+                    // Actualizar membresía en Firebase
+                    if (typeof firebaseAPI !== 'undefined' && currentUser.uid) {
+                        await firebaseAPI.updateMembership(currentUser.uid, {
+                            tipo_membresia: selectedPlan.type,
+                            fecha_vencimiento: fechaVencimiento.toISOString(),
+                            monto: selectedPlan.price
+                        });
+                    }
+                    
+                    // Actualizar usuario en sessionStorage
+                    currentUser.tipo_membresia = selectedPlan.type;
+                    currentUser.fecha_vencimiento = fechaVencimiento.toISOString();
+                    sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    
+                    // Limpiar plan seleccionado
+                    sessionStorage.removeItem('selectedPlan');
+                    
+                    // Ocultar loading
+                    document.getElementById('loadingOverlay').classList.remove('active');
+                    
+                    // Mostrar mensaje de éxito
+                    alert(`¡Pago procesado exitosamente!\n\n` +
+                          `Plan: ${selectedPlan.name}\n` +
+                          `Monto Total: S/ ${selectedPlan.price.toFixed(2)}\n\n` +
+                          `Recibirás un correo de confirmación en: ${email}\n\n` +
+                          `¡Bienvenido a la familia crema!`);
+                    
+                    // Redirigir al dashboard
+                    window.location.href = 'dashboard.html';
+                } catch (error) {
+                    console.error('Error al procesar pago:', error);
+                    document.getElementById('loadingOverlay').classList.remove('active');
+                    alert('Hubo un error al procesar el pago. Por favor intenta nuevamente.');
+                }
+            }, 3000);
+        });
+        
+        // Auto-completar email del usuario
+        if (currentUser && currentUser.email) {
+            document.getElementById('email').value = currentUser.email;
+        }
+    </script>
+</body>
+</html>
+
+

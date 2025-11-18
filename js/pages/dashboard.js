@@ -1,42 +1,17 @@
 // Dashboard functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Verificar autenticación con Firebase
-    firebase.auth().onAuthStateChanged(async (user) => {
-        if (!user) {
-            console.log('❌ Usuario no autenticado, redirigiendo...');
-            window.location.href = '../auth/login.html';
-            return;
-        }
-        
-        console.log('✅ Usuario autenticado:', user.email);
-        
-        // Cargar datos del usuario desde Firestore
-        try {
-            const userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
-            
-            if (!userDoc.exists) {
-                console.error('❌ No se encontraron datos del usuario en Firestore');
-                alert('Error al cargar datos del usuario');
-                return;
-            }
-            
-            const userData = {
-                id: user.uid,
-                email: user.email,
-                ...userDoc.data()
-            };
-            
-            console.log('📊 Datos del usuario cargados:', userData);
-            
-            // Load user data
-            loadUserData(userData);
-            loadMembershipHistory(userData);
-            
-        } catch (error) {
-            console.error('❌ Error al cargar datos del usuario:', error);
-            alert('Error al cargar datos del usuario');
-        }
-    });
+    // Check if user is logged in (check sessionStorage first, then localStorage for backward compatibility)
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser')) || JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (!currentUser) {
+        alert('Debes iniciar sesión para acceder al dashboard');
+        window.location.href = '../../index.html';
+        return;
+    }
+
+    // Load user data
+    loadUserData(currentUser);
+    loadMembershipHistory(currentUser);
     
     // Setup payment form
     setupPaymentForm();
@@ -97,7 +72,7 @@ const membershipPlans = {
 
 // Load user data
 function loadUserData(user) {
-    // Display user name (verificar que exista el elemento)
+    // Display user name
     const userNameElement = document.getElementById('userName');
     if (userNameElement) {
         userNameElement.textContent = user.nombres + ' ' + user.apellidos;
@@ -109,15 +84,15 @@ function loadUserData(user) {
     }
     
     // Display member since date
+    const memberSince = new Date(user.fecha_registro).getFullYear();
     const memberSinceElement = document.getElementById('memberSince');
-    if (memberSinceElement && user.fecha_registro) {
-        const memberSince = new Date(user.fecha_registro).getFullYear();
+    if (memberSinceElement) {
         memberSinceElement.textContent = memberSince;
     }
     
     // Display current membership
     const currentPlan = user.tipo_membresia || 'free';
-    const planData = membershipPlans[currentPlan.toLowerCase()] || membershipPlans['free'];
+    const planData = membershipPlans[currentPlan];
     
     const currentPlanNameElement = document.getElementById('currentPlanName');
     if (currentPlanNameElement) {
@@ -135,9 +110,9 @@ function loadUserData(user) {
     }
     
     // Display expiry date (only for paid plans)
+    const expiryDate = user.fecha_vencimiento ? new Date(user.fecha_vencimiento).toLocaleDateString('es-PE') : 'Sin vencimiento';
     const expiryDateElement = document.getElementById('expiryDate');
     if (expiryDateElement) {
-        const expiryDate = user.fecha_vencimiento ? new Date(user.fecha_vencimiento).toLocaleDateString('es-PE') : 'Sin vencimiento';
         expiryDateElement.textContent = expiryDate;
     }
     
@@ -161,13 +136,15 @@ function loadUserData(user) {
     // Update membership card style based on plan
     const membershipCard = document.getElementById('currentMembershipCard');
     if (membershipCard) {
-        membershipCard.className = 'membership-card-unified ' + currentPlan.toLowerCase();
+        membershipCard.classList.remove('basica', 'premium', 'vip');
+        membershipCard.classList.add(currentPlan);
     }
     
     // Hide upgrade options if already VIP
-    const upgradeSection = document.getElementById('upgradeSection');
-    if (upgradeSection && currentPlan.toLowerCase() === 'vip') {
-        upgradeSection.innerHTML = `
+    if (currentPlan === 'vip') {
+        const upgradeSection = document.getElementById('upgradeSection');
+        if (upgradeSection) {
+            upgradeSection.innerHTML = `
             <h2 class="section-title">Tienes la Membresía Máxima 👑</h2>
             <p class="section-subtitle">Ya disfrutas de todos los beneficios exclusivos</p>
             <div style="text-align: center; padding: 60px 20px;">
@@ -182,6 +159,7 @@ function loadUserData(user) {
                 </p>
             </div>
         `;
+        }
     } else {
         // Hide lower tier options (show only higher tiers)
         const upgradeCards = document.querySelectorAll('.upgrade-card');
@@ -201,6 +179,7 @@ function loadUserData(user) {
 // Load membership history
 function loadMembershipHistory(user) {
     const historyBody = document.getElementById('historyTableBody');
+    if (!historyBody) return;
     
     // Get history from localStorage or create initial entry
     let history = JSON.parse(localStorage.getItem(`history_${user.email}`)) || [];
@@ -250,12 +229,16 @@ function openUpgradeModal(plan, amount) {
 
 function closeUpgradeModal() {
     document.getElementById('upgradeModal').style.display = 'none';
-    document.getElementById('paymentForm').reset();
+    const paymentForm = document.getElementById('paymentForm');
+    if (paymentForm) {
+        paymentForm.reset();
+    }
 }
 
 // Setup payment form
 function setupPaymentForm() {
     const form = document.getElementById('paymentForm');
+    if (!form) return;
     
     form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -275,6 +258,8 @@ function setupPaymentForm() {
 function processPayment() {
     // Show loading state
     const submitBtn = document.querySelector('.btn-submit-payment');
+    if (!submitBtn) return;
+    
     const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando pago...';
     submitBtn.disabled = true;
@@ -309,8 +294,14 @@ function processPayment() {
         closeUpgradeModal();
         
         // Show success modal
-        document.getElementById('successPlanName').textContent = membershipPlans[selectedPlan].name;
-        document.getElementById('successModal').style.display = 'block';
+        const successPlanName = document.getElementById('successPlanName');
+        if (successPlanName) {
+            successPlanName.textContent = membershipPlans[selectedPlan].name;
+        }
+        const successModal = document.getElementById('successModal');
+        if (successModal) {
+            successModal.style.display = 'block';
+        }
         
         // Reset button
         submitBtn.innerHTML = originalText;
@@ -319,7 +310,10 @@ function processPayment() {
 }
 
 function closeSuccessModal() {
-    document.getElementById('successModal').style.display = 'none';
+    const successModal = document.getElementById('successModal');
+    if (successModal) {
+        successModal.style.display = 'none';
+    }
     // Reload page to show updated data
     location.reload();
 }
@@ -329,6 +323,8 @@ function setupCardFormatting() {
     const cardNumber = document.getElementById('cardNumber');
     const cardExpiry = document.getElementById('cardExpiry');
     const cardCVV = document.getElementById('cardCVV');
+    
+    if (!cardNumber || !cardExpiry || !cardCVV) return;
     
     // Format card number
     cardNumber.addEventListener('input', function(e) {
@@ -364,7 +360,7 @@ function logout() {
             firebase.auth().signOut().catch(err => console.error('Error signing out:', err));
         }
         
-        window.location.href = 'index.html';
+        window.location.href = '../../index.html';
     }
 }
 
@@ -373,10 +369,10 @@ window.onclick = function(event) {
     const upgradeModal = document.getElementById('upgradeModal');
     const successModal = document.getElementById('successModal');
     
-    if (event.target == upgradeModal) {
+    if (event.target == upgradeModal && upgradeModal) {
         closeUpgradeModal();
     }
-    if (event.target == successModal) {
+    if (event.target == successModal && successModal) {
         closeSuccessModal();
     }
 }

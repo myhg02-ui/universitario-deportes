@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información y Guía - Universitario Deportes</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/logos/logo.png">
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/logo.png">
+    
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/universitario-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding-top: 0;
+            margin: 0;
+        }
+        
+        .info-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .info-header {
+            background: linear-gradient(135deg, #003278 0%, #004ca3 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 60px rgba(0,50,120,0.3);
+        }
+        
+        .info-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .info-header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+        
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .section-card h2 {
+            color: #003278;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 3px solid #c41e3a;
+            padding-bottom: 1rem;
+        }
+        
+        .section-card h3 {
+            color: #c41e3a;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-card p {
+            color: #2c3e50;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .section-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        
+        .section-card li {
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #003278;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .section-card li:hover {
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            transform: translateX(10px);
+            border-left-color: #c41e3a;
+        }
+        
+        .section-card li strong {
+            color: #c41e3a;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .tech-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .tech-item i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tech-item h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(255,107,107,0.3);
+        }
+        
+        .warning-box h3 {
+            color: white !important;
+            margin-top: 0 !important;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(38,222,129,0.3);
+        }
+        
+        .success-box h3 {
+            color: white !important;
+            margin-top: 0 !important;
+        }
+        
+        .code-box {
+            background: #2d3748;
+            color: #48bb78;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .quick-link {
+            background: linear-gradient(135deg, #003278 0%, #004ca3 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .quick-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,50,120,0.4);
+        }
+        
+        .quick-link i {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- ✅ HEADER USUARIO ESTANDARIZADO -->
+    <header style="position: fixed; top: 0; left: 0; right: 0; width: 100%; background: white; box-shadow: 0 4px 16px rgba(0,50,120,0.12); z-index: 1000; margin: 0; padding: 0;">
+        <nav style="max-width: 1400px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem;">
+            <!-- Logo y nombre -->
+            <a href="../index.html" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; flex-shrink: 0;">
+                <img src="../assets/images/logos/logo.png" alt="Logo Universitario" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23003278%22/%3E%3Crect x=%220%22 y=%2248%22 width=%22100%22 height=%224%22 fill=%22%23c41e3a%22/%3E%3Ctext x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2250%22 font-weight=%22bold%22 font-family=%22Arial%22%3EU%3C/text%3E%3C/svg%3E'" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; display: block;">
+                <span style="font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, #003278 0%, #0052cc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Universitario</span>
+            </a>
+            
+            <!-- Menú de navegación -->
+            <ul style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0; flex-grow: 1; justify-content: center;">
+                <li style="list-style: none;">
+                    <a href="../index.html" style="text-decoration: none; color: #5a6c7d; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 10px; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                        <i class="fas fa-home" style="font-size: 1.1rem;"></i> Inicio
+                    </a>
+                </li>
+                <li style="list-style: none;">
+                    <a href="dashboard.html" style="text-decoration: none; color: #5a6c7d; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 10px; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                        <i class="fas fa-th-large" style="font-size: 1.1rem;"></i> Dashboard
+                    </a>
+                </li>
+                <li style="list-style: none;">
+                    <a href="mis-datos.html?v=20251116" style="text-decoration: none; color: #5a6c7d; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 10px; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                        <i class="fas fa-id-card" style="font-size: 1.1rem;"></i> Mis Datos
+                    </a>
+                </li>
+                <li style="list-style: none;">
+                    <a href="test.html?v=20251116" style="text-decoration: none; color: #003278; font-weight: 700; padding: 0.75rem 1.5rem; border-radius: 10px; transition: color 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                        <i class="fas fa-flask" style="font-size: 1.1rem;"></i> TEST
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Botón Salir -->
+            <button onclick="logout()" style="padding: 0.875rem 2rem; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; background: linear-gradient(135deg, #c41e3a, #e63950); color: white; box-shadow: 0 4px 12px rgba(196,30,58,0.3); display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; flex-shrink: 0; font-family: 'Montserrat', sans-serif;">
+                <i class="fas fa-sign-out-alt" style="font-size: 1.1rem;"></i> Salir
+            </button>
+        </nav>
+    </header>
+
+    <div class="info-container" style="padding-top: 120px;">
+        <!-- HEADER CON TABS -->
+        <div class="info-header">
+            <h1><i class="fas fa-book"></i> Guía Completa del Sistema</h1>
+            <p>Todo lo que necesitas saber sobre cómo funciona esta plataforma</p>
+            
+            <!-- TABS NAVEGACIÓN -->
+            <div class="tabs-container" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="tab-btn active" onclick="showTab(1)" style="padding: 1rem 2rem; background: white; color: #003278; border: 3px solid white; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                    1. Plataforma
+                </button>
+                <button class="tab-btn" onclick="showTab(2)" style="padding: 1rem 2rem; background: rgba(255,255,255,0.2); color: white; border: 3px solid rgba(255,255,255,0.5); border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(10px);">
+                    2. Estructura
+                </button>
+                <button class="tab-btn" onclick="showTab(3)" style="padding: 1rem 2rem; background: rgba(255,255,255,0.2); color: white; border: 3px solid rgba(255,255,255,0.5); border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(10px);">
+                    3. Firebase
+                </button>
+                <button class="tab-btn" onclick="showTab(4)" style="padding: 1rem 2rem; background: rgba(255,255,255,0.2); color: white; border: 3px solid rgba(255,255,255,0.5); border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(10px);">
+                    4. Código
+                </button>
+            </div>
+        </div>
+
+        <!-- TAB 1: QUÉ ES ESTA PLATAFORMA -->
+        <div class="tab-content" id="tab1" style="display: block;">
+        <div class="section-card">
+            <h2><i class="fas fa-info-circle"></i> ¿Qué es esta plataforma?</h2>
+            <p>Esta es la plataforma web oficial de <strong>Universitario Deportes</strong>, diseñada para gestionar membresías de socios, proporcionar información del club y ofrecer beneficios exclusivos a los miembros.</p>
+            
+            <h3><i class="fas fa-target"></i> Objetivos Principales:</h3>
+            <ul>
+                <li><strong>Gestión de Socios:</strong> Registro, autenticación y administración de cuentas de socios.</li>
+                <li><strong>Sistema de Membresías:</strong> Tres niveles (Básica S/120, Premium, VIP) con beneficios escalonados.</li>
+                <li><strong>Panel de Usuario:</strong> Dashboard personalizado con información de membresía y acceso rápido.</li>
+                <li><strong>Panel de Administración:</strong> Gestión completa de usuarios y permisos (solo para admins).</li>
+                <li><strong>Información Institucional:</strong> Historia del club, noticias, beneficios y más.</li>
+            </ul>
+        </div>
+        </div>
+
+        <!-- TAB 2: ESTRUCTURA DE PÁGINAS -->
+        <div class="tab-content" id="tab2" style="display: none;">
+        <div class="section-card">
+            <h2><i class="fas fa-sitemap"></i> Estructura de Páginas</h2>
+            
+            <h3><i class="fas fa-globe"></i> Páginas Públicas (sin login):</h3>
+            <ul>
+                <li><strong>index.html:</strong> Página principal con hero banner, información de membresías y llamadas a la acción.</li>
+                <li><strong>info/club.html:</strong> Historia del club, títulos, estadio, jugadores históricos.</li>
+                <li><strong>info/noticias.html:</strong> Últimas noticias y actualizaciones del club.</li>
+                <li><strong>info/beneficios.html:</strong> Lista completa de beneficios para socios.</li>
+                <li><strong>auth/login.html:</strong> Formulario de inicio de sesión con Firebase Authentication.</li>
+                <li><strong>auth/registro.html:</strong> Formulario de registro de nuevos socios.</li>
+            </ul>
+            
+            <h3><i class="fas fa-user-lock"></i> Páginas de Usuario (requieren login):</h3>
+            <ul>
+                <li><strong>user/dashboard.html:</strong> Panel principal con resumen de membresía, estado y opciones de upgrade.</li>
+                <li><strong>user/mis-datos.html:</strong> Información personal del socio, edición de datos, gestión de perfil.</li>
+                <li><strong>user/test.html:</strong> ESTA PÁGINA - Guía completa del sistema y documentación.</li>
+            </ul>
+            
+            <h3><i class="fas fa-shield-alt"></i> Páginas de Administración (solo admins):</h3>
+            <ul>
+                <li><strong>admin/panel-admin.html:</strong> Panel de control para gestionar todos los usuarios, permisos y configuraciones.</li>
+            </ul>
+        </div>
+        </div>
+
+        <!-- TAB 3: SISTEMA DE AUTENTICACIÓN -->
+        <div class="tab-content" id="tab3" style="display: none;">
+        <div class="section-card">
+            <h2><i class="fas fa-lock"></i> Sistema de Autenticación</h2>
+            
+            <h3><i class="fas fa-fire"></i> Firebase Authentication:</h3>
+            <p>Utilizamos <strong>Firebase Authentication</strong> para gestionar el registro y login de usuarios de forma segura.</p>
+            
+            <ul>
+                <li><strong>Registro:</strong> Nuevo usuario → crea cuenta con email/contraseña → Firebase genera UID único.</li>
+                <li><strong>Login:</strong> Usuario ingresa credenciales → Firebase valida → crea sesión persistente.</li>
+                <li><strong>Persistencia:</strong> La sesión se guarda en <code>localStorage</code> (Firebase LOCAL persistence) + <code>sessionStorage</code> para acceso rápido.</li>
+                <li><strong>Logout:</strong> Cierra sesión en Firebase + limpia <code>sessionStorage</code> + redirige a página principal.</li>
+            </ul>
+            
+            <div class="success-box">
+                <h3><i class="fas fa-check-circle"></i> ¿Cómo funciona el Header Dinámico?</h3>
+                <p><strong>Cuando NO hay sesión:</strong> El header muestra botones "Iniciar Sesión" y "Registrar".</p>
+                <p><strong>Cuando HAY sesión:</strong> El header muestra el nombre del usuario + menú desplegable con opciones:
+                    <br>• Dashboard
+                    <br>• Mis Datos
+                    <br>• TEST (esta página)
+                    <br>• Panel Admin (solo si eres admin)
+                    <br>• Cerrar Sesión
+                </p>
+            </div>
+        </div>
+        </div>
+
+        <!-- TAB 4: TECNOLOGÍAS Y CÓDIGO -->
+        <div class="tab-content" id="tab4" style="display: none;">
+        <div class="section-card">
+            <h2><i class="fas fa-code"></i> Stack Tecnológico</h2>
+            
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <i class="fab fa-html5"></i>
+                    <h4>HTML5</h4>
+                    <p>Estructura semántica</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-css3-alt"></i>
+                    <h4>CSS3</h4>
+                    <p>Estilos + Gradientes + Animaciones</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-js"></i>
+                    <h4>JavaScript</h4>
+                    <h4>Vanilla JS</h4>
+                    <p>Lógica del cliente</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-fire"></i>
+                    <h4>Firebase</h4>
+                    <p>Auth + Firestore + Hosting</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-file-code"></i> Archivos CSS Principales:</h3>
+            <ul>
+                <li><strong>css/styles.css:</strong> Estilos globales + header + user menu (1750+ líneas).</li>
+                <li><strong>css/universitario-theme.css:</strong> Variables de color (rojo #c41e3a, azul #003278, dorado #d4af37).</li>
+                <li><strong>css/auth-forms.css:</strong> Estilos profesionales para login y registro (387 líneas).</li>
+                <li><strong>css/pages/dashboard-pro.css:</strong> Diseño profesional del dashboard (550+ líneas con gradientes y animaciones).</li>
+            </ul>
+            
+            <h3><i class="fas fa-file-code"></i> Archivos JavaScript Principales:</h3>
+            <ul>
+                <li><strong>js/script.js:</strong> Lógica principal (300+ líneas) - maneja autenticación, header dinámico, path resolution.</li>
+                <li><strong>js/firebase-config.js:</strong> Configuración de Firebase + funciones API (login, registro, getUserData, etc.).</li>
+                <li><strong>js/login.js:</strong> Maneja el formulario de login.</li>
+                <li><strong>js/registro.js:</strong> Maneja el formulario de registro.</li>
+            </ul>
+        </div>
+
+        <!-- SECCIÓN 5: NAVEGACIÓN Y RUTAS -->
+        <div class="section-card">
+            <h2><i class="fas fa-map-signs"></i> Sistema de Navegación</h2>
+            
+            <h3><i class="fas fa-route"></i> Resolución de Rutas:</h3>
+            <p>El sistema detecta automáticamente en qué carpeta estás y construye rutas relativas correctas. Esto permite que funcione con el protocolo <code>file:///</code> sin servidor.</p>
+            
+            <div class="code-box">
+// Ejemplo de lógica en script.js:<br>
+if (pathname.endsWith('index.html')) {<br>
+&nbsp;&nbsp;userPath = 'user/';<br>
+} else if (pathname.includes('/user/')) {<br>
+&nbsp;&nbsp;userPath = '../user/';<br>
+}
+            </div>
+            
+            <ul>
+                <li><strong>Desde raíz (index.html):</strong> Links usan <code>user/</code>, <code>auth/</code>, <code>info/</code></li>
+                <li><strong>Desde subcarpetas:</strong> Links usan <code>../user/</code>, <code>../auth/</code>, <code>../index.html</code></li>
+                <li><strong>Header dinámico:</strong> Se adapta automáticamente según la ubicación actual.</li>
+            </ul>
+            
+            <div class="warning-box">
+                <h3><i class="fas fa-exclamation-triangle"></i> Importante:</h3>
+                <p>Siempre usa rutas relativas. NO uses rutas absolutas como <code>/user/dashboard.html</code> porque fallan con <code>file:///</code></p>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 6: FLUJO DE USUARIO -->
+        <div class="section-card">
+            <h2><i class="fas fa-project-diagram"></i> Flujo de Usuario Típico</h2>
+            
+            <h3><i class="fas fa-play-circle"></i> 1. Usuario Nuevo:</h3>
+            <ul>
+                <li>Visita <code>index.html</code> → Ve información de membresías</li>
+                <li>Click en "Registrar" → Va a <code>auth/registro.html</code></li>
+                <li>Completa formulario → Firebase crea cuenta + Firestore guarda datos</li>
+                <li>Redirigido a <code>index.html</code> con sesión activa</li>
+                <li>Header muestra su nombre + menú desplegable</li>
+            </ul>
+            
+            <h3><i class="fas fa-play-circle"></i> 2. Usuario Registrado:</h3>
+            <ul>
+                <li>Visita <code>index.html</code> → Click en "Iniciar Sesión"</li>
+                <li>Va a <code>auth/login.html</code> → Ingresa credenciales</li>
+                <li>Firebase valida → Sesión creada → Redirige a <code>index.html</code></li>
+                <li>Header muestra menú de usuario</li>
+                <li>Puede navegar a Dashboard, Mis Datos, TEST</li>
+            </ul>
+            
+            <h3><i class="fas fa-play-circle"></i> 3. Administrador:</h3>
+            <ul>
+                <li>Login como usuario normal</li>
+                <li>Si <code>is_admin: true</code> en Firestore → Ve opción "Panel Admin" en menú</li>
+                <li>Accede a <code>admin/panel-admin.html</code></li>
+                <li>Puede gestionar todos los usuarios, editar permisos, ver estadísticas</li>
+            </ul>
+        </div>
+
+        <!-- SECCIÓN 7: FIREBASE CONFIGURATION -->
+        <div class="section-card">
+            <h2><i class="fas fa-database"></i> Firebase Configuration</h2>
+            
+            <h3><i class="fas fa-project-diagram"></i> Proyecto Firebase:</h3>
+            <ul>
+                <li><strong>Project ID:</strong> universitario-deportes</li>
+                <li><strong>Authentication:</strong> Email/Password habilitado</li>
+                <li><strong>Firestore Database:</strong> Colección <code>users</code> con datos de socios</li>
+                <li><strong>Persistence:</strong> <code>firebase.auth.Auth.Persistence.LOCAL</code></li>
+            </ul>
+            
+            <h3><i class="fas fa-database"></i> Estructura Firestore:</h3>
+            <div class="code-box">
+users/{uid}/<br>
+├── uid: "firebase_user_id"<br>
+├── email: "usuario@example.com"<br>
+├── nombres: "Juan Pérez"<br>
+├── dni: "12345678"<br>
+├── celular: "987654321"<br>
+├── numero_socio: "U20250103"<br>
+├── membresia: "Básica"<br>
+├── is_admin: false<br>
+└── fecha_registro: Timestamp
+            </div>
+            
+            <div class="success-box">
+                <h3><i class="fas fa-user-shield"></i> Super Admin:</h3>
+                <p><strong>Email:</strong> myhg02@gmail.com</p>
+                <p><strong>Permisos:</strong> is_admin: true</p>
+                <p>Este usuario tiene acceso completo al panel de administración.</p>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 8: DEBUGGING Y TROUBLESHOOTING -->
+        <div class="section-card">
+            <h2><i class="fas fa-bug"></i> Debugging y Solución de Problemas</h2>
+            
+            <h3><i class="fas fa-wrench"></i> Problemas Comunes:</h3>
+            <ul>
+                <li><strong>El header no muestra usuario:</strong> Abre DevTools Console → Verifica errores de Firebase → Limpia caché.</li>
+                <li><strong>Links no funcionan:</strong> Revisa la consola para errores de rutas → Asegúrate de usar rutas relativas.</li>
+                <li><strong>Sesión no persiste:</strong> Verifica que Firebase persistence está en LOCAL → Revisa sessionStorage.</li>
+                <li><strong>Botones invisibles:</strong> Ya resuelto → Cambiamos de blanco sobre blanco a rojo con texto blanco.</li>
+                <li><strong>Flash de botones en carga:</strong> Ya resuelto → Usamos opacity: 0 inicial + clase .loaded.</li>
+            </ul>
+            
+            <h3><i class="fas fa-terminal"></i> Comandos Útiles:</h3>
+            <div class="code-box">
+// Ver usuario actual en consola:<br>
+firebase.auth().currentUser<br>
+<br>
+// Ver sessionStorage:<br>
+sessionStorage.getItem('currentUser')<br>
+<br>
+// Limpiar caché y recargar:<br>
+Ctrl + Shift + Delete → Limpiar todo → F5
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Scripts Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="../js/firebase-config.js"></script>
+    
+    <!-- Sistema de Presencia -->
+    <script src="../js/presence-system.js"></script>
+    
+    <script src="../js/script.js"></script>
+    
+    <script>
+        // Sistema de TABS (1, 2, 3, 4)
+        function showTab(tabNumber) {
+            // Ocultar todos los tabs
+            const allTabs = document.querySelectorAll('.tab-content');
+            allTabs.forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // Remover clase active de todos los botones
+            const allButtons = document.querySelectorAll('.tab-btn');
+            allButtons.forEach(btn => {
+                btn.style.background = 'rgba(255,255,255,0.2)';
+                btn.style.color = 'white';
+                btn.style.border = '3px solid rgba(255,255,255,0.5)';
+                btn.style.boxShadow = 'none';
+            });
+            
+            // Mostrar el tab seleccionado
+            const selectedTab = document.getElementById('tab' + tabNumber);
+            if (selectedTab) {
+                selectedTab.style.display = 'block';
+                selectedTab.style.animation = 'fadeInUp 0.4s ease';
+            }
+            
+            // Activar el botón seleccionado
+            const selectedButton = allButtons[tabNumber - 1];
+            if (selectedButton) {
+                selectedButton.style.background = 'white';
+                selectedButton.style.color = '#003278';
+                selectedButton.style.border = '3px solid white';
+                selectedButton.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+            }
+            
+            // Scroll suave al inicio del contenido
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Función de logout
+        function logout() {
+            firebase.auth().signOut().then(() => {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = '../index.html';
+            }).catch((error) => {
+                console.error('Error al cerrar sesión:', error);
+            });
+        }
+        
+        // Animación de entrada
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .tab-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 16px rgba(0,0,0,0.3) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

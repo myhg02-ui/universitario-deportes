@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro de Reclamaciones | Universitario de Deportes</title>
+    <meta name="description" content="Libro de reclamaciones digital del Club Universitario de Deportes.">
+    
+    <link rel="icon" type="image/png" href="../../../public/assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../src/css/base/reset.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="../../../public/index.html" class="nav-logo">
+                    <img src="../../../public/assets/images/logo.png" alt="Escudo Universitario" class="logo-img" width="50" height="50">
+                    <span>Universitario de Deportes</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="../../../public/index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="club.html" class="nav-link">El Club</a></li>
+                    <li><a href="../user/beneficios.html" class="nav-link">Beneficios</a></li>
+                    <li><a href="noticias.html" class="nav-link">Noticias</a></li>
+                    <li><a href="../../../public/index.html#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+                <div class="nav-auth">
+                    <button class="btn-login" onclick="window.location.href='../auth/login.html'">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+                    <button class="btn-register" onclick="window.location.href='../auth/registro.html'">
+                        <i class="fas fa-user-plus"></i> Registrarse
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" style="min-height: 40vh; padding: 120px 20px 60px;">
+        <div class="hero-content" style="grid-template-columns: 1fr; text-align: center;">
+            <div class="hero-text">
+                <h1 style="font-size: 2.8rem;">Libro de Reclamaciones</h1>
+                <p class="hero-description">Tu opinión es importante para nosotros</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <section class="benefits">
+        <div class="container" style="max-width: 900px;">
+            <div style="background: white; padding: 3rem; border-radius: 12px; box-shadow: var(--shadow); text-align: left; line-height: 1.8;">
+                
+                <div style="background: #fcf9ea; padding: 2rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid var(--primary-color);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">
+                        <i class="fas fa-info-circle"></i> Información Importante
+                    </h3>
+                    <p style="margin: 0;">
+                        De conformidad con el Código de Protección y Defensa del Consumidor (Ley N° 29571), el Club Universitario de Deportes pone a su disposición este Libro de Reclamaciones para registrar sus quejas o reclamos sobre nuestros productos y servicios.
+                    </p>
+                </div>
+
+                <h2 style="color: var(--primary-color); margin: 2rem 0 1rem; font-size: 1.8rem;">Formulario de Reclamación</h2>
+                
+                <form style="margin-top: 2rem;">
+                    <h3 style="color: var(--accent-color); margin: 1.5rem 0 1rem; font-size: 1.3rem;">1. Datos del Consumidor</h3>
+                    
+                    <div class="form-group">
+                        <label>Nombres y Apellidos *</label>
+                        <input type="text" required placeholder="Ingrese su nombre completo">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tipo de Documento *</label>
+                        <select style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px; font-size: 1rem;">
+                            <option value="dni">DNI</option>
+                            <option value="ce">Carnet de Extranjería</option>
+                            <option value="pasaporte">Pasaporte</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Número de Documento *</label>
+                        <input type="text" required placeholder="Ej: 12345678">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Correo Electrónico *</label>
+                        <input type="email" required placeholder="tu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Teléfono de Contacto *</label>
+                        <input type="tel" required placeholder="+51 999 999 999">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input type="text" placeholder="Dirección completa">
+                    </div>
+
+                    <h3 style="color: var(--accent-color); margin: 2rem 0 1rem; font-size: 1.3rem;">2. Datos del Padre/Madre (Si es menor de edad)</h3>
+                    
+                    <div class="form-group">
+                        <label>Nombres y Apellidos del Apoderado</label>
+                        <input type="text" placeholder="Solo si es menor de edad">
+                    </div>
+
+                    <div class="form-group">
+                        <label>DNI del Apoderado</label>
+                        <input type="text" placeholder="Solo si es menor de edad">
+                    </div>
+
+                    <h3 style="color: var(--accent-color); margin: 2rem 0 1rem; font-size: 1.3rem;">3. Identificación del Bien Contratado</h3>
+                    
+                    <div class="form-group">
+                        <label>Tipo de Servicio/Producto *</label>
+                        <select style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px; font-size: 1rem;" required>
+                            <option value="">Seleccione...</option>
+                            <option value="membresia">Membresía de Socio</option>
+                            <option value="entradas">Compra de Entradas</option>
+                            <option value="tienda">Tienda Oficial</option>
+                            <option value="eventos">Eventos del Club</option>
+                            <option value="estacionamiento">Estacionamiento</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Monto Reclamado (S/)</label>
+                        <input type="number" step="0.01" placeholder="0.00">
+                    </div>
+
+                    <h3 style="color: var(--accent-color); margin: 2rem 0 1rem; font-size: 1.3rem;">4. Detalle de la Reclamación</h3>
+                    
+                    <div class="form-group">
+                        <label>Tipo *</label>
+                        <div style="display: flex; gap: 2rem; margin: 1rem 0;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="radio" name="tipo" value="reclamo" required> 
+                                <strong>Reclamo:</strong> Disconformidad con el servicio/producto
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                <input type="radio" name="tipo" value="queja" required> 
+                                <strong>Queja:</strong> Malestar por la atención
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Detalle de la Reclamación *</label>
+                        <textarea rows="6" required placeholder="Describa detalladamente su reclamo o queja..." style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px; font-size: 1rem; font-family: inherit;"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pedido del Consumidor *</label>
+                        <textarea rows="4" required placeholder="¿Qué espera como solución a su reclamo?" style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px; font-size: 1rem; font-family: inherit;"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Adjuntar Documentos (Opcional)</label>
+                        <input type="file" multiple style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px; font-size: 1rem;">
+                        <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
+                            Puede adjuntar comprobantes de pago, fotografías u otros documentos relevantes
+                        </p>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="acepto" required>
+                        <label for="acepto">Declaro que la información proporcionada es veraz y autorizo el tratamiento de mis datos personales para la atención de mi reclamo conforme a la <a href="privacidad.html" style="color: var(--primary-color);">Política de Privacidad</a>.</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full" style="margin-top: 2rem;">
+                        <i class="fas fa-paper-plane"></i> Enviar Reclamación
+                    </button>
+                </form>
+
+                <div style="margin-top: 3rem; padding: 2rem; background: #fcf9ea; border-radius: 8px;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Tiempo de Respuesta
+                    </h3>
+                    <p style="margin-bottom: 1rem;">
+                        De acuerdo con la normativa vigente, el Club Universitario de Deportes tiene un plazo máximo de <strong>30 días calendario</strong> para responder a su reclamo.
+                    </p>
+                    <p style="margin-bottom: 1rem;">
+                        Recibirá un correo electrónico de confirmación con el número de su reclamo. Podrá hacer seguimiento del estado de su reclamación contactando a nuestro servicio al cliente.
+                    </p>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 2rem; background: white; border: 2px solid var(--primary-color); border-radius: 8px;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">
+                        <i class="fas fa-headset"></i> Atención al Cliente
+                    </h3>
+                    <p style="margin: 0.5rem 0;"><strong>Email:</strong> atencion@universitario.pe</p>
+                    <p style="margin: 0.5rem 0;"><strong>Teléfono:</strong> +51 1 326-5000</p>
+                    <p style="margin: 0.5rem 0;"><strong>WhatsApp:</strong> +51 999 999 999</p>
+                    <p style="margin: 0.5rem 0;"><strong>Dirección:</strong> Estadio Monumental, Av. Universitaria s/n, Ate, Lima - Perú</p>
+                    <p style="margin: 0.5rem 0;"><strong>Horario:</strong> Lunes a Viernes, 9:00 AM - 6:00 PM / Sábados, 9:00 AM - 1:00 PM</p>
+                </div>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <a href="../../../public/index.html" class="btn btn-secondary" style="display: inline-flex; background: #666; color: white;">
+                        <i class="fas fa-arrow-left"></i> Volver al Inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Club Universitario de Deportes</h3>
+                    <p>El equipo más grande y exitoso del Perú. Tricampeón 2023-2024-2025.</p>
+                    <img src="../../../public/assets/images/logo.png" alt="Escudo" class="footer-logo" width="60" height="60">
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="../../../public/index.html">Inicio</a></li>
+                        <li><a href="club.html">El Club</a></li>
+                        <li><a href="../user/beneficios.html">Beneficios</a></li>
+                        <li><a href="noticias.html">Noticias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Síguenos</h3>
+                    <p>Únete a nuestra comunidad crema</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/universitario" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com/universitario" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/universitario" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/universitario" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com/@universitario" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-club-logo">
+                <img src="../../../public/assets/images/logo.png" alt="Escudo" width="100" height="100">
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Club Universitario de Deportes. Todos los derechos reservados.</p>
+                <p class="footer-links">
+                    <a href="privacidad.html">Política de Privacidad</a> | 
+                    <a href="terminos.html">Términos y Condiciones</a> | 
+                    <a href="libro-reclamaciones.html">Libro de Reclamaciones</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal" role="dialog" aria-labelledby="loginTitle" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('loginModal')" aria-label="Cerrar modal">&times;</button>
+            <h2 id="loginTitle">Iniciar Sesión</h2>
+            <p class="modal-subtitle">Accede a tu cuenta de socio crema</p>
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Correo Electrónico *</label>
+                    <input type="email" id="loginEmail" placeholder="tu@email.com" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña *</label>
+                    <input type="password" id="loginPassword" placeholder="Tu contraseña" required autocomplete="current-password">
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Recordarme</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                </button>
+                <p class="auth-switch">¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+                <p class="auth-switch"><a href="#">¿Olvidaste tu contraseña?</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" style="display: none;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="../../../src/js/core/firebase-config.js"></script>
+    <script>initFirebase();</script>
+    
+    <!-- App Scripts -->
+    <script src="../../../src/js/pages/index.js"></script>
+    <script src="../../../src/js/services/auth.service.js"></script>
+</body>
+</html>
+
+

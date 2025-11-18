@@ -24,7 +24,21 @@ node_modules/
 # Archivos de backup
 *.bak
 *.backup
+backup/
 
 # Archivos sensibles
 .env
 .env.local
+
+# Archivos de prueba y temporales
+test-*.html
+*-backup*.html
+*-original.html
+*.bat
+
+# Documentación temporal
+docs/
+ESTRUCTURA-INDEX.md
+MEJORAS_*.md
+REPORTE_*.md
+SISTEMA_*.md

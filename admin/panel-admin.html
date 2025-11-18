@@ -1,0 +1,2752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Universitario de Deportes</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%233b82f6'><path d='M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0z'/></svg>" type="image/svg+xml">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0f172a;
+            min-height: 100vh;
+            padding: 0;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0;
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+
+        /* Header - Estilo moderno */
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid #3b82f6;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .header-user {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-info h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .user-info p {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            box-shadow: 0 4px 12px rgba(59,130,246,0.4);
+        }
+
+        .btn-logout {
+            padding: 0.65rem 1.5rem;
+            background: rgba(239,68,68,0.1);
+            border: 2px solid #ef4444;
+            color: #ef4444;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-logout:hover {
+            background: #ef4444;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239,68,68,0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Stats Cards - Diseño moderno */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            padding: 1.75rem;
+            border-radius: 16px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(59,130,246,0.15);
+            border-color: #3b82f6;
+        }
+
+        .stat-card h3 {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card i {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 2.5rem;
+            color: #e0e7ff;
+        }
+
+        /* Section Styling */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+
+        .section-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Search Bar - Moderno */
+        .search-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-wrapper {
+            position: relative;
+            max-width: 500px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.875rem 1rem 0.875rem 3rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            outline: none;
+            background: #f8fafc;
+        }
+
+        .search-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59,130,246,0.1);
+            background: white;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .search-count {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Filters - Diseño moderno */
+        .filters {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.65rem 1.5rem;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-btn:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+        }
+
+        /* Table - Diseño moderno */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+        }
+
+        th {
+            padding: 1.25rem 1rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        td {
+            padding: 1.25rem 1rem;
+            color: #475569;
+            font-size: 0.95rem;
+        }
+            font-weight: 600;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        td {
+            padding: 1rem;
+        }
+
+        /* Plan Badges */
+        .plan-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .plan-free { 
+            background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 100%); 
+            color: #424242;
+        }
+        .plan-básica,
+        .plan-basica { 
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%); 
+            color: white;
+        }
+        .plan-premium { 
+            background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%); 
+            color: white;
+        }
+        .plan-vip { 
+            background: linear-gradient(135deg, #ffd700 0%, #ff8f00 100%); 
+            color: #000;
+            font-weight: 900;
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 0 2px white;
+        }
+
+        .status-online { 
+            background: #4caf50;
+            animation: pulse 2s infinite;
+        }
+
+        .status-away { 
+            background: #ff9800;
+            animation: pulse 2s infinite;
+        }
+
+        .status-offline { 
+            background: #9e9e9e;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 2px white, 0 0 0 4px rgba(76, 175, 80, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 2px white, 0 0 0 6px rgba(76, 175, 80, 0.1);
+            }
+        }
+
+        /* Badges - Diseño moderno */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-free {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .badge-premium {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(139,92,246,0.3);
+        }
+
+        .badge-vip {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(245,158,11,0.3);
+        }
+
+        .badge-online {
+            background: #10b981;
+            color: white;
+        }
+
+        .badge-offline {
+            background: #6b7280;
+            color: white;
+        }
+
+        /* Status indicators */
+        .status-online, .status-offline {
+            font-size: 1.2rem;
+        }
+
+        /* Action Buttons - Diseño moderno */
+        .btn-action {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-right: 0.4rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(59,130,246,0.3);
+        }
+
+        .btn-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(59,130,246,0.4);
+        }
+
+        .btn-action.btn-danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            box-shadow: 0 2px 8px rgba(239,68,68,0.3);
+        }
+
+        .btn-action.btn-danger:hover {
+            box-shadow: 0 6px 20px rgba(239,68,68,0.4);
+        }
+
+        .btn-action.btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 2px 8px rgba(16,185,129,0.3);
+        }
+
+        .btn-action.btn-success:hover {
+            box-shadow: 0 6px 20px rgba(16,185,129,0.4);
+        }
+
+        .btn-action.btn-warning {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(245,158,11,0.3);
+        }
+
+        .btn-action.btn-warning:hover {
+            box-shadow: 0 6px 20px rgba(245,158,11,0.4);
+        }
+
+        .btn-action i {
+            font-size: 1rem;
+        }
+
+        .btn-action:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-view {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: white;
+            box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+        }
+
+        .btn-view:hover {
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            color: white;
+            box-shadow: 0 2px 4px rgba(244, 67, 54, 0.3);
+        }
+
+        .btn-delete:hover {
+            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(244, 67, 54, 0.4);
+        }
+
+        .btn-action:active {
+            transform: translateY(0);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        .pagination-info {
+            color: #1e293b;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .page-btn {
+            padding: 0.625rem 1.25rem;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 700;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .page-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background: #f1f5f9;
+            color: #94a3b8;
+        }
+
+        .page-size-select {
+            padding: 0.625rem 0.875rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #1e293b;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .page-size-select:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+        }
+
+        .page-size-select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #3b82f6;
+            font-size: 2rem;
+        }
+
+        /* Admin Management */
+        .add-admin-container {
+            display: none;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 2px solid #fbbf24;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.1);
+        }
+
+        .add-admin-form {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .form-group label {
+            display: block;
+            color: #1e293b;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .btn-add-admin {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1e293b;
+            font-weight: 800;
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+            font-size: 1rem;
+        }
+
+        .btn-add-admin:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-add-admin:active {
+            transform: translateY(-1px);
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #005bb5;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* === MODAL DE DETALLES === */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-container {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 2.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-title {
+            margin: 0;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .modal-title i {
+            font-size: 2rem;
+            color: #60a5fa;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.25rem;
+        }
+
+        .modal-close:hover {
+            background: rgba(239, 68, 68, 0.9);
+            border-color: #ef4444;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem 2.5rem;
+            background: #f8fafc;
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 16px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            margin: 0 0 1.5rem 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .section-title i {
+            color: #3b82f6;
+            font-size: 1.375rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .info-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .info-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e293b;
+            padding: 0.75rem 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            word-break: break-word;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            padding: 1.5rem 2.5rem;
+            border-top: 2px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .btn-modal {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-modal-secondary {
+            background: white;
+            color: #64748b;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-modal-secondary:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+        }
+
+        .btn-modal-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-modal-primary:hover {
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pagination {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .add-admin-form {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-container {
+                width: 95%;
+                max-height: 95vh;
+                border-radius: 15px;
+            }
+
+            .modal-header,
+            .modal-body,
+            .modal-footer {
+                padding: 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.375rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+            }
+
+            .btn-modal {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div style="display: flex; align-items: center; gap: 2rem;">
+                <a href="../user/dashboard.html" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; opacity: 0.9; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Volver al Dashboard</span>
+                </a>
+                <h1 style="margin: 0;">
+                    <i class="fas fa-shield-alt"></i>
+                    Panel de Administración
+                </h1>
+            </div>
+            <div class="header-user">
+                <div class="user-avatar" id="userAvatar">AD</div>
+                <div>
+                    <div id="userName" style="font-weight: 600;">Administrador</div>
+                    <div id="userRole" style="font-size: 0.85rem; opacity: 0.9;">Super Admin</div>
+                </div>
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Salir
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Total Socios</h3>
+                    <div class="number" id="totalUsers">0</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-user-shield"></i>
+                    <h3>Administradores</h3>
+                    <div class="number" id="totalAdmins">0</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-crown"></i>
+                    <h3>Planes Premium/VIP</h3>
+                    <div class="number" id="totalPremium">0</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-signal"></i>
+                    <h3>Usuarios Online</h3>
+                    <div class="number" id="totalOnline">0</div>
+                </div>
+            </div>
+
+            <!-- Sección de Socios -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-users"></i>
+                        Gestión de Socios
+                    </h2>
+                </div>
+
+                <!-- Search -->
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input 
+                            type="text" 
+                            class="search-input" 
+                            id="searchUsers"
+                            placeholder="Buscar por nombre, email o código de socio..."
+                            oninput="searchUsers(this.value)"
+                        >
+                        <span class="search-count" id="searchUsersCount"></span>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all" onclick="filterUsersByPlan('all')">
+                        Todos
+                    </button>
+                    <button class="filter-btn" data-filter="Free" onclick="filterUsersByPlan('Free')">
+                        Free
+                    </button>
+                    <button class="filter-btn" data-filter="Básica" onclick="filterUsersByPlan('Básica')">
+                        Básica
+                    </button>
+                    <button class="filter-btn" data-filter="Premium" onclick="filterUsersByPlan('Premium')">
+                        Premium
+                    </button>
+                    <button class="filter-btn" data-filter="VIP" onclick="filterUsersByPlan('VIP')">
+                        <i class="fas fa-crown"></i> VIP
+                    </button>
+                </div>
+
+                <!-- Table -->
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Estado</th>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Plan</th>
+                                <th>Registro</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <tr>
+                                <td colspan="7">
+                                    <div class="loading">
+                                        <div class="spinner"></div>
+                                        <p>Cargando socios...</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Controles de visualización (siempre visible) -->
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #f8f9fa; border-radius: 0 0 15px 15px;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <label style="font-weight: 600; color: #003278;">Mostrar:</label>
+                        <select class="page-size-select" id="usersPageSize" onchange="changeUsersPageSize(parseInt(this.value))" style="padding: 0.5rem; border: 2px solid #003278; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            <option value="10" selected>10 socios</option>
+                            <option value="25">25 socios</option>
+                            <option value="50">50 socios</option>
+                            <option value="100">100 socios</option>
+                            <option value="200">200 socios</option>
+                            <option value="500">500 socios</option>
+                            <option value="1000">1000 socios</option>
+                        </select>
+                    </div>
+                    <div class="pagination-info" id="usersPaginationInfo" style="font-weight: 600; color: #666;">
+                        Mostrando 0 de 0 socios
+                    </div>
+                </div>
+
+                <!-- Pagination (siempre visible) -->
+                <div class="pagination" style="margin-top: 0; border-radius: 0; display: flex;">
+                    <div class="pagination-controls">
+                        <button class="page-btn" onclick="changeUsersPage('first')" id="btnFirstUsers">
+                            <i class="fas fa-angle-double-left"></i>
+                        </button>
+                        <button class="page-btn" onclick="changeUsersPage('prev')" id="btnPrevUsers">
+                            <i class="fas fa-angle-left"></i> Anterior
+                        </button>
+                        <span id="currentUserPage" style="padding: 0 1rem; font-weight: 600;">Página 1</span>
+                        <button class="page-btn" onclick="changeUsersPage('next')" id="btnNextUsers">
+                            Siguiente <i class="fas fa-angle-right"></i>
+                        </button>
+                        <button class="page-btn" onclick="changeUsersPage('last')" id="btnLastUsers">
+                            <i class="fas fa-angle-double-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Administradores -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-user-shield"></i>
+                        Gestión de Administradores
+                    </h2>
+                </div>
+
+                <!-- Add Admin Form (Solo Super Admin) -->
+                <div class="add-admin-container" id="addAdminFormContainer">
+                    <h3 style="color: #003278; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-crown" style="color: #d4af37;"></i>
+                        Agregar Nuevo Administrador
+                    </h3>
+                    <p style="color: #666; margin-bottom: 1rem; font-size: 0.9rem;">
+                        Solo tú como Super Admin puedes agregar o remover administradores del sistema.
+                    </p>
+                    <div class="add-admin-form">
+                        <div class="form-group">
+                            <label>Número de Socio:</label>
+                            <input 
+                                type="text" 
+                                id="newAdminId" 
+                                placeholder="Ej: U202512345"
+                            >
+                        </div>
+                        <button class="btn-add-admin" onclick="addNewAdmin()">
+                            <i class="fas fa-user-plus"></i> Agregar Admin
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Admins -->
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input 
+                            type="text" 
+                            class="search-input" 
+                            id="searchAdmins"
+                            placeholder="Buscar administradores por nombre o email..."
+                            oninput="searchAdmins(this.value)"
+                        >
+                        <span class="search-count" id="searchAdminsCount"></span>
+                    </div>
+                </div>
+
+                <!-- Admins Table -->
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Estado</th>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Última Conexión</th>
+                                <th>Registro</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminsTableBody">
+                            <tr>
+                                <td colspan="7">
+                                    <div class="loading">
+                                        <div class="spinner"></div>
+                                        <p>Cargando administradores...</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="../js/firebase-config.js"></script>
+    
+    <!-- Sistema de Presencia Global -->
+    <script src="../js/presence-system.js"></script>
+    
+    <script>
+        // Inicializar Firebase automáticamente
+        if (typeof firebase !== 'undefined') {
+            // Verificar si Firebase ya está inicializado
+            if (firebase.apps.length === 0) {
+                try {
+                    firebase.initializeApp({
+                        apiKey: "AIzaSyC3W8ZzBxKPlPwVmhhIg9OU3tKqR-7mr9Y",
+                        authDomain: "universitario-deportes.firebaseapp.com",
+                        databaseURL: "https://universitario-deportes-default-rtdb.firebaseio.com",
+                        projectId: "universitario-deportes",
+                        storageBucket: "universitario-deportes.firebasestorage.app",
+                        messagingSenderId: "891772064216",
+                        appId: "1:891772064216:web:efb768cec8725af31862ad",
+                        measurementId: "G-J5181E6DGB"
+                    });
+                    console.log('✅ Firebase inicializado correctamente en panel-admin');
+                } catch (error) {
+                    console.error('❌ Error inicializando Firebase:', error);
+                }
+            } else {
+                console.log('✅ Firebase ya estaba inicializado');
+            }
+        } else {
+            console.error('❌ Firebase SDK no está cargado');
+        }
+
+        // Variables para caché de datos
+        let lastUsersLoad = 0;
+        let lastAdminsLoad = 0;
+        const CACHE_DURATION = 30000; // 30 segundos
+        
+        // Arrays de datos
+        let allUsersData = [];
+        let filteredUsersData = [];
+        let allAdminsData = [];
+        let filteredAdminsData = [];
+        
+        // Estado de presencia de usuarios (global)
+        window.userPresenceStatus = {};
+
+        // 🟢 SISTEMA DE PRESENCIA EN TIEMPO REAL
+        function initPresenceSystem() {
+            if (!firebase.database) {
+                console.warn('⚠️ Firebase Realtime Database no disponible');
+                return;
+            }
+            
+            const currentUser = firebase.auth().currentUser;
+            if (!currentUser) return;
+            
+            const presenceRef = firebase.database().ref('presence');
+            
+            // ✅ NO registrar presencia aquí - lo hace presence-system.js automáticamente
+            // Solo escuchar cambios en la presencia de TODOS los usuarios
+            console.log('👂 Escuchando cambios de presencia de todos los usuarios...');
+            
+            // Inicializar objetos globales
+            window.userPresenceStatus = {};
+            window.userPresenceData = {};
+            
+            // Escuchar cambios en la presencia de todos los usuarios
+            presenceRef.on('value', (snapshot) => {
+                const presenceData = snapshot.val() || {};
+                
+                console.log('📊 Datos de presencia recibidos:', presenceData);
+                
+                // Actualizar estado global con datos completos
+                window.userPresenceStatus = {}; // Para compatibilidad (solo boolean)
+                window.userPresenceData = {}; // Datos completos (state + timestamp)
+                
+                Object.keys(presenceData).forEach(userId => {
+                    const userPresence = presenceData[userId];
+                    const state = userPresence?.state || 'offline';
+                    window.userPresenceStatus[userId] = state === 'online';
+                    window.userPresenceData[userId] = userPresence;
+                    
+                    const emoji = state === 'online' ? '🟢' : state === 'away' ? '🟠' : '⚫';
+                    console.log(`  - Usuario ${userId}: ${emoji} ${state.toUpperCase()}`);
+                });
+                
+                // Contar usuarios online (no incluir "away")
+                const onlineCount = Object.values(window.userPresenceData).filter(p => p.state === 'online').length;
+                const totalOnlineElement = document.getElementById('totalOnline');
+                if (totalOnlineElement) {
+                    totalOnlineElement.textContent = onlineCount;
+                }
+                
+                // Re-renderizar tabla si es necesario
+                if (typeof renderUsersPaginated === 'function' && allUsersData.length > 0) {
+                    renderUsersPaginated();
+                }
+                
+                // Re-renderizar tabla de administradores también
+                if (typeof renderAdminsTable === 'function' && allAdminsData.length > 0) {
+                    renderAdminsTable(allAdminsData);
+                }
+                
+                console.log(`🟢 ${onlineCount} usuario(s) online de ${Object.keys(presenceData).length} registrados`);
+            });
+            
+            // Escuchar cambios individuales para actualizar en tiempo real
+            presenceRef.on('child_changed', (snapshot) => {
+                const userId = snapshot.key;
+                const userPresence = snapshot.val();
+                const state = userPresence?.state || 'offline';
+                
+                // Actualizar estado global
+                window.userPresenceStatus[userId] = state === 'online';
+                window.userPresenceData[userId] = userPresence;
+                
+                // Actualizar contador (solo online)
+                const onlineCount = Object.values(window.userPresenceData).filter(p => p.state === 'online').length;
+                const totalOnlineElement = document.getElementById('totalOnline');
+                if (totalOnlineElement) {
+                    totalOnlineElement.textContent = onlineCount;
+                }
+                
+                // Re-renderizar tabla para actualizar estado
+                if (typeof renderUsersPaginated === 'function') {
+                    renderUsersPaginated();
+                }
+                
+                // Re-renderizar tabla de administradores también
+                if (typeof renderAdminsTable === 'function' && allAdminsData.length > 0) {
+                    renderAdminsTable(allAdminsData);
+                }
+                
+                const emoji = state === 'online' ? '🟢' : state === 'away' ? '🟠' : '⚫';
+                console.log(`🔄 Usuario ${userId}: ${emoji} ${state.toUpperCase()}`);
+            });
+            
+            console.log('✅ Sistema de presencia inicializado');
+        }
+        
+        // Actualizar indicador de presencia individual (deprecated, usar renderUsersPaginated)
+        function updateUserPresenceIndicator(userId, isOnline) {
+            // Re-renderizar la tabla completa para actualizar estados
+            if (typeof renderUsersPaginated === 'function') {
+                renderUsersPaginated();
+            }
+        }
+
+        // 📊 CARGAR USUARIOS DESDE FIREBASE
+        async function loadAllUsers() {
+            const now = Date.now();
+            
+            // Si hay caché válido, no recargar
+            if (allUsersData.length > 0 && (now - lastUsersLoad) < CACHE_DURATION) {
+                console.log('✅ Usando caché de usuarios');
+                return;
+            }
+            
+            try {
+                console.log('🔄 Cargando usuarios desde Firebase...');
+                const usersSnapshot = await firebase.firestore().collection('users').get();
+                
+                allUsersData = [];
+                usersSnapshot.forEach(doc => {
+                    const userData = doc.data();
+                    allUsersData.push({
+                        id: doc.id,
+                        ...userData
+                    });
+                });
+                
+                lastUsersLoad = now;
+                filteredUsersData = [...allUsersData]; // Copia completa
+                
+                console.log(`✅ ${allUsersData.length} usuarios cargados`);
+                
+                // Actualizar estadísticas
+                updateStats();
+                
+                // Renderizar usuarios paginados
+                if (typeof renderUsersPaginated === 'function') {
+                    renderUsersPaginated();
+                }
+                
+            } catch (error) {
+                console.error('❌ Error cargando usuarios:', error);
+                document.getElementById('usersTableBody').innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 2rem; color: #f44336;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Error al cargar usuarios: ${error.message}
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // 👥 CARGAR ADMINISTRADORES DESDE FIREBASE (OPTIMIZADO)
+        async function loadAllAdmins() {
+            const now = Date.now();
+            
+            // Si hay caché válido, no recargar
+            if (allAdminsData.length > 0 && (now - lastAdminsLoad) < CACHE_DURATION) {
+                console.log('✅ Usando caché de administradores');
+                return;
+            }
+            
+            try {
+                console.log('🔄 Cargando administradores desde Firebase...');
+                
+                // ⚡ OPTIMIZACIÓN: Usar índice de Firestore para consulta más rápida
+                const usersSnapshot = await firebase.firestore()
+                    .collection('users')
+                    .where('is_admin', '==', true)
+                    .limit(100) // Limitar resultados para mejor rendimiento
+                    .get();
+                
+                allAdminsData = [];
+                usersSnapshot.forEach(doc => {
+                    const userData = doc.data();
+                    allAdminsData.push({
+                        id: doc.id,
+                        ...userData
+                    });
+                });
+                
+                lastAdminsLoad = now;
+                filteredAdminsData = allAdminsData;
+                
+                console.log(`✅ ${allAdminsData.length} administradores cargados`);
+                
+                // Renderizar admins si hay una función disponible
+                if (typeof renderAdminsTable === 'function') {
+                    renderAdminsTable(allAdminsData);
+                }
+                
+            } catch (error) {
+                console.error('❌ Error cargando administradores:', error);
+                
+                // Si el error es por falta de índice, mostrar mensaje útil
+                if (error.code === 'failed-precondition' || error.message.includes('index')) {
+                    console.warn('⚠️ Se necesita crear un índice en Firestore para optimizar esta consulta');
+                }
+                
+                const adminsTableBody = document.getElementById('adminsTableBody');
+                if (adminsTableBody) {
+                    adminsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 2rem; color: #f44336;">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Error al cargar administradores: ${error.message}
+                            </td>
+                        </tr>
+                    `;
+                }
+            }
+        }
+
+        // 🎨 RENDERIZAR USUARIOS EN LA TABLA
+        function renderUsersPaginated() {
+            const tbody = document.getElementById('usersTableBody');
+            if (!tbody) return;
+
+            // Siempre usar filteredUsersData
+            const usersToRender = filteredUsersData;
+
+            if (usersToRender.length === 0) {
+                const isFiltered = filteredUsersData.length !== allUsersData.length;
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 2rem; color: #999;">
+                            <i class="fas fa-${isFiltered ? 'filter' : 'users'}"></i><br>
+                            ${isFiltered ? 'No hay usuarios con ese filtro' : 'No hay usuarios registrados'}
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            let html = '';
+            usersToRender.forEach(user => {
+                const presenceData = window.userPresenceData[user.id];
+                const state = presenceData?.state || 'offline';
+                const lastSeen = presenceData?.lastChanged || user.ultima_conexion;
+                
+                let statusIcon = '⚫';
+                let statusText = '';
+                let statusClass = 'status-offline';
+                
+                if (state === 'online') {
+                    statusIcon = '🟢';
+                    statusText = '🟢 En línea ahora';
+                    statusClass = 'status-online';
+                } else if (state === 'away') {
+                    statusIcon = '🟠';
+                    statusText = '🟠 Ausente - Pestaña abierta pero no visible';
+                    statusClass = 'status-away';
+                } else {
+                    // Calcular última conexión para desconectados
+                    if (lastSeen) {
+                        const lastSeenDate = typeof lastSeen === 'number' ? new Date(lastSeen) : 
+                                            lastSeen.toDate ? lastSeen.toDate() : new Date(lastSeen);
+                        const now = new Date();
+                        const diffMs = now - lastSeenDate;
+                        const diffMins = Math.floor(diffMs / 60000);
+                        const diffHours = Math.floor(diffMs / 3600000);
+                        const diffDays = Math.floor(diffMs / 86400000);
+                        
+                        if (diffMins < 1) {
+                            statusText = '⚫ Última conexión: Hace un momento';
+                        } else if (diffMins < 60) {
+                            statusText = `⚫ Última conexión: Hace ${diffMins} minuto${diffMins > 1 ? 's' : ''}`;
+                        } else if (diffHours < 24) {
+                            statusText = `⚫ Última conexión: Hace ${diffHours} hora${diffHours > 1 ? 's' : ''}`;
+                        } else if (diffDays < 7) {
+                            statusText = `⚫ Última conexión: Hace ${diffDays} día${diffDays > 1 ? 's' : ''}`;
+                        } else {
+                            statusText = `⚫ Última conexión: ${lastSeenDate.toLocaleDateString('es-PE', {day: 'numeric', month: 'short', year: 'numeric'})}`;
+                        }
+                    } else {
+                        statusText = '⚫ Desconectado - Nunca se ha conectado';
+                    }
+                }
+
+                const membershipBadge = user.tipo_membresia || 'Free';
+                const membershipClass = membershipBadge === 'VIP' ? 'badge-vip' : 
+                                       membershipBadge === 'Premium' ? 'badge-premium' : 'badge-free';
+
+                html += `
+                    <tr>
+                        <td>
+                            <span class="${statusClass}" title="${statusText}" style="font-size: 1.2rem;">
+                                ${statusIcon}
+                            </span>
+                        </td>
+                        <td><strong>${user.numero_socio || '-'}</strong></td>
+                        <td>${user.nombres || ''} ${user.apellidos || ''}</td>
+                        <td style="color: #64748b;">${user.email || '-'}</td>
+                        <td>
+                            <span class="badge ${membershipClass}">
+                                ${membershipBadge}
+                            </span>
+                        </td>
+                        <td style="color: #64748b;">${user.fecha_registro ? new Date(user.fecha_registro.seconds * 1000).toLocaleDateString('es-PE', {year: 'numeric', month: 'short', day: 'numeric'}) : '-'}</td>
+                        <td>
+                            <button onclick="editUser('${user.id}')" class="btn-action" title="Ver y Editar" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white;">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            ${user.is_admin ? '' : `
+                            <button onclick="deleteUser('${user.id}')" class="btn-action btn-danger" title="Eliminar">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            `}
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        // 🎨 RENDERIZAR ADMINISTRADORES
+        function renderAdminsTable(admins) {
+            const tbody = document.getElementById('adminsTableBody');
+            if (!tbody) return;
+
+            if (admins.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 2rem; color: #999;">
+                            <i class="fas fa-user-shield"></i><br>
+                            No hay administradores registrados
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            let html = '';
+            admins.forEach(admin => {
+                const presenceData = window.userPresenceData[admin.id];
+                const state = presenceData?.state || 'offline';
+                const lastSeen = presenceData?.lastChanged || admin.ultima_conexion;
+                
+                let statusIcon = '⚫';
+                let statusText = '';
+                let statusClass = 'status-offline';
+                let ultimaConexionText = '-';
+                
+                if (state === 'online') {
+                    statusIcon = '🟢';
+                    statusText = '🟢 En línea ahora';
+                    statusClass = 'status-online';
+                    ultimaConexionText = '<span style="color: #10b981; font-weight: 600;">🟢 En línea</span>';
+                } else if (state === 'away') {
+                    statusIcon = '🟠';
+                    statusText = '🟠 Ausente - Pestaña abierta pero no visible';
+                    statusClass = 'status-away';
+                    ultimaConexionText = '<span style="color: #f59e0b; font-weight: 600;">🟠 Ausente</span>';
+                } else {
+                    // Desconectado - calcular última conexión
+                    if (lastSeen) {
+                        const lastSeenDate = typeof lastSeen === 'number' ? new Date(lastSeen) : 
+                                            lastSeen.toDate ? lastSeen.toDate() : new Date(lastSeen);
+                        const now = new Date();
+                        const diffMs = now - lastSeenDate;
+                        const diffMins = Math.floor(diffMs / 60000);
+                        const diffHours = Math.floor(diffMs / 3600000);
+                        const diffDays = Math.floor(diffMs / 86400000);
+                        
+                        if (diffMins < 1) {
+                            statusText = '⚫ Última conexión: Hace un momento';
+                            ultimaConexionText = '<span style="color: #94a3b8;">Hace un momento</span>';
+                        } else if (diffMins < 60) {
+                            statusText = `⚫ Última conexión: Hace ${diffMins} minuto${diffMins > 1 ? 's' : ''}`;
+                            ultimaConexionText = `<span style="color: #94a3b8;">Hace ${diffMins} min</span>`;
+                        } else if (diffHours < 24) {
+                            statusText = `⚫ Última conexión: Hace ${diffHours} hora${diffHours > 1 ? 's' : ''}`;
+                            ultimaConexionText = `<span style="color: #94a3b8;">Hace ${diffHours}h</span>`;
+                        } else if (diffDays < 30) {
+                            statusText = `⚫ Última conexión: Hace ${diffDays} día${diffDays > 1 ? 's' : ''}`;
+                            ultimaConexionText = `<span style="color: #94a3b8;">Hace ${diffDays}d</span>`;
+                        } else {
+                            statusText = `⚫ Última conexión: ${lastSeenDate.toLocaleDateString('es-PE', {day: 'numeric', month: 'short', year: 'numeric'})}`;
+                            ultimaConexionText = `<span style="color: #94a3b8;">${lastSeenDate.toLocaleDateString('es-PE', {day: 'numeric', month: 'short'})}</span>`;
+                        }
+                    } else {
+                        statusText = '⚫ Nunca se ha conectado';
+                        ultimaConexionText = '<span style="color: #cbd5e1;">Nunca conectado</span>';
+                    }
+                }
+                
+                const role = admin.rol === 'super_admin' ? '👑 SUPER ADMIN' : '🛡️ ADMIN';
+                const roleClass = admin.rol === 'super_admin' ? 'badge-vip' : 'badge-premium';
+                const isActive = admin.admin_activo !== false;
+                const isSuperAdmin = admin.rol === 'super_admin';
+
+                html += `
+                    <tr>
+                        <td>
+                            <span class="${statusClass}" title="${statusText}" style="font-size: 1.2rem;">
+                                ${statusIcon}
+                            </span>
+                        </td>
+                        <td><strong>${admin.numero_socio || '-'}</strong></td>
+                        <td><strong>${admin.nombres || ''} ${admin.apellidos || ''}</strong></td>
+                        <td style="color: #64748b;">${admin.email || '-'}</td>
+                        <td>
+                            <span class="badge ${roleClass}" style="font-size: 0.85rem;">
+                                ${role}
+                            </span>
+                        </td>
+                        <td>${ultimaConexionText}</td>
+                        <td style="color: #64748b;">
+                            ${admin.fecha_registro ? new Date(admin.fecha_registro.seconds * 1000).toLocaleDateString('es-PE', { 
+                                year: 'numeric', 
+                                month: 'short', 
+                                day: 'numeric' 
+                            }) : '-'}
+                        </td>
+                        <td>
+                            <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                                <button onclick="editUser('${admin.id}')" class="btn-action" title="Ver y Editar" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white;">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                ${!isSuperAdmin ? `
+                                <button onclick="toggleAdminStatus('${admin.id}', ${!isActive})" class="btn-action ${!isActive ? 'btn-success' : 'btn-warning'}" title="${isActive ? 'Suspender Admin' : 'Activar Admin'}">
+                                    <i class="fas fa-${isActive ? 'user-slash' : 'user-check'}"></i>
+                                </button>
+                                <button onclick="removeAdmin('${admin.id}')" class="btn-action btn-danger" title="Quitar permisos de Admin">
+                                    <i class="fas fa-user-minus"></i>
+                                </button>
+                                ` : `
+                                <span style="color: #fbbf24; font-size: 0.75rem; padding: 0.25rem 0.5rem; background: rgba(251,191,36,0.1); border-radius: 4px; white-space: nowrap;">
+                                    🔒 Protegido
+                                </span>
+                                `}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        // 📊 ACTUALIZAR ESTADÍSTICAS
+        function updateStats() {
+            // Total socios
+            document.getElementById('totalUsers').textContent = allUsersData.length;
+            
+            // Total administradores
+            const admins = allUsersData.filter(u => u.is_admin === true);
+            document.getElementById('totalAdmins').textContent = admins.length;
+            
+            // Planes Premium/VIP
+            const premium = allUsersData.filter(u => 
+                u.tipo_membresia === 'Premium' || 
+                u.tipo_membresia === 'VIP' ||
+                u.tipo_membresia === 'premium' || 
+                u.tipo_membresia === 'vip'
+            );
+            document.getElementById('totalPremium').textContent = premium.length;
+            
+            // Usuarios online - contar desde el estado de presencia
+            const onlineCount = Object.values(window.userPresenceStatus).filter(Boolean).length;
+            document.getElementById('totalOnline').textContent = onlineCount;
+        }
+
+        // Función de logout
+        function logout() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                firebase.auth().signOut().then(() => {
+                    window.location.href = '../auth/login.html';
+                }).catch((error) => {
+                    console.error('Error al cerrar sesión:', error);
+                });
+            }
+        }
+
+        // 👁️ VER DETALLES DE USUARIO
+        function viewUser(userId) {
+            const user = allUsersData.find(u => u.id === userId);
+            if (!user) {
+                alert('Usuario no encontrado');
+                return;
+            }
+            
+            // Nombre completo
+            const nombreCompleto = `${user.nombres || ''} ${user.apellidos || ''}`.trim() || 'No especificado';
+            document.getElementById('modal-nombre').textContent = nombreCompleto;
+            
+            // Email
+            document.getElementById('modal-email').textContent = user.email || 'No especificado';
+            
+            // DNI
+            document.getElementById('modal-dni').textContent = user.numero_documento || 'No especificado';
+            
+            // Teléfono
+            document.getElementById('modal-telefono').textContent = user.telefono || 'No especificado';
+            
+            // Dirección
+            document.getElementById('modal-direccion').textContent = user.direccion || 'No especificado';
+            
+            // Número de socio
+            document.getElementById('modal-numero-socio').textContent = user.numero_socio || 'No asignado';
+            
+            // Membresía con badge
+            const membresia = user.tipo_membresia || 'Free';
+            const membresiaElement = document.getElementById('modal-membresia');
+            let membresiaHTML = membresia;
+            if (membresia === 'Premium') {
+                membresiaHTML = '<span class="badge badge-premium">👑 Premium</span>';
+            } else if (membresia === 'VIP') {
+                membresiaHTML = '<span class="badge badge-vip">⭐ VIP</span>';
+            } else {
+                membresiaHTML = '<span class="badge">🆓 Free</span>';
+            }
+            membresiaElement.innerHTML = membresiaHTML;
+            
+            // Fecha de registro
+            let fechaRegistro = 'No disponible';
+            if (user.fecha_registro) {
+                try {
+                    const fecha = user.fecha_registro.toDate ? user.fecha_registro.toDate() : new Date(user.fecha_registro);
+                    fechaRegistro = fecha.toLocaleDateString('es-ES', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                } catch (e) {
+                    fechaRegistro = 'Formato inválido';
+                }
+            }
+            document.getElementById('modal-fecha-registro').textContent = fechaRegistro;
+            
+            // Estado de cuenta
+            const estado = user.activo !== false ? '✅ Activo' : '❌ Inactivo';
+            document.getElementById('modal-estado').textContent = estado;
+            
+            // Estado de conexión y última conexión
+            const presenceData = window.userPresenceData[userId];
+            
+            let estadoConexion = '🔴 Desconectado';
+            let ultimaConexion = 'Nunca';
+            
+            if (presenceData) {
+                const state = presenceData.state || 'offline';
+                
+                if (state === 'online') {
+                    estadoConexion = '🟢 Conectado';
+                    ultimaConexion = 'Ahora mismo';
+                } else if (state === 'away') {
+                    estadoConexion = '🟠 Ausente (pestaña abierta pero no visible)';
+                    ultimaConexion = 'En otra ventana/pestaña';
+                } else if (presenceData.last_changed) {
+                    // Estado offline - calcular tiempo desde última conexión
+                    estadoConexion = '🔴 Desconectado';
+                    try {
+                        const lastSeen = new Date(presenceData.last_changed);
+                        const now = new Date();
+                        const diffMs = now - lastSeen;
+                        const diffMins = Math.floor(diffMs / 60000);
+                        const diffHours = Math.floor(diffMs / 3600000);
+                        const diffDays = Math.floor(diffMs / 86400000);
+                        
+                        if (diffMins < 1) {
+                            ultimaConexion = 'Hace menos de 1 minuto';
+                        } else if (diffMins < 60) {
+                            ultimaConexion = `Hace ${diffMins} minuto${diffMins > 1 ? 's' : ''}`;
+                        } else if (diffHours < 24) {
+                            ultimaConexion = `Hace ${diffHours} hora${diffHours > 1 ? 's' : ''}`;
+                        } else if (diffDays < 30) {
+                            ultimaConexion = `Hace ${diffDays} día${diffDays > 1 ? 's' : ''}`;
+                        } else {
+                            ultimaConexion = lastSeen.toLocaleDateString('es-ES', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            });
+                        }
+                    } catch (e) {
+                        ultimaConexion = 'Error al calcular';
+                    }
+                }
+            }
+            
+            document.getElementById('modal-estado-conexion').textContent = estadoConexion;
+            document.getElementById('modal-ultima-conexion').textContent = ultimaConexion;
+            
+            // ID de usuario
+            document.getElementById('modal-user-id').textContent = userId;
+            
+            // Rol
+            const rol = user.is_admin ? '👑 Administrador' : '👤 Usuario Regular';
+            document.getElementById('modal-rol').textContent = rol;
+            
+            // Código de usuario
+            const codigo = user.codigo_socio || user.numero_socio || 'No asignado';
+            document.getElementById('modal-codigo').textContent = codigo;
+            
+            // Mostrar modal
+            document.getElementById('userDetailModal').style.display = 'flex';
+            
+            // Guardar userId para edición
+            document.getElementById('userDetailModal').dataset.userId = userId;
+        }
+
+        // Cerrar modal
+        function closeUserModal() {
+            document.getElementById('userDetailModal').style.display = 'none';
+        }
+
+        // Editar desde modal
+        function editUserFromModal() {
+            const userId = document.getElementById('userDetailModal').dataset.userId;
+            closeUserModal();
+            editUser(userId);
+        }
+
+        // Cerrar modal al hacer clic fuera
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('userDetailModal');
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeUserModal();
+                    }
+                });
+            }
+            
+            // Cerrar con ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeUserModal();
+                }
+            });
+        });
+
+        // ✏️ EDITAR USUARIO
+        let currentEditingUserId = null;
+
+        async function editUser(userId) {
+            try {
+                currentEditingUserId = userId;
+                
+                // Obtener datos del usuario
+                const userDoc = await firebase.firestore().collection('users').doc(userId).get();
+                
+                if (!userDoc.exists) {
+                    alert('❌ Usuario no encontrado');
+                    return;
+                }
+                
+                const userData = userDoc.data();
+                
+                // Llenar el formulario con los datos actuales
+                document.getElementById('edit-numero-socio').textContent = userData.numero_socio || '-';
+                document.getElementById('edit-user-id').textContent = userId;
+                document.getElementById('edit-nombres').value = userData.nombres || '';
+                document.getElementById('edit-apellidos').value = userData.apellidos || '';
+                document.getElementById('edit-dni').value = userData.dni || '';
+                document.getElementById('edit-email').value = userData.email || '';
+                document.getElementById('edit-telefono').value = userData.telefono || '';
+                document.getElementById('edit-fecha-nacimiento').value = userData.fecha_nacimiento || '';
+                document.getElementById('edit-genero').value = userData.genero || '';
+                document.getElementById('edit-departamento').value = userData.departamento || '';
+                document.getElementById('edit-distrito').value = userData.distrito || '';
+                document.getElementById('edit-direccion').value = userData.direccion || '';
+                document.getElementById('edit-tipo-membresia').value = userData.tipo_membresia || 'free';
+                document.getElementById('edit-fecha-vencimiento').value = userData.fecha_vencimiento || '';
+                
+                // Mostrar modal
+                document.getElementById('editUserModal').style.display = 'flex';
+            } catch (error) {
+                console.error('❌ Error al cargar usuario:', error);
+                alert('❌ Error al cargar los datos del usuario');
+            }
+        }
+
+        // 💾 GUARDAR CAMBIOS DEL USUARIO
+        async function saveUserChanges(event) {
+            event.preventDefault();
+            
+            if (!currentEditingUserId) {
+                alert('❌ Error: No hay usuario seleccionado');
+                return;
+            }
+            
+            // Confirmar cambios
+            if (!confirm('¿Estás seguro de guardar estos cambios?\n\nLos datos del socio serán actualizados permanentemente.')) {
+                return;
+            }
+            
+            try {
+                // Preparar datos actualizados
+                const datosActualizados = {
+                    nombres: document.getElementById('edit-nombres').value.trim(),
+                    apellidos: document.getElementById('edit-apellidos').value.trim(),
+                    dni: document.getElementById('edit-dni').value.trim(),
+                    email: document.getElementById('edit-email').value.trim(),
+                    telefono: document.getElementById('edit-telefono').value.trim(),
+                    fecha_nacimiento: document.getElementById('edit-fecha-nacimiento').value,
+                    genero: document.getElementById('edit-genero').value,
+                    departamento: document.getElementById('edit-departamento').value,
+                    distrito: document.getElementById('edit-distrito').value.trim(),
+                    direccion: document.getElementById('edit-direccion').value.trim(),
+                    tipo_membresia: document.getElementById('edit-tipo-membresia').value,
+                    fecha_vencimiento: document.getElementById('edit-fecha-vencimiento').value || null,
+                    actualizado: firebase.firestore.FieldValue.serverTimestamp(),
+                    actualizado_por_admin: true
+                };
+                
+                // Actualizar en Firestore
+                await firebase.firestore().collection('users').doc(currentEditingUserId).update(datosActualizados);
+                
+                alert('✅ Datos del socio actualizados correctamente');
+                
+                // Cerrar modal y recargar datos
+                closeEditModal();
+                await loadAllUsers();
+            } catch (error) {
+                console.error('❌ Error al guardar cambios:', error);
+                alert('❌ Error al guardar los cambios: ' + error.message);
+            }
+        }
+
+        // ❌ CERRAR MODAL DE EDICIÓN
+        function closeEditModal() {
+            document.getElementById('editUserModal').style.display = 'none';
+            currentEditingUserId = null;
+            document.getElementById('editUserForm').reset();
+        }
+
+        // 🗑️ ELIMINAR USUARIO
+        async function deleteUser(userId) {
+            if (!confirm('¿Estás seguro de eliminar este usuario? Esta acción no se puede deshacer.')) {
+                return;
+            }
+
+            try {
+                await firebase.firestore().collection('users').doc(userId).delete();
+                alert('✅ Usuario eliminado correctamente');
+                await loadAllUsers();
+            } catch (error) {
+                console.error('Error eliminando usuario:', error);
+                alert('❌ Error al eliminar usuario: ' + error.message);
+            }
+        }
+
+        // 👑 AGREGAR NUEVO ADMINISTRADOR
+        async function addNewAdmin() {
+            const numeroSocio = document.getElementById('newAdminId').value.trim();
+            
+            if (!numeroSocio) {
+                alert('❌ Por favor ingresa el número de socio');
+                return;
+            }
+            
+            console.log('🔍 Buscando usuario con número de socio:', numeroSocio);
+            
+            try {
+                // Buscar usuario por número de socio
+                const querySnapshot = await firebase.firestore().collection('users')
+                    .where('numero_socio', '==', numeroSocio)
+                    .get();
+                
+                if (querySnapshot.empty) {
+                    // Intentar buscar por código_socio también
+                    const querySnapshot2 = await firebase.firestore().collection('users')
+                        .where('codigo_socio', '==', numeroSocio)
+                        .get();
+                    
+                    if (querySnapshot2.empty) {
+                        alert('❌ No se encontró ningún usuario con ese número de socio');
+                        return;
+                    }
+                    
+                    // Usuario encontrado por código_socio
+                    const userDoc = querySnapshot2.docs[0];
+                    await promoteToAdmin(userDoc);
+                } else {
+                    // Usuario encontrado por numero_socio
+                    const userDoc = querySnapshot.docs[0];
+                    await promoteToAdmin(userDoc);
+                }
+            } catch (error) {
+                console.error('❌ Error al agregar admin:', error);
+                alert('❌ Error al buscar usuario: ' + error.message);
+            }
+        }
+        
+        async function promoteToAdmin(userDoc) {
+            const userData = userDoc.data();
+            const userId = userDoc.id;
+            
+            // Verificar si ya es admin
+            if (userData.is_admin === true) {
+                alert('⚠️ Este usuario ya es administrador');
+                return;
+            }
+            
+            // Confirmar acción
+            const confirmMsg = `¿Confirmar agregar como ADMINISTRADOR?\n\n` +
+                              `Nombre: ${userData.nombres} ${userData.apellidos}\n` +
+                              `Email: ${userData.email}\n` +
+                              `N° Socio: ${userData.numero_socio || userData.codigo_socio}`;
+            
+            if (!confirm(confirmMsg)) {
+                return;
+            }
+            
+            try {
+                // Actualizar usuario a admin
+                await firebase.firestore().collection('users').doc(userId).update({
+                    is_admin: true,
+                    fecha_promocion_admin: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                console.log('✅ Usuario promovido a admin:', userId);
+                alert('✅ Usuario agregado como administrador exitosamente');
+                
+                // Limpiar campo
+                document.getElementById('newAdminId').value = '';
+                
+                // Recargar datos
+                await loadAllUsers();
+                await loadAdmins();
+                
+            } catch (error) {
+                console.error('❌ Error al promover a admin:', error);
+                alert('❌ Error al agregar administrador: ' + error.message);
+            }
+        }
+
+        // 🔍 BUSCAR USUARIOS
+        function searchUsers(searchTerm) {
+            const term = searchTerm.toLowerCase().trim();
+            
+            if (!term) {
+                // Si no hay término de búsqueda, mostrar todos los usuarios (aplicando filtro actual si existe)
+                const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+                filterUsersByPlan(activeFilter);
+                return;
+            }
+            
+            // Filtrar usuarios que coincidan con el término de búsqueda
+            filteredUsersData = allUsersData.filter(user => {
+                const nombreCompleto = `${user.nombres || ''} ${user.apellidos || ''}`.toLowerCase();
+                const email = (user.email || '').toLowerCase();
+                const numeroSocio = (user.numero_socio || '').toLowerCase();
+                const codigo = (user.codigo_socio || '').toLowerCase();
+                
+                return nombreCompleto.includes(term) ||
+                       email.includes(term) ||
+                       numeroSocio.includes(term) ||
+                       codigo.includes(term);
+            });
+            
+            renderUsersPaginated();
+            
+            // Actualizar contador de búsqueda
+            const searchCount = document.getElementById('searchUsersCount');
+            if (searchCount) {
+                if (filteredUsersData.length > 0) {
+                    searchCount.textContent = `${filteredUsersData.length} resultado${filteredUsersData.length !== 1 ? 's' : ''}`;
+                    searchCount.style.display = 'block';
+                } else {
+                    searchCount.textContent = 'Sin resultados';
+                    searchCount.style.display = 'block';
+                }
+            }
+        }
+        
+        // 🎯 FILTRAR USUARIOS POR PLAN
+        function filterUsersByPlan(plan) {
+            console.log('🎯 Filtrando por plan:', plan);
+            
+            // Actualizar botones activos
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === plan) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Limpiar búsqueda
+            const searchInput = document.querySelector('#searchUsers');
+            if (searchInput) {
+                searchInput.value = '';
+            }
+            const searchCount = document.getElementById('searchUsersCount');
+            if (searchCount) {
+                searchCount.style.display = 'none';
+            }
+            
+            // Filtrar datos
+            if (plan === 'all') {
+                filteredUsersData = [...allUsersData];
+            } else {
+                filteredUsersData = allUsersData.filter(user => {
+                    const membresia = (user.tipo_membresia || 'Free').trim();
+                    const planToMatch = plan.trim();
+                    
+                    // Considerar también variaciones de capitalización
+                    return membresia.toLowerCase() === planToMatch.toLowerCase();
+                });
+            }
+            
+            console.log(`✅ Filtro aplicado: ${plan} - ${filteredUsersData.length} de ${allUsersData.length} usuarios`);
+            
+            renderUsersPaginated();
+        }
+        
+        // 🔍 BUSCAR ADMINISTRADORES
+        function searchAdmins(searchTerm) {
+            const term = searchTerm.toLowerCase().trim();
+            
+            if (!term) {
+                filteredAdminsData = [...allAdminsData];
+            } else {
+                filteredAdminsData = allAdminsData.filter(admin => {
+                    const nombreCompleto = `${admin.nombres || ''} ${admin.apellidos || ''}`.toLowerCase();
+                    const email = (admin.email || '').toLowerCase();
+                    
+                    return nombreCompleto.includes(term) || email.includes(term);
+                });
+            }
+            
+            renderAdminsTable(filteredAdminsData);
+            
+            // Actualizar contador
+            const searchCount = document.getElementById('searchAdminsCount');
+            if (searchCount) {
+                if (term && filteredAdminsData.length > 0) {
+                    searchCount.textContent = `${filteredAdminsData.length} resultado${filteredAdminsData.length !== 1 ? 's' : ''}`;
+                    searchCount.style.display = 'block';
+                } else if (term) {
+                    searchCount.textContent = 'Sin resultados';
+                    searchCount.style.display = 'block';
+                } else {
+                    searchCount.style.display = 'none';
+                }
+            }
+        }
+
+        // 👁️ VER DETALLES DE ADMIN
+        function viewAdmin(adminId) {
+            const admin = allAdminsData.find(a => a.id === adminId);
+            if (!admin) return;
+            
+            alert(`Detalles del Administrador:\n\n` +
+                  `Nombre: ${admin.nombres} ${admin.apellidos}\n` +
+                  `Email: ${admin.email}\n` +
+                  `Rol: ${admin.rol === 'super_admin' ? 'Super Admin' : 'Admin'}\n` +
+                  `Estado: ${admin.admin_activo !== false ? 'Activo' : 'Suspendido'}`);
+        }
+
+        // 🔄 TOGGLE ESTADO DE ADMIN (Suspender/Activar)
+        async function toggleAdminStatus(adminId, newStatus) {
+            const action = newStatus ? 'activar' : 'suspender';
+            if (!confirm(`⚠️ ¿Estás seguro de ${action} este administrador?\n\n${!newStatus ? '⚠️ El administrador no podrá acceder al panel hasta que sea reactivado.' : '✅ El administrador podrá acceder nuevamente al panel.'}`)) {
+                return;
+            }
+
+            try {
+                await firebase.firestore().collection('users').doc(adminId).update({
+                    admin_activo: newStatus,
+                    actualizado: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                alert(`✅ Administrador ${action === 'activar' ? 'activado' : 'suspendido'} correctamente`);
+                await loadAllAdmins();
+            } catch (error) {
+                console.error('Error actualizando estado:', error);
+                alert('❌ Error: ' + error.message);
+            }
+        }
+
+        // 🗑️ QUITAR PERMISOS DE ADMINISTRADOR
+        async function removeAdmin(adminId) {
+            const admin = allAdminsData.find(a => a.id === adminId);
+            if (!admin) {
+                alert('❌ Administrador no encontrado');
+                return;
+            }
+
+            // Confirmación con información del admin
+            const confirmMsg = `⚠️ ATENCIÓN: Vas a QUITAR los permisos de administrador\n\n` +
+                              `Nombre: ${admin.nombres} ${admin.apellidos}\n` +
+                              `Email: ${admin.email}\n` +
+                              `Rol: ${admin.rol === 'super_admin' ? 'SUPER ADMIN' : 'ADMIN'}\n\n` +
+                              `Esta acción:\n` +
+                              `✅ Mantendrá al usuario como socio\n` +
+                              `❌ Le quitará acceso al panel de administración\n` +
+                              `❌ Eliminará su rol de administrador\n\n` +
+                              `¿Confirmar?`;
+
+            if (!confirm(confirmMsg)) {
+                return;
+            }
+
+            // Segunda confirmación de seguridad
+            if (!confirm(`⚠️ ÚLTIMA CONFIRMACIÓN\n\n¿Realmente deseas quitar los permisos de admin a ${admin.nombres}?`)) {
+                return;
+            }
+
+            try {
+                await firebase.firestore().collection('users').doc(adminId).update({
+                    is_admin: false,
+                    admin_activo: false,
+                    rol: firebase.firestore.FieldValue.delete(),
+                    admin_desde: firebase.firestore.FieldValue.delete(),
+                    permisos_removidos_fecha: firebase.firestore.FieldValue.serverTimestamp(),
+                    actualizado: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                alert('✅ Permisos de administrador removidos correctamente\n\nEl usuario ahora es un socio regular.');
+                
+                // Recargar datos
+                await Promise.all([loadAllUsers(), loadAllAdmins()]);
+            } catch (error) {
+                console.error('❌ Error quitando permisos de admin:', error);
+                alert('❌ Error al quitar permisos: ' + error.message);
+            }
+        }
+
+        // Verificar autenticación al cargar
+        firebase.auth().onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = '../auth/login.html';
+            } else {
+                // Cargar datos completos del usuario desde Firestore
+                firebase.firestore().collection('users').doc(user.uid).get()
+                    .then((doc) => {
+                        if (!doc.exists) {
+                            // Usuario no existe en Firestore
+                            alert('❌ Acceso denegado: Usuario no registrado.');
+                            firebase.auth().signOut();
+                            window.location.href = '../auth/login.html';
+                            return;
+                        }
+                        
+                        const userData = doc.data();
+                        
+                        // 🔒 VERIFICACIÓN DE PERMISOS DE ADMINISTRADOR
+                        // Solo usuarios con is_admin = true pueden acceder
+                        if (!userData.is_admin) {
+                            console.warn('Acceso denegado: Usuario sin permisos de administrador');
+                            alert('❌ Acceso denegado: No tienes permisos de administrador.\n\nEste panel es exclusivo para administradores del sistema.');
+                            firebase.auth().signOut();
+                            window.location.href = '../user/dashboard.html'; // Redirigir al dashboard normal
+                            return;
+                        }
+                        
+                        // Verificar si el admin está activo (no suspendido)
+                        if (userData.admin_activo === false) {
+                            alert('❌ Acceso denegado: Tu cuenta de administrador está suspendida.\n\nContacta al Super Admin para más información.');
+                            firebase.auth().signOut();
+                            window.location.href = '../user/dashboard.html';
+                            return;
+                        }
+                        
+                        // ✅ Usuario es admin y está activo - Permitir acceso
+                        console.log('✅ Acceso autorizado como administrador');
+                        
+                        // Nombre completo del usuario
+                        const fullName = `${userData.nombres || ''} ${userData.apellidos || ''}`.trim();
+                        document.getElementById('userName').textContent = fullName || user.displayName || 'Administrador';
+                        
+                        // Avatar con iniciales
+                        const initials = fullName 
+                            ? fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()
+                            : (user.displayName || 'AD').substring(0, 2).toUpperCase();
+                        document.getElementById('userAvatar').textContent = initials;
+                        
+                        // Determinar el rol específico del administrador
+                        let userRank = '';
+                        if (userData.rol === 'super_admin') {
+                            userRank = '👑 Super Admin';
+                            document.getElementById('addAdminFormContainer').style.display = 'block';
+                        } else {
+                            userRank = '🛡️ Administrador';
+                            // Solo Super Admin puede agregar nuevos admins
+                            document.getElementById('addAdminFormContainer').style.display = 'none';
+                        }
+                        
+                        document.getElementById('userRole').textContent = userRank;
+                        
+                        // Inicializar sistema de presencia
+                        setTimeout(() => {
+                            initPresenceSystem();
+                        }, 1000);
+                        
+                        // CARGAR DATOS INICIALES
+                        loadAllUsers();
+                        loadAllAdmins();
+                    })
+                    .catch((error) => {
+                        console.error('❌ Error verificando permisos:', error);
+                        alert('❌ Error al verificar permisos de acceso.');
+                        firebase.auth().signOut();
+                        window.location.href = '../auth/login.html';
+                    });
+            }
+        });
+
+        // Verificar si es Super Admin (ya no se usa directamente, se integró arriba)
+        function checkIfSuperAdmin(userId) {
+            firebase.firestore().collection('users').doc(userId).get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        const userData = doc.data();
+                        if (userData.rol === 'super_admin' || userData.is_admin) {
+                            document.getElementById('addAdminFormContainer').style.display = 'block';
+                        }
+                    }
+                });
+        }
+    </script>
+
+    <!-- Modal de Detalles del Usuario -->
+    <div id="userDetailModal" class="modal-overlay" style="display: none;">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-user-circle"></i>
+                    Detalles del Usuario
+                </h2>
+                <button class="modal-close" onclick="closeUserModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Información Personal -->
+                <div class="info-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-id-card"></i>
+                        Información Personal
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Nombre Completo</span>
+                            <span class="info-value" id="modal-nombre">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Email</span>
+                            <span class="info-value" id="modal-email">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">DNI</span>
+                            <span class="info-value" id="modal-dni">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Teléfono</span>
+                            <span class="info-value" id="modal-telefono">-</span>
+                        </div>
+                        <div class="info-item full-width">
+                            <span class="info-label">Dirección</span>
+                            <span class="info-value" id="modal-direccion">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información de Membresía -->
+                <div class="info-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-crown"></i>
+                        Información de Membresía
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">N° de Socio</span>
+                            <span class="info-value" id="modal-numero-socio">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Tipo de Membresía</span>
+                            <span class="info-value" id="modal-membresia">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Fecha de Registro</span>
+                            <span class="info-value" id="modal-fecha-registro">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Estado</span>
+                            <span class="info-value" id="modal-estado">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información de Actividad -->
+                <div class="info-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-clock"></i>
+                        Actividad Reciente
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Estado de Conexión</span>
+                            <span class="info-value" id="modal-estado-conexion">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Última Conexión</span>
+                            <span class="info-value" id="modal-ultima-conexion">-</span>
+                        </div>
+                        <div class="info-item full-width">
+                            <span class="info-label">ID de Usuario</span>
+                            <span class="info-value" id="modal-user-id" style="font-family: monospace; font-size: 0.875rem;">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información Administrativa -->
+                <div class="info-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-shield-alt"></i>
+                        Información Administrativa
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Rol</span>
+                            <span class="info-value" id="modal-rol">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Código de Usuario</span>
+                            <span class="info-value" id="modal-codigo">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-modal btn-modal-secondary" onclick="closeUserModal()">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+                <button class="btn-modal btn-modal-primary" onclick="editUserFromModal()">
+                    <i class="fas fa-edit"></i> Editar Usuario
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📝 Modal de Edición de Usuario -->
+    <div id="editUserModal" class="modal-overlay" style="display: none;">
+        <div class="modal-container" style="max-width: 900px;">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-user-edit"></i>
+                    Editar Información del Socio
+                </h2>
+                <button class="modal-close" onclick="closeEditModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="editUserForm" onsubmit="saveUserChanges(event)">
+                    <!-- Información No Editable -->
+                    <div class="info-section" style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                        <h3 class="section-title">
+                            <i class="fas fa-lock"></i>
+                            Información del Sistema (No Editable)
+                        </h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">N° de Socio</span>
+                                <span class="info-value" id="edit-numero-socio" style="color: #666;">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">ID de Usuario</span>
+                                <span class="info-value" id="edit-user-id" style="font-family: monospace; font-size: 0.85rem; color: #666;">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Datos Personales Editables -->
+                    <div class="info-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-id-card"></i>
+                            Datos Personales
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+                            <div class="form-group">
+                                <label for="edit-nombres"><i class="fas fa-user"></i> Nombres *</label>
+                                <input type="text" id="edit-nombres" class="form-control" placeholder="Nombres del socio" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-apellidos"><i class="fas fa-user"></i> Apellidos *</label>
+                                <input type="text" id="edit-apellidos" class="form-control" placeholder="Apellidos del socio" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-dni"><i class="fas fa-id-card"></i> DNI *</label>
+                                <input type="text" id="edit-dni" class="form-control" placeholder="12345678" maxlength="8" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-email"><i class="fas fa-envelope"></i> Email *</label>
+                                <input type="email" id="edit-email" class="form-control" placeholder="correo@ejemplo.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-telefono"><i class="fas fa-phone"></i> Teléfono</label>
+                                <input type="tel" id="edit-telefono" class="form-control" placeholder="+51 999 999 999">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-fecha-nacimiento"><i class="fas fa-calendar"></i> Fecha de Nacimiento</label>
+                                <input type="date" id="edit-fecha-nacimiento" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-genero"><i class="fas fa-venus-mars"></i> Género</label>
+                                <select id="edit-genero" class="form-control">
+                                    <option value="">Seleccionar</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-departamento"><i class="fas fa-map-marker-alt"></i> Departamento</label>
+                                <select id="edit-departamento" class="form-control">
+                                    <option value="">Seleccionar</option>
+                                    <option value="Amazonas">Amazonas</option>
+                                    <option value="Áncash">Áncash</option>
+                                    <option value="Apurímac">Apurímac</option>
+                                    <option value="Arequipa">Arequipa</option>
+                                    <option value="Ayacucho">Ayacucho</option>
+                                    <option value="Cajamarca">Cajamarca</option>
+                                    <option value="Callao">Callao</option>
+                                    <option value="Cusco">Cusco</option>
+                                    <option value="Huancavelica">Huancavelica</option>
+                                    <option value="Huánuco">Huánuco</option>
+                                    <option value="Ica">Ica</option>
+                                    <option value="Junín">Junín</option>
+                                    <option value="La Libertad">La Libertad</option>
+                                    <option value="Lambayeque">Lambayeque</option>
+                                    <option value="Lima">Lima</option>
+                                    <option value="Loreto">Loreto</option>
+                                    <option value="Madre de Dios">Madre de Dios</option>
+                                    <option value="Moquegua">Moquegua</option>
+                                    <option value="Pasco">Pasco</option>
+                                    <option value="Piura">Piura</option>
+                                    <option value="Puno">Puno</option>
+                                    <option value="San Martín">San Martín</option>
+                                    <option value="Tacna">Tacna</option>
+                                    <option value="Tumbes">Tumbes</option>
+                                    <option value="Ucayali">Ucayali</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-distrito"><i class="fas fa-building"></i> Distrito</label>
+                                <input type="text" id="edit-distrito" class="form-control" placeholder="Distrito">
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label for="edit-direccion"><i class="fas fa-home"></i> Dirección Completa</label>
+                                <input type="text" id="edit-direccion" class="form-control" placeholder="Dirección completa del socio">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información de Membresía -->
+                    <div class="info-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-crown"></i>
+                            Membresía
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+                            <div class="form-group">
+                                <label for="edit-tipo-membresia"><i class="fas fa-star"></i> Tipo de Membresía</label>
+                                <select id="edit-tipo-membresia" class="form-control">
+                                    <option value="free">Free</option>
+                                    <option value="Básica">Básica</option>
+                                    <option value="Premium">Premium</option>
+                                    <option value="VIP">VIP</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-fecha-vencimiento"><i class="fas fa-calendar-times"></i> Fecha de Vencimiento</label>
+                                <input type="date" id="edit-fecha-vencimiento" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid #e2e8f0;">
+                        <button type="button" class="btn btn-secondary" onclick="closeEditModal()">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Guardar Cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .form-control {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #94a3b8;
+            color: white;
+            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: #64748b;
+            transform: translateY(-2px);
+        }
+    </style>
+
+</body>
+</html>
+
+

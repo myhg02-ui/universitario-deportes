@@ -1,0 +1,683 @@
+/* 🏆 TEMA UNIFICADO - CLUB UNIVERSITARIO DE DEPORTES 🏆 */
+
+/* ============================================
+   COLORES OFICIALES DEL CLUB (Consistentes)
+   ============================================ */
+:root {
+    /* Colores principales del club */
+    --color-azul-principal: #003278;
+    --color-azul-oscuro: #002255;
+    --color-azul-claro: #0052cc;
+    --color-crema-principal: #c41e3a;
+    --color-crema-oscuro: #8B0000;
+    --color-crema-claro: #e63950;
+    --color-dorado: #d4af37;
+    --color-dorado-claro: #ffd700;
+    --color-dorado-oscuro: #b8941f;
+    
+    /* Colores de fondo */
+    --bg-blanco: #ffffff;
+    --bg-gris-claro: #f8f9fa;
+    --bg-gris: #e9ecef;
+    --bg-crema-suave: #fcf9ea;
+    
+    /* Colores de texto */
+    --text-oscuro: #1a1a1a;
+    --text-gris: #6c757d;
+    --text-claro: #ffffff;
+    
+    /* Sombras */
+    --shadow-sm: 0 2px 8px rgba(0, 50, 120, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 50, 120, 0.12);
+    --shadow-lg: 0 8px 24px rgba(0, 50, 120, 0.16);
+    --shadow-xl: 0 12px 32px rgba(0, 50, 120, 0.2);
+    
+    /* Bordes */
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --border-radius-xl: 24px;
+    --border-radius-full: 50%;
+    
+    /* Transiciones */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Espaciado */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+}
+
+/* ============================================
+   LOGO Y MARCA CONSISTENTE
+   ============================================ */
+.club-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--border-radius-full);
+    object-fit: cover;
+}
+
+.club-name {
+    color: var(--color-azul-principal) !important;
+    font-weight: 800;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.club-name-red {
+    color: var(--color-crema-principal) !important;
+}
+
+/* ============================================
+   HEADER UNIFICADO
+   ============================================ */
+.header-unified {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-blanco);
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+}
+
+.navbar-unified {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo-unified {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+}
+
+.nav-menu-unified {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-link-unified {
+    text-decoration: none;
+    color: var(--text-oscuro);
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
+    transition: var(--transition-normal);
+}
+
+.nav-link-unified:hover,
+.nav-link-unified.active {
+    background: var(--color-azul-principal);
+    color: var(--text-claro);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   BOTONES UNIFICADOS
+   ============================================ */
+.btn-unified {
+    padding: 0.8rem 1.8rem;
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.btn-azul {
+    background: linear-gradient(135deg, var(--color-azul-principal), var(--color-azul-claro));
+    color: var(--text-claro);
+    box-shadow: 0 4px 12px rgba(0, 50, 120, 0.3);
+}
+
+.btn-azul:hover {
+    background: linear-gradient(135deg, var(--color-azul-oscuro), var(--color-azul-principal));
+    box-shadow: 0 6px 16px rgba(0, 50, 120, 0.4);
+    transform: translateY(-3px);
+}
+
+.btn-rojo {
+    background: linear-gradient(135deg, var(--color-crema-principal), var(--color-crema-claro));
+    color: var(--text-claro);
+    box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
+}
+
+.btn-rojo:hover {
+    background: linear-gradient(135deg, var(--color-crema-oscuro), var(--color-crema-principal));
+    box-shadow: 0 6px 16px rgba(196, 30, 58, 0.4);
+    transform: translateY(-3px);
+}
+
+.btn-dorado {
+    background: linear-gradient(135deg, var(--color-dorado), var(--color-dorado-claro));
+    color: var(--text-oscuro);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.btn-dorado:hover {
+    background: linear-gradient(135deg, var(--color-dorado-oscuro), var(--color-dorado));
+    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+    transform: translateY(-3px);
+}
+
+.btn-outline-azul {
+    background: transparent;
+    border: 2px solid var(--color-azul-principal);
+    color: var(--color-azul-principal);
+}
+
+.btn-outline-azul:hover {
+    background: var(--color-azul-principal);
+    color: var(--text-claro);
+}
+
+/* ============================================
+   TARJETAS UNIFICADAS
+   ============================================ */
+.card-unified {
+    background: var(--bg-blanco);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+}
+
+.card-unified:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--color-dorado);
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--color-azul-principal), var(--color-azul-claro));
+    border-radius: var(--border-radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-claro);
+    font-size: 1.5rem;
+}
+
+.card-icon.gold {
+    background: linear-gradient(135deg, var(--color-dorado), var(--color-dorado-claro));
+    color: var(--text-oscuro);
+}
+
+.card-icon.red {
+    background: linear-gradient(135deg, var(--color-crema-principal), var(--color-crema-claro));
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-azul-principal);
+    margin: 0;
+}
+
+.card-body {
+    color: var(--text-gris);
+    line-height: 1.6;
+}
+
+/* ============================================
+   BADGES Y ETIQUETAS
+   ============================================ */
+.badge-unified {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 1rem;
+    border-radius: var(--border-radius-xl);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-azul {
+    background: linear-gradient(135deg, var(--color-azul-principal), var(--color-azul-claro));
+    color: var(--text-claro);
+}
+
+.badge-rojo {
+    background: linear-gradient(135deg, var(--color-crema-principal), var(--color-crema-claro));
+    color: var(--text-claro);
+}
+
+.badge-dorado {
+    background: linear-gradient(135deg, var(--color-dorado), var(--color-dorado-claro));
+    color: var(--text-oscuro);
+}
+
+.badge-success {
+    background: #28a745;
+    color: var(--text-claro);
+}
+
+.badge-warning {
+    background: #ffc107;
+    color: var(--text-oscuro);
+}
+
+.badge-info {
+    background: #17a2b8;
+    color: var(--text-claro);
+}
+
+/* ============================================
+   ESTRELLAS DECORATIVAS
+   ============================================ */
+.stars-decoration {
+    text-align: center;
+    margin: var(--spacing-lg) 0;
+}
+
+.stars-decoration::before {
+    content: "★ ★ ★";
+    color: var(--color-dorado);
+    font-size: 1.5rem;
+    letter-spacing: 1rem;
+    animation: pulse-stars 3s ease-in-out infinite;
+}
+
+@keyframes pulse-stars {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+/* ============================================
+   SEPARADORES
+   ============================================ */
+.separator-unified {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-dorado), transparent);
+    margin: var(--spacing-lg) 0;
+    border: none;
+}
+
+.separator-blue {
+    background: linear-gradient(90deg, transparent, var(--color-azul-principal), transparent);
+}
+
+.separator-red {
+    background: linear-gradient(90deg, transparent, var(--color-crema-principal), transparent);
+}
+
+/* ============================================
+   BANNER HERO
+   ============================================ */
+.hero-banner {
+    background: linear-gradient(135deg, var(--color-azul-principal) 0%, var(--color-crema-principal) 100%);
+    color: var(--text-claro);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-banner::before {
+    content: "★";
+    position: absolute;
+    font-size: 15rem;
+    color: rgba(212, 175, 55, 0.1);
+    top: -5rem;
+    right: -3rem;
+    transform: rotate(15deg);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* ============================================
+   GRID SYSTEM
+   ============================================ */
+.grid-unified {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grid-4 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* ============================================
+   SECCIÓN DE MEMBRESÍA
+   ============================================ */
+.membership-card-unified {
+    background: var(--bg-blanco);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-lg);
+    border: 3px solid transparent;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.membership-card-unified::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--color-azul-principal), var(--color-crema-principal), var(--color-dorado));
+}
+
+.membership-card-unified:hover {
+    border-color: var(--color-dorado);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-8px);
+}
+
+.membership-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--color-dorado), var(--color-dorado-claro));
+    border-radius: var(--border-radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--text-oscuro);
+    margin: 0 auto var(--spacing-md);
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+}
+
+.membership-name {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-azul-principal);
+    margin-bottom: var(--spacing-sm);
+}
+
+.membership-price {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-crema-principal);
+    margin-bottom: var(--spacing-md);
+}
+
+.membership-price span {
+    font-size: 1rem;
+    color: var(--text-gris);
+    font-weight: 400;
+}
+
+.membership-benefits {
+    list-style: none;
+    padding: 0;
+}
+
+.membership-benefits li {
+    padding: var(--spacing-xs) 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--text-gris);
+}
+
+.membership-benefits li i {
+    color: var(--color-dorado);
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   ESTADOS Y NOTIFICACIONES
+   ============================================ */
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--border-radius-full);
+    display: inline-block;
+    animation: pulse-dot 2s infinite;
+}
+
+.status-dot.active {
+    background: #28a745;
+}
+
+.status-dot.inactive {
+    background: #dc3545;
+}
+
+.status-dot.pending {
+    background: #ffc107;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ============================================
+   FORMULARIOS UNIFICADOS
+   ============================================ */
+.form-group-unified {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-label-unified {
+    display: block;
+    font-weight: 600;
+    color: var(--color-azul-principal);
+    margin-bottom: var(--spacing-xs);
+}
+
+.form-input-unified {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--bg-gris);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    transition: var(--transition-normal);
+}
+
+.form-input-unified:focus {
+    outline: none;
+    border-color: var(--color-azul-principal);
+    box-shadow: 0 0 0 3px rgba(0, 50, 120, 0.1);
+}
+
+.form-input-unified.invalid {
+    border-color: var(--color-crema-principal);
+}
+
+.form-input-unified.valid {
+    border-color: #28a745;
+}
+
+/* ============================================
+   TABLAS UNIFICADAS
+   ============================================ */
+.table-unified {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-blanco);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.table-unified thead {
+    background: linear-gradient(135deg, var(--color-azul-principal), var(--color-azul-claro));
+    color: var(--text-claro);
+}
+
+.table-unified th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 700;
+}
+
+.table-unified td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--bg-gris);
+}
+
+.table-unified tbody tr:hover {
+    background: var(--bg-gris-claro);
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+.animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .navbar-unified {
+        padding: 1rem;
+    }
+    
+    .nav-menu-unified {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   UTILIDADES
+   ============================================ */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+
+.fw-bold { font-weight: 700; }
+.fw-normal { font-weight: 400; }
+
+.text-azul { color: var(--color-azul-principal); }
+.text-rojo { color: var(--color-crema-principal); }
+.text-dorado { color: var(--color-dorado); }
+.text-gris { color: var(--text-gris); }

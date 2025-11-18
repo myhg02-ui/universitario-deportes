@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Perfil - Club Universitario de Deportes</title>
+    <link rel="icon" type="image/png" href="../../../public/assets/images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: #003278;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #003278;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #003278;
+            color: white;
+        }
+
+        .btn-logout {
+            padding: 0.7rem 1.5rem;
+            background: #c41e3a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background: #a01830;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef3 100%);
+            min-height: 100vh;
+            padding-bottom: 4rem;
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #003278 0%, #005bb5 50%, #c41e3a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            color: white;
+        }
+
+        .loading-screen.hidden {
+            display: none;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .perfil-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+
+        .perfil-header-card {
+            background: linear-gradient(135deg, #003278 0%, #005bb5 50%, #c41e3a 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 50px rgba(0, 50, 120, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .perfil-header-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .perfil-header-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .perfil-avatar-container {
+            flex-shrink: 0;
+        }
+
+        .perfil-avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #003278;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 5px solid rgba(255,255,255,0.2);
+        }
+
+        .perfil-info {
+            flex-grow: 1;
+            color: white;
+        }
+
+        .perfil-nombre {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .perfil-meta {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .perfil-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .perfil-meta-item i {
+            font-size: 1.3rem;
+        }
+
+        .membership-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .perfil-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            background: transparent;
+            color: #666;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .tab-button:hover {
+            background: #f5f5f5;
+            color: #003278;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #003278, #005bb5);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,50,120,0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #003278;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #c41e3a;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .card-title i {
+            font-size: 1.7rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #003278;
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #003278;
+            box-shadow: 0 0 0 4px rgba(0,50,120,0.1);
+        }
+
+        .form-input:disabled {
+            background: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+            border-color: #e0e0e0;
+        }
+
+        .form-input-icon {
+            position: relative;
+        }
+
+        .form-input-icon i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .form-input-icon .form-input {
+            padding-left: 3rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .info-display {
+            background: #f8f9fa;
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            border-left: 4px solid #003278;
+        }
+
+        .info-display-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-display-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #003278;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #003278, #005bb5);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,50,120,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,50,120,0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #003278;
+            border: 2px solid #003278;
+        }
+
+        .btn-secondary:hover {
+            background: #003278;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #c41e3a;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #a01830;
+            transform: translateY(-2px);
+        }
+
+        .message {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 500;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.show {
+            display: flex;
+        }
+
+        .message-success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .message-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .membership-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #dee2e6;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: #003278;
+            margin-bottom: 0.8rem;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #003278;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .perfil-header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .perfil-meta {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .perfil-wrapper {
+                padding: 80px 1rem 1rem;
+            }
+
+            .perfil-nombre {
+                font-size: 2rem;
+            }
+
+            .perfil-tabs {
+                flex-direction: column;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- MENSAJE DE DEBUG - Si ves esto, la página SÍ está cargando -->
+    <div style="position: fixed; top: 0; left: 0; right: 0; background: #4caf50; color: white; padding: 10px; text-align: center; z-index: 99999; font-weight: bold;">
+        ✅ PÁGINA CARGANDO - Si ves este mensaje verde, el HTML está funcionando correctamente
+    </div>
+    
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="spinner"></div>
+        <div class="loading-text">Cargando perfil...</div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="../../../public/index.html" class="nav-logo">
+                    <img src="../../../public/assets/images/logo.png" alt="Logo Universitario" class="logo-img">
+                    <span>Universitario</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="dashboard.html" class="nav-link">🏠 Dashboard</a></li>
+                    <li><a href="perfil.html" class="nav-link active">👤 Mi Perfil</a></li>
+                    <li><a href="beneficios.html" class="nav-link">Beneficios</a></li>
+                </ul>
+                <div class="nav-auth">
+                    <button class="btn-logout" onclick="logout()">
+                        🚪 Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido Principal -->
+    <div class="perfil-wrapper">
+        <!-- Mensajes -->
+        <div id="successMessage" class="message message-success">
+            ✅ <span id="successText"></span>
+        </div>
+        <div id="errorMessage" class="message message-error">
+            ❌ <span id="errorText"></span>
+        </div>
+
+        <!-- Header del Perfil -->
+        <div class="perfil-header-card">
+            <div class="perfil-header-content">
+                <div class="perfil-avatar-container">
+                    <div class="perfil-avatar">
+                        👤
+                    </div>
+                </div>
+                <div class="perfil-info">
+                    <h1 class="perfil-nombre" id="userName">Cargando...</h1>
+                    <div class="perfil-meta">
+                        <div class="perfil-meta-item">
+                            🆔 Socio N° <strong id="userNumber">-------</strong>
+                        </div>
+                        <div class="perfil-meta-item">
+                            📧 <span id="userEmail">email@ejemplo.com</span>
+                        </div>
+                        <div class="membership-badge" id="membershipBadge">
+                            👑 <span>Membresía Free</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs de Navegación -->
+        <div class="perfil-tabs">
+            <button class="tab-button active" onclick="switchTab('personal')">
+                📋 Información Personal
+            </button>
+            <button class="tab-button" onclick="switchTab('membresia')">
+                👑 Mi Membresía
+            </button>
+            <button class="tab-button" onclick="switchTab('seguridad')">
+                🔒 Seguridad
+            </button>
+        </div>
+
+        <!-- Tab: Información Personal -->
+        <div id="tab-personal" class="tab-content active">
+            <div class="content-grid">
+                <!-- Datos Personales -->
+                <div class="info-card">
+                    <h2 class="card-title">
+                        🆔 Datos Personales
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Documento</label>
+                        <input type="text" class="form-input" value="DNI" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Número de Documento</label>
+                        <input type="text" class="form-input" id="numeroDocumento" disabled>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Nombres *</label>
+                            <input type="text" class="form-input" id="nombres" placeholder="Tus nombres" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Apellidos *</label>
+                            <input type="text" class="form-input" id="apellidos" placeholder="Tus apellidos" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Fecha de Nacimiento</label>
+                            <input type="date" class="form-input" id="fechaNacimiento">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Género</label>
+                            <select class="form-select" id="genero">
+                                <option value="">Seleccionar</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                                <option value="Prefiero no decir">Prefiero no decir</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Datos de Contacto -->
+                <div class="info-card">
+                    <h2 class="card-title">
+                        📞 Datos de Contacto
+                    </h2>
+
+                    <div class="form-group">
+                        <label class="form-label">Correo Electrónico</label>
+                        <div class="form-input-icon">
+                            📧
+                            <input type="email" class="form-input" id="email" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Teléfono</label>
+                        <div class="form-input-icon">
+                            📱
+                            <input type="tel" class="form-input" id="telefono" placeholder="+51 999 999 999">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Dirección</label>
+                        <div class="form-input-icon">
+                            📍
+                            <input type="text" class="form-input" id="direccion" placeholder="Tu dirección completa">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Departamento</label>
+                            <select class="form-select" id="departamento">
+                                <option value="">Seleccionar</option>
+                                <option value="Lima">Lima</option>
+                                <option value="Arequipa">Arequipa</option>
+                                <option value="Cusco">Cusco</option>
+                                <option value="La Libertad">La Libertad</option>
+                                <option value="Piura">Piura</option>
+                                <option value="Lambayeque">Lambayeque</option>
+                                <option value="Junín">Junín</option>
+                                <option value="Cajamarca">Cajamarca</option>
+                                <option value="Puno">Puno</option>
+                                <option value="Ica">Ica</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Distrito</label>
+                            <input type="text" class="form-input" id="distrito" placeholder="Tu distrito">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="guardarCambios()">
+                    💾 Guardar Cambios
+                </button>
+                <button class="btn btn-secondary" onclick="cancelarEdicion()">
+                    ❌ Cancelar
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab: Mi Membresía -->
+        <div id="tab-membresia" class="tab-content">
+            <div class="info-card">
+                <h2 class="card-title">
+                    👑 Estado de Mi Membresía
+                </h2>
+
+                <div class="membership-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-value" id="tipoMembresia">Free</div>
+                        <div class="stat-label">Tipo de Membresía</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value" id="fechaRegistro">--/--/----</div>
+                        <div class="stat-label">Miembro desde</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-value" id="fechaVencimiento">--/--/----</div>
+                        <div class="stat-label">Vence el</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">✔️</div>
+                        <div class="stat-value" id="estadoMembresia" style="color: #4caf50;">Activa</div>
+                        <div class="stat-label">Estado</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="window.location.href='dashboard.html'">
+                        ⬆️ Mejorar Membresía
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='beneficios.html'">
+                        🎁 Ver Mis Beneficios
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Seguridad -->
+        <div id="tab-seguridad" class="tab-content">
+            <div class="info-card">
+                <h2 class="card-title">
+                    🔒 Configuración de Seguridad
+                </h2>
+
+                <div class="info-display" style="margin-bottom: 2rem;">
+                    <div class="info-display-label">
+                        ℹ️ Información
+                    </div>
+                    <div class="info-display-value" style="font-size: 1rem; font-weight: 500; color: #666; margin-top: 0.5rem;">
+                        Por seguridad, los cambios de contraseña deben realizarse a través del enlace de recuperación enviado a tu correo electrónico.
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="enviarRecuperacionPassword()">
+                        🔑 Cambiar Contraseña
+                    </button>
+                    <button class="btn btn-danger" onclick="cerrarTodasSesiones()">
+                        🚪 Cerrar Todas las Sesiones
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <!-- Firebase Config -->
+    <script src="../../../src/js/core/firebase-config.js"></script>
+    
+    <!-- Sistema de Presencia -->
+    <script src="../js/presence-system.js"></script>
+    
+    <!-- Script del Perfil -->
+    <script>
+        console.log('🚀 INICIO DEL SCRIPT');
+        
+        // Inicializar Firebase primero
+        if (typeof initFirebase === 'function') {
+            initFirebase();
+            console.log('✅ Firebase inicializado');
+        }
+        
+        let userData = null;
+        let originalData = null;
+
+        // Ocultar loading inmediatamente para ver la página
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                loadingScreen.style.display = 'none';
+                console.log('✅ Loading screen ocultado');
+            }
+        }, 500);
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+            event.target.closest('.tab-button').classList.add('active');
+        }
+
+        async function loadUserData() {
+            try {
+                console.log('🔄 Iniciando carga de datos del usuario...');
+                
+                if (typeof firebase === 'undefined' || !firebase.auth) {
+                    throw new Error('Firebase no está inicializado');
+                }
+
+                const user = firebase.auth().currentUser;
+                console.log('👤 Usuario autenticado:', user ? user.email : 'ninguno');
+                
+                if (!user) {
+                    console.log('❌ No hay usuario autenticado, redirigiendo a login...');
+                    window.location.href = '../auth/login.html';
+                    return;
+                }
+
+                const doc = await firebase.firestore().collection('users').doc(user.uid).get();
+                console.log('📄 Documento encontrado:', doc.exists);
+                
+                if (!doc.exists) {
+                    showError('No se encontraron datos del usuario');
+                    document.getElementById('loadingScreen').classList.add('hidden');
+                    return;
+                }
+
+                userData = { uid: user.uid, ...doc.data() };
+                originalData = { ...userData };
+                console.log('✅ Datos cargados:', userData);
+
+                document.getElementById('userName').textContent = `${userData.nombres || ''} ${userData.apellidos || ''}`;
+                document.getElementById('userNumber').textContent = userData.numero_socio || '-------';
+                document.getElementById('userEmail').textContent = userData.email || '';
+                
+                document.getElementById('numeroDocumento').value = userData.documento || '';
+                document.getElementById('nombres').value = userData.nombres || '';
+                document.getElementById('apellidos').value = userData.apellidos || '';
+                document.getElementById('fechaNacimiento').value = userData.fecha_nacimiento || '';
+                document.getElementById('genero').value = userData.genero || '';
+                document.getElementById('email').value = userData.email || '';
+                document.getElementById('telefono').value = userData.telefono || '';
+                document.getElementById('direccion').value = userData.direccion || '';
+                document.getElementById('departamento').value = userData.departamento || '';
+                document.getElementById('distrito').value = userData.distrito || '';
+
+                const tipoMem = userData.tipo_membresia || 'free';
+                document.getElementById('tipoMembresia').textContent = tipoMem.charAt(0).toUpperCase() + tipoMem.slice(1);
+                document.getElementById('fechaRegistro').textContent = userData.fecha_registro ? new Date(userData.fecha_registro).toLocaleDateString('es-PE') : '--/--/----';
+                document.getElementById('fechaVencimiento').textContent = userData.fecha_vencimiento ? new Date(userData.fecha_vencimiento).toLocaleDateString('es-PE') : '--/--/----';
+                document.getElementById('estadoMembresia').textContent = userData.estado_membresia || 'Activa';
+
+                const badge = document.getElementById('membershipBadge').querySelector('span');
+                badge.textContent = `Membresía ${tipoMem.charAt(0).toUpperCase() + tipoMem.slice(1)}`;
+
+                // Ocultar pantalla de carga
+                document.getElementById('loadingScreen').classList.add('hidden');
+                console.log('✅ Perfil cargado completamente');
+
+            } catch (error) {
+                console.error('❌ Error al cargar datos:', error);
+                showError('Error al cargar los datos del perfil: ' + error.message);
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }
+        }
+
+        async function guardarCambios() {
+            try {
+                if (!userData) {
+                    showError('No hay datos para guardar');
+                    return;
+                }
+
+                const nombres = document.getElementById('nombres').value.trim();
+                const apellidos = document.getElementById('apellidos').value.trim();
+
+                if (!nombres || !apellidos) {
+                    showError('Los nombres y apellidos son obligatorios');
+                    return;
+                }
+
+                const updatedData = {
+                    nombres: nombres,
+                    apellidos: apellidos,
+                    fecha_nacimiento: document.getElementById('fechaNacimiento').value,
+                    genero: document.getElementById('genero').value,
+                    telefono: document.getElementById('telefono').value.trim(),
+                    direccion: document.getElementById('direccion').value.trim(),
+                    departamento: document.getElementById('departamento').value,
+                    distrito: document.getElementById('distrito').value.trim()
+                };
+
+                await firebase.firestore().collection('users').doc(userData.uid).update(updatedData);
+
+                userData = { ...userData, ...updatedData };
+                originalData = { ...userData };
+
+                document.getElementById('userName').textContent = `${nombres} ${apellidos}`;
+
+                showSuccess('✅ Perfil actualizado correctamente');
+
+            } catch (error) {
+                console.error('Error al guardar:', error);
+                showError('Error al guardar los cambios');
+            }
+        }
+
+        function cancelarEdicion() {
+            if (!originalData) return;
+
+            document.getElementById('nombres').value = originalData.nombres || '';
+            document.getElementById('apellidos').value = originalData.apellidos || '';
+            document.getElementById('fechaNacimiento').value = originalData.fecha_nacimiento || '';
+            document.getElementById('genero').value = originalData.genero || '';
+            document.getElementById('telefono').value = originalData.telefono || '';
+            document.getElementById('direccion').value = originalData.direccion || '';
+            document.getElementById('departamento').value = originalData.departamento || '';
+            document.getElementById('distrito').value = originalData.distrito || '';
+
+            showSuccess('Cambios descartados');
+        }
+
+        function enviarRecuperacionPassword() {
+            if (!userData || !userData.email) {
+                showError('No se encontró el correo electrónico');
+                return;
+            }
+
+            if (confirm(`Se enviará un correo de recuperación a: ${userData.email}\n\n¿Continuar?`)) {
+                firebase.auth().sendPasswordResetEmail(userData.email)
+                    .then(() => {
+                        showSuccess(`✅ Correo de recuperación enviado a ${userData.email}`);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        showError('Error al enviar el correo de recuperación');
+                    });
+            }
+        }
+
+        function cerrarTodasSesiones() {
+            if (confirm('¿Estás seguro de que deseas cerrar todas tus sesiones activas?\n\nDeberás iniciar sesión nuevamente.')) {
+                logout();
+            }
+        }
+
+        async function logout() {
+            try {
+                await firebase.auth().signOut();
+                sessionStorage.clear();
+                localStorage.removeItem('currentUser');
+                window.location.href = '../index.html';
+            } catch (error) {
+                console.error('Error al cerrar sesión:', error);
+            }
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            const successText = document.getElementById('successText');
+            successText.textContent = message;
+            successDiv.classList.add('show');
+            successDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            setTimeout(() => {
+                successDiv.classList.remove('show');
+            }, 5000);
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorDiv.classList.add('show');
+            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            setTimeout(() => {
+                errorDiv.classList.remove('show');
+            }, 5000);
+        }
+
+        // Esperar a que Firebase esté listo
+        function initPage() {
+            console.log('🚀 Iniciando página de perfil...');
+            
+            // Verificar si Firebase está cargado
+            if (typeof firebase === 'undefined') {
+                document.getElementById('loadingScreen').innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 4rem; margin-bottom: 1rem;"></i>
+                        <h2 style="margin-bottom: 1rem;">Error al cargar Firebase</h2>
+                        <p style="margin-bottom: 2rem;">No se pudo conectar con la base de datos.</p>
+                        <button onclick="location.reload()" style="padding: 1rem 2rem; background: white; color: #003278; border: none; border-radius: 5px; font-weight: 600; cursor: pointer;">
+                            <i class="fas fa-sync"></i> Reintentar
+                        </button>
+                    </div>
+                `;
+                console.error('❌ Firebase no está definido');
+                return;
+            }
+            
+            firebase.auth().onAuthStateChanged(function(user) {
+                console.log('🔐 Estado de autenticación cambiado:', user ? user.email : 'sin usuario');
+                
+                if (user) {
+                    console.log('✅ Usuario autenticado, cargando datos...');
+                    loadUserData();
+                } else {
+                    console.log('❌ No hay usuario, redirigiendo...');
+                    document.getElementById('loadingScreen').innerHTML = `
+                        <div style="text-align: center; padding: 2rem;">
+                            <i class="fas fa-lock" style="font-size: 4rem; margin-bottom: 1rem;"></i>
+                            <h2 style="margin-bottom: 1rem;">Sesión No Iniciada</h2>
+                            <p style="margin-bottom: 2rem;">Debes iniciar sesión para ver tu perfil.</p>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Redirigiendo al login en 3 segundos...</p>
+                        </div>
+                    `;
+                    setTimeout(() => {
+                        window.location.href = '../auth/login.html';
+                    }, 3000);
+                }
+            });
+        }
+
+        // Iniciar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            console.log('⏳ DOM aún cargando...');
+            document.addEventListener('DOMContentLoaded', initPage);
+        } else {
+            console.log('✅ DOM ya cargado, iniciando...');
+            initPage();
+        }
+        
+        // SCRIPT DE DEBUG ADICIONAL
+        console.log('📊 Estado del documento:', document.readyState);
+        console.log('📊 Firebase disponible:', typeof firebase !== 'undefined');
+        console.log('📊 Elementos en body:', document.body ? document.body.children.length : 'body no existe');
+    </script>
+</body>
+</html>

@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="<?= date('D, d M Y H:i:s'); ?> GMT">
+        <title>Mi                 <li>
+                    <a href="mi-cuenta.html?v=20251116" style="text-decoration: none; background: #003278 !important; color: white !important; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-user"></i> Mi Perfil
+                    </a>
+                </li>l - Club Universitario de Deportes</title>
+    
+    <!-- CSS UNIFICADO - Orden importante -->
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/themes/theme-unified.css">
+    <link rel="stylesheet" href="../../css/base/global-enhancements.css">
+    <link rel="stylesheet" href="../../css/themes/universitario.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Forzar estilos del header para consistencia */
+        .header-unified {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: white !important;
+            box-shadow: 0 4px 16px rgba(0, 50, 120, 0.12) !important;
+            z-index: 1000 !important;
+        }
+        
+        .navbar-unified {
+            max-width: 1400px !important;
+            margin: 0 auto !important;
+            padding: 1rem 2rem !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            gap: 2rem !important;
+        }
+        
+        .nav-logo-unified {
+            display: flex !important;
+            align-items: center !important;
+            gap: 1rem !important;
+            text-decoration: none !important;
+        }
+        
+        .nav-menu-unified {
+            display: flex !important;
+            gap: 2rem !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .nav-menu-unified li {
+            list-style: none !important;
+        }
+        
+        .nav-link-unified {
+            text-decoration: none !important;
+            color: #1a1a1a !important;
+            font-weight: 600 !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px !important;
+            transition: all 0.3s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+        }
+        
+        .nav-link-unified:hover,
+        .nav-link-unified.active {
+            background: #003278 !important;
+            color: white !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        .btn-unified {
+            padding: 0.8rem 1.8rem !important;
+            border: none !important;
+            border-radius: 12px !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+        }
+        
+        .btn-rojo {
+            background: linear-gradient(135deg, #c41e3a, #e63950) !important;
+            color: white !important;
+            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3) !important;
+        }
+        
+        .btn-rojo:hover {
+            background: linear-gradient(135deg, #8B0000, #c41e3a) !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 6px 16px rgba(196, 30, 58, 0.4) !important;
+        }
+    </style>
+    
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            min-height: 100vh;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1400px;
+            margin: 90px auto 40px;
+            padding: 0 2rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            background: transparent;
+            color: #666;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .tab:hover {
+            background: #f5f5f5;
+            color: #003278;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #003278, #005bb5);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,50,120,0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #003278;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #c41e3a;
+        }
+
+        /* Formularios */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #003278;
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #003278;
+            box-shadow: 0 0 0 4px rgba(0,50,120,0.1);
+        }
+
+        .form-input:disabled {
+            background: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Info Display */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 5px solid #003278;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #003278;
+        }
+
+        /* Botones */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #003278, #005bb5);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,50,120,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,50,120,0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #003278;
+            border: 2px solid #003278;
+        }
+
+        .btn-secondary:hover {
+            background: #003278;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #c41e3a;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #a01830;
+            transform: translateY(-2px);
+        }
+
+        /* Mensajes */
+        .message {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message-success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .message-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #003278;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .form-grid,
+            .info-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ✅ HEADER USUARIO (Inicio, Dashboard, Mi Perfil) -->
+    <header style="position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; background: white !important; box-shadow: 0 4px 16px rgba(0,50,120,0.12) !important; z-index: 9999 !important;">
+        <nav style="max-width: 1400px !important; margin: 0 auto !important; padding: 1rem 2rem !important; display: flex !important; justify-content: space-between !important; align-items: center !important; gap: 2rem !important;">
+            <!-- Logo y nombre -->
+            <a href="../../../public/index.html" style="display: flex !important; align-items: center !important; gap: 1rem !important; text-decoration: none !important;">
+                <img src="../../../public/assets/images/logo.png" alt="Logo" style="width: 50px !important; height: 50px !important; border-radius: 50% !important; object-fit: cover !important;">
+                <span style="font-size: 1.5rem !important; font-weight: 800 !important; color: #003278 !important;">Universitario</span>
+            </a>
+            
+            <!-- Menú de navegación -->
+            <ul style="display: flex !important; gap: 2rem !important; list-style: none !important; margin: 0 !important; padding: 0 !important;">
+                <li>
+                    <a href="../../../public/index.html" style="text-decoration: none !important; color: #1a1a1a !important; font-weight: 600 !important; padding: 0.5rem 1rem !important; border-radius: 8px !important; transition: all 0.3s ease !important; display: inline-flex !important; align-items: center !important; gap: 0.5rem !important;">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                </li>
+                <li>
+                    <a href="dashboard.html?v=20251116" style="text-decoration: none !important; color: #1a1a1a !important; font-weight: 600 !important; padding: 0.5rem 1rem !important; border-radius: 8px !important; transition: all 0.3s ease !important; display: inline-flex !important; align-items: center !important; gap: 0.5rem !important;">
+                        <i class="fas fa-th-large"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="mi-cuenta.html?v=20251116" style="text-decoration: none !important; background: #003278 !important; color: white !important; font-weight: 600 !important; padding: 0.5rem 1rem !important; border-radius: 8px !important; transition: all 0.3s ease !important; display: inline-flex !important; align-items: center !important; gap: 0.5rem !important;">
+                        <i class="fas fa-user"></i> Mi Perfil
+                    </a>
+                </li>
+                <li>
+                    <a href="test.html?v=20251116" style="text-decoration: none !important; color: #1a1a1a !important; font-weight: 600 !important; padding: 0.5rem 1rem !important; border-radius: 8px !important; transition: all 0.3s ease !important; display: inline-flex !important; align-items: center !important; gap: 0.5rem !important;">
+                        <i class="fas fa-flask"></i> TEST
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Botón Salir -->
+            <button onclick="logout()" style="padding: 0.8rem 1.8rem !important; border: none !important; border-radius: 12px !important; font-weight: 700 !important; cursor: pointer !important; background: linear-gradient(135deg, #c41e3a, #e63950) !important; color: white !important; box-shadow: 0 4px 12px rgba(196,30,58,0.3) !important; display: inline-flex !important; align-items: center !important; gap: 0.5rem !important; transition: all 0.3s ease !important;">
+                <i class="fas fa-sign-out-alt"></i> Salir
+            </button>
+        </nav>
+    </header>
+
+    <!-- Contenido Principal -->
+    <div class="container">
+        <!-- 🆔 IDENTIFICADOR VISUAL - ESTAS EN MI CUENTA -->
+        <div style="background: linear-gradient(135deg, #c41e3a, #003278); color: white; padding: 1rem; border-radius: 10px; margin-bottom: 2rem; text-align: center; font-weight: 700; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(196,30,58,0.3);">
+            👤 PÁGINA: MI PERFIL | EDITA TUS DATOS PERSONALES
+        </div>
+        
+        <!-- Mensaje -->
+        <div id="mensaje" class="message"></div>
+
+        <!-- Banner de Perfil Unificado -->
+        <div class="hero-banner animate-fade-in">
+            <div class="hero-content">
+                <h1 class="hero-title" id="nombreCompleto">Cargando perfil...</h1>
+                <p class="hero-subtitle"><i class="fas fa-envelope"></i> <span id="emailDisplay">-</span></p>
+                <p class="hero-subtitle"><i class="fas fa-id-card"></i> Número de Socio: <strong id="numeroSocio">-</strong></p>
+                <span class="badge-unified badge-dorado mt-sm">
+                    ⭐ <span id="tipoBadge">Miembro</span>
+                </span>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab(0)">📋 Datos Personales</button>
+            <button class="tab" onclick="switchTab(1)">📞 Contacto</button>
+            <button class="tab" onclick="switchTab(2)">👑 Membresía</button>
+            <button class="tab" onclick="switchTab(3)">🔒 Seguridad</button>
+        </div>
+
+        <!-- Tab 1: Datos Personales -->
+        <div class="tab-content active">
+            <div class="card">
+                <h2 class="card-title">📋 Información Personal</h2>
+                
+                <div class="info-grid">
+                    <div class="info-box">
+                        <div class="info-label">Tipo de Documento</div>
+                        <div class="info-value">DNI</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">Número de Documento</div>
+                        <div class="info-value" id="documento">-</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">Número de Socio</div>
+                        <div class="info-value" id="numeroSocioInfo">-</div>
+                    </div>
+                </div>
+
+                <form id="formPersonal" style="margin-top: 2rem;">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Nombres *</label>
+                            <input type="text" class="form-input" id="nombres" placeholder="Tus nombres" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Apellidos *</label>
+                            <input type="text" class="form-input" id="apellidos" placeholder="Tus apellidos" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Fecha de Nacimiento</label>
+                            <input type="date" class="form-input" id="fechaNacimiento">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Género</label>
+                            <select class="form-select" id="genero">
+                                <option value="">Seleccionar</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary">💾 Guardar Cambios</button>
+                        <button type="button" class="btn btn-secondary" onclick="cancelarCambios()">❌ Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tab 2: Contacto -->
+        <div class="tab-content">
+            <div class="card">
+                <h2 class="card-title">📞 Información de Contacto</h2>
+
+                <form id="formContacto">
+                    <div class="form-group">
+                        <label class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-input" id="email" disabled>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Teléfono</label>
+                            <input type="tel" class="form-input" id="telefono" placeholder="+51 999 999 999">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Departamento</label>
+                            <select class="form-select" id="departamento">
+                                <option value="">Seleccionar</option>
+                                <option value="Lima">Lima</option>
+                                <option value="Arequipa">Arequipa</option>
+                                <option value="Cusco">Cusco</option>
+                                <option value="La Libertad">La Libertad</option>
+                                <option value="Piura">Piura</option>
+                                <option value="Lambayeque">Lambayeque</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Dirección Completa</label>
+                        <textarea class="form-textarea" id="direccion" placeholder="Ingresa tu dirección completa"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Distrito</label>
+                        <input type="text" class="form-input" id="distrito" placeholder="Tu distrito">
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary">💾 Guardar Contacto</button>
+                        <button type="button" class="btn btn-secondary" onclick="cancelarCambios()">❌ Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tab 3: Membresía -->
+        <div class="tab-content">
+            <div class="card">
+                <h2 class="card-title">👑 Estado de Membresía</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-value" id="tipoMembresia">-</div>
+                        <div class="stat-label">Tipo de Membresía</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value" id="fechaRegistro">-</div>
+                        <div class="stat-label">Miembro desde</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-value" id="fechaVencimiento">-</div>
+                        <div class="stat-label">Vence el</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-value" style="color: #4caf50;">ACTIVA</div>
+                        <div class="stat-label">Estado</div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="window.location.href='dashboard.html'">⬆️ Mejorar Membresía</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Seguridad -->
+        <div class="tab-content">
+            <div class="card">
+                <h2 class="card-title">🔒 Configuración de Seguridad</h2>
+
+                <div style="background: #fff3cd; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; border-left: 5px solid #ffc107;">
+                    <p style="margin: 0; color: #856404; font-weight: 600;">
+                        <strong>ℹ️ Información:</strong> Por seguridad, los cambios de contraseña se realizan mediante correo electrónico de recuperación.
+                    </p>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="cambiarPassword()">🔑 Cambiar Contraseña</button>
+                    <button class="btn btn-danger" onclick="logout()">🚪 Cerrar Sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="../../../src/js/core/firebase-config.js"></script>
+    
+    <!-- Sistema de Presencia -->
+    <script src="../js/presence-system.js"></script>
+
+    <script>
+        console.log('🚀 MI CUENTA - Página cargada');
+
+        // 🔥 FORZAR VISIBILIDAD DEL MENÚ DE NAVEGACIÓN 🔥
+        document.addEventListener('DOMContentLoaded', function() {
+            const navMenu = document.querySelector('header nav ul');
+            if (navMenu) {
+                navMenu.style.display = 'flex';
+                navMenu.style.visibility = 'visible';
+                navMenu.style.opacity = '1';
+                console.log('✅ Menú de navegación forzado a mostrarse');
+            }
+
+            // Agregar efectos hover a los enlaces del menú
+            const navLinks = document.querySelectorAll('header nav ul li a');
+            navLinks.forEach(link => {
+                // No aplicar hover al enlace activo (Mi Perfil)
+                if (!link.style.background || link.style.background.indexOf('#003278') === -1) {
+                    link.addEventListener('mouseenter', function() {
+                        this.style.background = '#003278';
+                        this.style.color = 'white';
+                        this.style.transform = 'translateY(-2px)';
+                    });
+                    
+                    link.addEventListener('mouseleave', function() {
+                        this.style.background = 'transparent';
+                        this.style.color = '#1a1a1a';
+                        this.style.transform = 'translateY(0)';
+                    });
+                }
+            });
+
+            // Hover para el botón Salir
+            const logoutBtn = document.querySelector('header button[onclick="logout()"]');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('mouseenter', function() {
+                    this.style.background = 'linear-gradient(135deg, #8B0000, #c41e3a)';
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.boxShadow = '0 6px 16px rgba(196,30,58,0.4)';
+                });
+                
+                logoutBtn.addEventListener('mouseleave', function() {
+                    this.style.background = 'linear-gradient(135deg, #c41e3a, #e63950)';
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 12px rgba(196,30,58,0.3)';
+                });
+            }
+        });
+
+        let userData = {};
+        let originalData = {};
+
+        // Inicializar Firebase
+        if (typeof initFirebase === 'function') {
+            initFirebase();
+        }
+
+        // Función para cambiar tabs
+        function switchTab(index) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach((tab, i) => {
+                tab.classList.toggle('active', i === index);
+            });
+            
+            contents.forEach((content, i) => {
+                content.classList.toggle('active', i === index);
+            });
+        }
+
+        // Mostrar mensajes
+        function showMessage(text, type = 'success') {
+            const mensaje = document.getElementById('mensaje');
+            mensaje.textContent = text;
+            mensaje.className = `message message-${type} show`;
+            
+            setTimeout(() => {
+                mensaje.classList.remove('show');
+            }, 5000);
+        }
+
+        // Cargar datos del usuario
+        async function loadUserData() {
+            console.log('📥 Cargando datos del usuario...');
+            
+            try {
+                // Intentar desde sessionStorage primero
+                const sessionUser = JSON.parse(sessionStorage.getItem('currentUser'));
+                
+                if (sessionUser) {
+                    mostrarDatos(sessionUser);
+                    console.log('✅ Datos cargados desde sessionStorage');
+                }
+
+                // Luego intentar desde Firebase
+                if (typeof firebase !== 'undefined' && firebase.auth) {
+                    const user = firebase.auth().currentUser;
+                    
+                    if (user) {
+                        const doc = await firebase.firestore().collection('users').doc(user.uid).get();
+                        
+                        if (doc.exists) {
+                            const firebaseData = doc.data();
+                            userData = { uid: user.uid, ...firebaseData };
+                            originalData = { ...userData };
+                            mostrarDatos(userData);
+                            console.log('✅ Datos actualizados desde Firebase');
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('❌ Error:', error);
+                showMessage('Error al cargar datos', 'error');
+            }
+        }
+
+        // Mostrar datos en la interfaz
+        function mostrarDatos(data) {
+            document.getElementById('nombreCompleto').textContent = 
+                `${data.nombres || 'Usuario'} ${data.apellidos || 'Nuevo'}`;
+            document.getElementById('emailDisplay').textContent = data.email || '-';
+            document.getElementById('numeroSocio').textContent = data.numero_socio || 'No asignado';
+            document.getElementById('numeroSocioInfo').textContent = data.numero_socio || 'No asignado';
+            document.getElementById('documento').textContent = data.documento || 'No registrado';
+            
+            // Badge de tipo
+            const tipoBadge = document.getElementById('tipoBadge');
+            if (data.rol === 'super_admin') {
+                tipoBadge.textContent = '👑 SUPER ADMIN';
+            } else if (data.is_admin) {
+                tipoBadge.textContent = '🛡️ ADMIN';
+            } else {
+                tipoBadge.textContent = '⭐ MIEMBRO';
+            }
+
+            // Formularios
+            document.getElementById('nombres').value = data.nombres || '';
+            document.getElementById('apellidos').value = data.apellidos || '';
+            document.getElementById('fechaNacimiento').value = data.fecha_nacimiento || '';
+            document.getElementById('genero').value = data.genero || '';
+            document.getElementById('email').value = data.email || '';
+            document.getElementById('telefono').value = data.telefono || '';
+            document.getElementById('direccion').value = data.direccion || '';
+            document.getElementById('departamento').value = data.departamento || '';
+            document.getElementById('distrito').value = data.distrito || '';
+
+            // Membresía
+            document.getElementById('tipoMembresia').textContent = 
+                (data.tipo_membresia || 'free').toUpperCase();
+            document.getElementById('fechaRegistro').textContent = 
+                data.fecha_registro ? new Date(data.fecha_registro).toLocaleDateString('es-PE') : 'N/A';
+            document.getElementById('fechaVencimiento').textContent = 
+                data.fecha_vencimiento ? new Date(data.fecha_vencimiento).toLocaleDateString('es-PE') : 'N/A';
+        }
+
+        // Guardar formulario personal
+        document.getElementById('formPersonal').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await guardarDatos('personal');
+        });
+
+        // Guardar formulario contacto
+        document.getElementById('formContacto').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await guardarDatos('contacto');
+        });
+
+        // Guardar datos
+        async function guardarDatos(tipo) {
+            console.log('💾 Guardando datos...');
+            
+            try {
+                const nombres = document.getElementById('nombres').value.trim();
+                const apellidos = document.getElementById('apellidos').value.trim();
+
+                if (!nombres || !apellidos) {
+                    showMessage('Los nombres y apellidos son obligatorios', 'error');
+                    return;
+                }
+
+                const updatedData = {
+                    nombres: nombres,
+                    apellidos: apellidos,
+                    fecha_nacimiento: document.getElementById('fechaNacimiento').value,
+                    genero: document.getElementById('genero').value,
+                    telefono: document.getElementById('telefono').value.trim(),
+                    direccion: document.getElementById('direccion').value.trim(),
+                    departamento: document.getElementById('departamento').value,
+                    distrito: document.getElementById('distrito').value.trim()
+                };
+
+                // Guardar en Firebase si está disponible
+                if (typeof firebase !== 'undefined' && firebase.auth) {
+                    const user = firebase.auth().currentUser;
+                    if (user) {
+                        await firebase.firestore().collection('users').doc(user.uid).update(updatedData);
+                    }
+                }
+
+                // Actualizar sessionStorage
+                const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+                if (currentUser) {
+                    Object.assign(currentUser, updatedData);
+                    sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+                }
+
+                userData = { ...userData, ...updatedData };
+                originalData = { ...userData };
+                
+                document.getElementById('nombreCompleto').textContent = `${nombres} ${apellidos}`;
+                
+                showMessage('✅ Perfil actualizado correctamente', 'success');
+                console.log('✅ Datos guardados');
+
+            } catch (error) {
+                console.error('❌ Error:', error);
+                showMessage('Error al guardar: ' + error.message, 'error');
+            }
+        }
+
+        // Cancelar cambios
+        function cancelarCambios() {
+            if (Object.keys(originalData).length > 0) {
+                mostrarDatos(originalData);
+                showMessage('Cambios descartados', 'success');
+            }
+        }
+
+        // Cambiar contraseña
+        function cambiarPassword() {
+            const email = document.getElementById('email').value;
+            
+            if (!email) {
+                showMessage('No se encontró el correo electrónico', 'error');
+                return;
+            }
+
+            if (confirm(`Se enviará un correo de recuperación a:\n${email}\n\n¿Continuar?`)) {
+                if (typeof firebase !== 'undefined' && firebase.auth) {
+                    firebase.auth().sendPasswordResetEmail(email)
+                        .then(() => {
+                            showMessage(`✅ Correo enviado a ${email}`, 'success');
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                            showMessage('Error al enviar el correo', 'error');
+                        });
+                }
+            }
+        }
+
+        // Cerrar sesión
+        async function logout() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                try {
+                    if (typeof firebase !== 'undefined' && firebase.auth) {
+                        await firebase.auth().signOut();
+                    }
+                    sessionStorage.clear();
+                    localStorage.clear();
+                    window.location.href = '../index.html';
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+        }
+
+        // Cargar datos al iniciar
+        if (typeof firebase !== 'undefined' && firebase.auth) {
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    loadUserData();
+                } else {
+                    loadUserData(); // Intentar desde sessionStorage
+                }
+            });
+        } else {
+            loadUserData();
+        }
+    </script>
+</body>
+</html>
