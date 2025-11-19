@@ -189,9 +189,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     mostrarMensaje('success', `¡Registro exitoso! Tu número de socio es: ${userData.numero_socio}. Redirigiendo a tu dashboard...`);
                     form.reset();
                     
-                    // 🎯 Redirigir al INDEX después de registro exitoso
+                    // Redirigir al dashboard después de 2 segundos
+                    // Desde src/pages/auth/registro.html hacia src/pages/user/dashboard.html
                     setTimeout(() => {
-                        window.location.href = '../../index.html';
+                        window.location.href = '/universitario-deportes/user/dashboard.html';
                     }, 2000);
                 }
             } else {
@@ -203,12 +204,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
                 
-                mostrarMensaje('success', `¡Registro exitoso! Tu número de socio es: ${userData.numero_socio}. Redirigiendo...`);
+                mostrarMensaje('success', `¡Registro exitoso! Tu número de socio es: ${userData.numero_socio}. Redirigiendo a tu dashboard...`);
                 form.reset();
                 
-                // 🎯 Redirigir al INDEX después de registro exitoso
+                // Desde src/pages/auth/registro.html hacia src/pages/user/dashboard.html
                 setTimeout(() => {
-                    window.location.href = '../../index.html';
+                    window.location.href = '/universitario-deportes/user/dashboard.html';
                 }, 2000);
             }
         } catch (error) {

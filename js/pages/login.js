@@ -99,8 +99,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                     
                     setTimeout(() => {
-                        // 🎯 Redirigir al INDEX después de login exitoso
-                        window.location.href = '../../index.html';
+                        // Redirigir según rol
+                        if (userData.is_admin && userData.admin_activo) {
+                            window.location.href = '/universitario-deportes/admin/panel-admin.html';
+                        } else {
+                            window.location.href = '/universitario-deportes/user/dashboard.html';
+                        }
                     }, 1500);
                 } else {
                     throw new Error('Login fallido');
@@ -120,8 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     sessionStorage.setItem('currentUser', JSON.stringify(user));
                     showMessage('success', `¡Bienvenido ${user.nombres}! Redirigiendo...`);
                     setTimeout(() => {
-                        // 🎯 Redirigir al INDEX después de login exitoso
-                        window.location.href = '../../index.html';
+                        window.location.href = '/universitario-deportes/user/dashboard.html';
                     }, 1500);
                 } else {
                     throw { code: 'auth/wrong-password' };
