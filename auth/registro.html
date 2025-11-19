@@ -3,44 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Meta Tags -->
     <title>Registro de Socio | Universitario de Deportes</title>
     <meta name="description" content="Regístrate como socio del Club Universitario de Deportes y disfruta de beneficios exclusivos.">
-    <meta name="keywords" content="Universitario de Deportes, registro, socio crema, hacerse socio">
-    <meta name="author" content="Universitario de Deportes">
-    <meta name="robots" content="index, follow">
     
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/images/logos/logo.png">
-    <link rel="apple-touch-icon" href="../assets/images/logos/logo.png">
-    
-    <!-- Stylesheets -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/universitario-theme.css">
-    <link rel="stylesheet" href="../css/placeholders.css">
-    <link rel="stylesheet" href="../css/auth-forms.css">
+    <link rel="stylesheet" href="../css/base/reset.css">
+    <link rel="stylesheet" href="../css/themes/universitario.css">
+    <link rel="stylesheet" href="../css/pages/registro.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="../assets/images/logos/logo.png" as="image">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <!-- Estrellas decorativas -->
-        <div class="header-stars"></div>
-        
         <nav class="navbar">
             <div class="nav-container">
-                <a href="../index.html" class="nav-logo" aria-label="Inicio - Universitario de Deportes">
-                    <img src="../assets/images/logos/logo.png" alt="Escudo Universitario de Deportes" class="logo-img" width="50" height="50">
+                <a href="../index.html" class="nav-logo">
+                    <img src="../assets/images/logos/logo.png" alt="Escudo Universitario" class="logo-img" width="50" height="50">
                     <span>Universitario de Deportes</span>
                 </a>
-                <ul class="nav-menu" role="navigation" aria-label="Navegación principal">
+                <ul class="nav-menu">
                     <li><a href="../index.html" class="nav-link">Inicio</a></li>
                     <li><a href="../info/club.html" class="nav-link">El Club</a></li>
                     <li><a href="../user/beneficios.html" class="nav-link">Beneficios</a></li>
@@ -52,11 +36,6 @@
                         <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
                     </button>
                 </div>
-                <button class="hamburger" aria-label="Menú de navegación" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
             </div>
         </nav>
     </header>
@@ -292,9 +271,9 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container\">
-            <div class=\"footer-club-logo\">
-                <img src=\"../assets/images/logos/logo.png\" alt=\"Escudo\" width=\"140\" height=\"140\">
+        <div class="container">
+            <div class="footer-club-logo">
+                <img src="../assets/images/logos/logo.png" alt="Escudo" width="140" height="140">
             </div>
             
             <div class="footer-bottom">
@@ -318,8 +297,7 @@
     <script>initFirebase();</script>
     
     <!-- App Scripts -->
-    <script src="../js/registro.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="../js/pages/registro.js"></script>
 </body>
 </html>
 
