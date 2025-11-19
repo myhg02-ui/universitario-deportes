@@ -287,18 +287,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Scroll al mensaje
         mensajeContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
         
-        // Si es éxito, redirigir al dashboard después de 2 segundos
-        if (tipo === 'success') {
-            // Desde src/pages/auth/registro.html hacia src/pages/user/dashboard.html
-            setTimeout(() => {
-                window.location.href = '../user/dashboard.html';
-            }, 2000);
-        } else {
-            // Auto-ocultar después de 5 segundos si es error
-            setTimeout(() => {
-                mensajeContainer.style.display = 'none';
-            }, 5000);
-        }
+        // Auto-ocultar después de 5 segundos
+        setTimeout(() => {
+            mensajeContainer.style.display = 'none';
+        }, 5000);
     }
 });
 
